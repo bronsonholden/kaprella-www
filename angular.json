@@ -62,7 +62,16 @@
                 }
               ]
             }
+          },
+          "staging": {
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.staging.ts"
+              }
+            ]
           }
+        }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
