@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBase: 'https://api.kaprella.com'
+  apiBase: 'http://api.staging.kaprella.com'
 };
