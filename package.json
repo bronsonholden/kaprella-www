@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "deploy:staging": "ng build --prod && aws s3 sync ./dist/kaprella-www s3://www.staging.kaprella.com",
-    "deploy:production": "ng build --prod && aws s3 sync ./dist/kaprella-www s3://www.kaprella.com",
+    "deploy:staging": "ng build --prod && aws s3 sync ./dist/kaprella-www s3://www.staging.kaprella.com --delete",
+    "deploy:production": "ng build --prod && aws s3 sync ./dist/kaprella-www s3://www.kaprella.com --delete",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
