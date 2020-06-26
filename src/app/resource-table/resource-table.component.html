@@ -88,6 +88,7 @@
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-footer>
+        <!-- TODO: Create component for footer -->
         <ng-template
           ngx-datatable-footer-template
           let-rowCount="rowCount"
@@ -99,10 +100,26 @@
               style="width: 100%; padding: 8px;"
               [fxLayout.xs]="'column'"
               [fxLayout.gt-xs]="'row'">
-            <div class="footer-messages" fxFlex>
-              <mat-icon matRipple [matRippleRadius]="14" [matRippleUnbounded]="true"[matRippleCentered]="true" class="filter-icon" svgIcon="menu"></mat-icon>
-              &nbsp;
-              {{ offset + 1 }} to {{ Math.min(rowCount, offset + pageSize) }} of {{ rowCount }}
+            <div class="footer-widgets-row" fxFlex>
+              <div fxLayout="row" [fxLayoutAlign.xs]="'space-between'" [fxLayoutAlign.gt-xs]="'start'">
+                <div class="footer-widget" fxFlex="0 1 auto">
+                  <mat-icon matRipple [matRippleRadius]="16" [matRippleUnbounded]="true" [matRippleCentered]="true" class="filter-icon" svgIcon="menu"></mat-icon>
+                </div>
+                <div style="text-align: center;" class="footer-widget" [fxFlex.xs]="'1 0 auto'" [fxFlex.gt-xs]="'0 1 auto'">
+                  <mat-label>Size:</mat-label>
+                  &nbsp;
+                  <mat-select style="width: 40px">
+                    <mat-option [value]="5">5</mat-option>
+                    <mat-option [value]="10">10</mat-option>
+                    <mat-option [value]="25">25</mat-option>
+                    <mat-option [value]="50">50</mat-option>
+                    <mat-option [value]="100">100</mat-option>
+                  </mat-select>
+                </div>
+                <div class="footer-widget" [fxFlex.xs]="'0 1 auto'" [fxFlex.gt-xs]="'1 0 auto'">
+                  {{ offset + 1 }} &ndash; {{ Math.min(rowCount, offset + pageSize) }} of {{ rowCount }}
+                </div>
+              </div>
             </div>
             <datatable-pager
               fxFlex

@@ -24,15 +24,12 @@
   cursor: pointer;
 }
 
-.footer-messages {
+.footer-widgets-row {
   height: 100%;
   line-height: 34px;
-  padding-left: 8px;
   vertical-align: middle;
 }
 
-@media screen and (max-width: 599px) {
- .footer-messages {
-   text-align: center;
- }
+.footer-widget {
+  padding: 0px 6px 0px 6px;
 }
