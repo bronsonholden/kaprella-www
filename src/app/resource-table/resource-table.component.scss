@@ -1,0 +1,38 @@
+.resource-table {
+  height: 100%;
+}
+
+.ngx-datatable {
+  height: 100%;
+  width: 100%;
+  box-shadow: none;
+}
+
+.filter-chips {
+  padding: 8px;
+}
+
+.filter-icon {
+  font-size: 12px !important;
+  vertical-align: middle;
+  opacity: 0.35;
+  margin-bottom: 2px;
+}
+
+.filter-icon:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.footer-messages {
+  height: 100%;
+  line-height: 34px;
+  padding-left: 8px;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 599px) {
+ .footer-messages {
+   text-align: center;
+ }
+}

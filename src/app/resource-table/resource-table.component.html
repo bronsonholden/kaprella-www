@@ -1,0 +1,123 @@
+<div fxLayout="column" class="resource-table">
+  <div fxFlex="0 1 em" class="filter-chips">
+    <mat-chip-list aria-label="Filters">
+      <mat-chip color="accent" selected>Add filter</mat-chip>
+      <mat-chip>
+        Name like ACME, Inc
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Location within 5 mi of <mat-icon svgIcon="map-marker"></mat-icon>
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Area < 100
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+  <div fxFlex="1 0 1em">
+    <ngx-datatable
+        class="material"
+        [rows]="rows"
+        columnMode="standard"
+        [headerHeight]="32"
+        [footerHeight]="footerHeight"
+        [rowHeight]="'auto'"
+        [scrollbarH]="true"
+        [scrollbarV]="true"
+        [selected]="selected"
+        (select)="onSelect($event)"
+        selectionType="checkbox"
+        [sortType]="SortType.multi"
+        [externalPaging]="true"
+        [externalSorting]="true"
+        [virtualization]="false"
+        [offset]="page.offset"
+        [count]="page.total"
+        [limit]="page.limit"
+        (sort)="onSort($event)"
+        [sorts]="sorts">
+      <ngx-datatable-column
+          *ngIf="tableConfig.select === 'multiple'"
+          [width]="50"
+          [sortable]="false"
+          [canAutoResize]="false"
+          [resizeable]="false">
+        <ng-template
+            ngx-datatable-header-template
+            let-value="value"
+            let-allRowsSelected="allRowsSelected"
+            let-selectFn="selectFn">
+          <mat-checkbox [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"></mat-checkbox>
+        </ng-template>
+        <ng-template
+            ngx-datatable-cell-template
+            let-value="value"
+            let-isSelected="isSelected"
+            let-onCheckboxChangeFn="onCheckboxChangeFn">
+          <mat-checkbox [disableRipple]="true" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+          *ngIf="tableConfig.select === 'single'"
+          [width]="50"
+          [sortable]="false"
+          [canAutoResize]="false"
+          [resizeable]="false">
+        <ng-template
+            ngx-datatable-cell-template
+            let-row="row"
+            let-isSelected="isSelected">
+          <mat-radio-button [checked]="isSelected" (change)="onRadioChangeFn($event, row)"></mat-radio-button>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+          *ngFor="let display of tableConfig.display"
+          [name]="display.title"
+          [width]="display.width"
+          [resizeable]="false"
+          [sortable]="false">
+        <ng-template ngx-datatable-header-template let-sort="sortFn">
+          <span class="text-no-select">
+            {{ display.title }}
+          </span>
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.id }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-footer>
+        <ng-template
+          ngx-datatable-footer-template
+          let-rowCount="rowCount"
+          let-pageSize="pageSize"
+          let-selectedCount="selectedCount"
+          let-curPage="curPage"
+          let-offset="offset">
+          <div
+              style="width: 100%; padding: 8px;"
+              [fxLayout.xs]="'column'"
+              [fxLayout.gt-xs]="'row'">
+            <div class="footer-messages" fxFlex>
+              <mat-icon matRipple [matRippleRadius]="14" [matRippleUnbounded]="true"[matRippleCentered]="true" class="filter-icon" svgIcon="menu"></mat-icon>
+              &nbsp;
+              {{ offset + 1 }} to {{ Math.min(rowCount, offset + pageSize) }} of {{ rowCount }}
+            </div>
+            <datatable-pager
+              fxFlex
+              [pagerLeftArrowIcon]="'datatable-icon-left'"
+              [pagerRightArrowIcon]="'datatable-icon-right'"
+              [pagerPreviousIcon]="'datatable-icon-prev'"
+              [pagerNextIcon]="'datatable-icon-skip'"
+              [page]="curPage"
+              [size]="pageSize"
+              [count]="rowCount"
+              (change)="onPagerChange($event)">
+            </datatable-pager>
+          </div>
+        </ng-template>
+      </ngx-datatable-footer>
+    </ngx-datatable>
+  </div>
+</div>

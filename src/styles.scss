@@ -2,6 +2,10 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
 // Fonts
 @import 'https://fonts.googleapis.com/css?family=Material+Icons';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
@@ -246,5 +250,59 @@ html, body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.text-no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Center the pager since the footer will be organized into two rows when
+ * viewing on small screens.
+ */
+@media screen and (max-width: 599px) {
+  .ngx-datatable .datatable-footer .datatable-pager,
+  .ngx-datatable .pager {
+    text-align: center !important;
+  }
+}
+
+.ngx-datatable .datatable-pager {
+  margin: 0px !important;
+}
+
+.ngx-datatable .datatable-footer .datatable-pager {
+  height: 100%;
+}
+
+.ngx-datatable .pager {
+  vertical-align: middle;
+}
+
+.h-fill {
+  flex: 1 0 auto;
+}
+
+/* Tweak the padding of datatable cells to make the table more compact; helps
+ * display more data on smaller displays.
+ */
+.resource-table datatable-body-cell,
+.resource-table datatable-header-cell {
+  padding: 6px 10px 6px 10px !important;
+}
+
+/* Keep checkboxes from hugging left edge; makes it easier to hit checkboxes
+ * on small touch screens.
+ */
+.resource-table datatable-body-row,
+.resource-table datatable-header {
+  padding-left: 4px;
+}
+
+/* Hide the pesky ripple indicator behind checkboxes in resource tables. */
+.resource-table .mat-checkbox .mat-checkbox-ripple.mat-focus-indicator {
+  display: none;
 }
