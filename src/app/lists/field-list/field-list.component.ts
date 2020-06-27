@@ -16,7 +16,7 @@ export class FieldListComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.httpClient.get('http://localhost:3000/fields').subscribe((res: any) => {
+    this.httpClient.get('fields').subscribe((res: any) => {
       this.fields = res.data;
       this.page.turn(0, 5, res.data.length);
       this.loading = false;
