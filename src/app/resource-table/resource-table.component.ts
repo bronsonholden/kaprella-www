@@ -87,6 +87,8 @@ export class ResourceTableComponent implements OnInit {
   SortType = SortType;
   Math = Math;
 
+  @Input() loading = true;
+
   /* Footer height increases on small screens to make room for two rows */
   footerHeight = 50;
 

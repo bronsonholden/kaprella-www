@@ -11,6 +11,7 @@ export class FieldListComponent implements OnInit {
 
   page = new ResourceTablePage();
   fields = [];
+  loading = true;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,6 +19,7 @@ export class FieldListComponent implements OnInit {
     this.httpClient.get('http://localhost:3000/fields').subscribe((res: any) => {
       this.fields = res.data;
       this.page.turn(0, 5, res.data.length);
+      this.loading = false;
     }, err => {
       console.log(err);
     })
