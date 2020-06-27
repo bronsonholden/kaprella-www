@@ -89,6 +89,7 @@ export class ResourceTableComponent implements OnInit {
   SortType = SortType;
   Math = Math;
 
+  /* Whether data table loading indicator should be shown */
   @Input() loading = true;
 
   /* Footer height increases on small screens to make room for two rows */
