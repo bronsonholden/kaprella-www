@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SortType } from '@swimlane/ngx-datatable';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { DatatableComponent, SortType } from '@swimlane/ngx-datatable';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 export class ResourceTableColumnDisplay {
@@ -83,6 +83,8 @@ export class ResourceTablePage {
   styleUrls: ['./resource-table.component.scss']
 })
 export class ResourceTableComponent implements OnInit {
+  @ViewChild('dataTable', { static: true }) datatable: DatatableComponent;
+
   /* Expose to template */
   SortType = SortType;
   Math = Math;
@@ -133,6 +135,11 @@ export class ResourceTableComponent implements OnInit {
       } else {
         this.footerHeight = 50;
       }
+      /* Footer height occasionally doesn't update for some reason. The
+       * recalculate method will force an update to various dimensions of the
+       * data table, including footer height.
+       */
+      this.datatable.recalculate();
     });
   }
 
