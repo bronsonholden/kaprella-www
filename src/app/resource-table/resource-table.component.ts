@@ -151,7 +151,6 @@ export class ResourceTableComponent implements OnInit {
    * tableConfig.select === 'multiple'
    */
   onSelect(select) {
-    console.log(select);
   }
 
   /* Called when a selection is changed in single element selection, i.e.
