@@ -1,14 +1,48 @@
 <mat-toolbar color="primary" class="app-toolbar">
   <mat-toolbar-row>
+   <button mat-icon-button aria-label="Menu">
+      <mat-icon (click)="sideNav.toggle()">menu</mat-icon>
+    </button>
     <div class="brand-logo">
       <img src="assets/logo.png" height="100%">
     </div>
     <div class="h-fill"></div>
-     <button mat-icon-button class="example-icon" aria-label="Menu">
-      <mat-icon>menu</mat-icon>
-    </button>
   </mat-toolbar-row>
 </mat-toolbar>
 <div class="router-container">
-  <router-outlet></router-outlet>
+  <mat-sidenav-container style="width: 100%; height: 100%;">
+    <mat-sidenav
+        [style.flex]="mobileQuery.matches ? '1 0 auto' : '1'"
+        autoFocus="false"
+        class="side-nav"
+        #sideNav
+        mode="over"
+        fixedInViewport="true"
+        [fixedTopGap]="mobileQuery.matches ? 56 : 64">
+      <div style="padding: 8px;">
+        <mat-accordion multi>
+          <mat-expansion-panel *ngFor="let section of topbarConfig.sections">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ section.title }}
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <a
+                *ngFor="let button of section.buttons"
+                mat-list-item
+                (click)="sideNav.close()"
+                [routerLink]="button.routerLink">{{ button.label }}</a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

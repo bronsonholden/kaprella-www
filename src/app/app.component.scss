@@ -1,11 +1,10 @@
-.app-toolbar .mat-toolbar-row {
-  /* So logo is flush with left edge of view */
-  padding-left: 0px !important;
-}
-
 .brand-logo {
   vertical-align: baseline;
   height: 100%;
+}
+
+.side-nav {
+  min-width: 140px;
 }
 
 .router-container {
