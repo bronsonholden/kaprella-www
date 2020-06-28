@@ -98,6 +98,7 @@ export class ResourceTableComponent implements OnInit {
 
 }
 
+/* Display configuration for columns in a resource table */
 export class ResourceTableColumnDisplay {
   public title: string;
   public width: number;
