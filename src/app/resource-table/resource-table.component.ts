@@ -2,76 +2,6 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DatatableComponent, SortType } from '@swimlane/ngx-datatable';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
-export class ResourceTableColumnDisplay {
-  public title: string;
-  public width: number;
-
-  constructor() {}
-}
-
-/* Resource table configuration. Specifies how a table of resources should
- * be displayed.
- */
-export class ResourceTableConfig {
-  public display: ResourceTableColumnDisplay[] = [];
-  public select = 'multiple';
-
-  constructor() {}
-}
-
-/* Resource table page information. Affects the display and behavior of the
- * table pager located in the footer.
- */
-export class ResourceTablePage {
-  _limit = 100;
-  _offset = 0;
-  _total = 0;
-
-  get offset(): number {
-    return this._offset;
-  }
-
-  set offset(value: number) {
-    if (value < 0) {
-      throw 'ResourceTablePage offset must be >= 0';
-    }
-    this._offset = value;
-  }
-
-  get limit(): number {
-    return this._limit;
-  }
-
-  set limit(value: number) {
-    if (value < 0) {
-      throw 'ResourceTablePage limit must be > 0';
-    }
-    this._limit = value;
-  }
-
-  get total(): number {
-    return this._total;
-  }
-
-  set total(value: number) {
-    if (value < 0) {
-      throw 'ResourceTablePage total must be > 0';
-    }
-    this._total = value;
-  }
-
-  get page(): number {
-    return Math.floor(this._offset / this._limit) + 1;
-  }
-
-  /* Update a page's properties all at once */
-  turn(offset, limit, total) {
-    this.offset = offset;
-    this.limit = limit;
-    this.total = total;
-  }
-}
-
 /* Wrapper component for ngx-datatable. Displays data with the given table
  * configuration and emits events upon user interaction with the display
  * e.g. page changes or selections. Responding to such events to reload data,
@@ -166,4 +96,74 @@ export class ResourceTableComponent implements OnInit {
   onPagerChange(event) {
   }
 
+}
+
+export class ResourceTableColumnDisplay {
+  public title: string;
+  public width: number;
+
+  constructor() {}
+}
+
+/* Resource table configuration. Specifies how a table of resources should
+ * be displayed.
+ */
+export class ResourceTableConfig {
+  public display: ResourceTableColumnDisplay[] = [];
+  public select = 'multiple';
+
+  constructor() {}
+}
+
+/* Resource table page information. Affects the display and behavior of the
+ * table pager located in the footer.
+ */
+export class ResourceTablePage {
+  _limit = 100;
+  _offset = 0;
+  _total = 0;
+
+  get offset(): number {
+    return this._offset;
+  }
+
+  set offset(value: number) {
+    if (value < 0) {
+      throw 'ResourceTablePage offset must be >= 0';
+    }
+    this._offset = value;
+  }
+
+  get limit(): number {
+    return this._limit;
+  }
+
+  set limit(value: number) {
+    if (value < 0) {
+      throw 'ResourceTablePage limit must be > 0';
+    }
+    this._limit = value;
+  }
+
+  get total(): number {
+    return this._total;
+  }
+
+  set total(value: number) {
+    if (value < 0) {
+      throw 'ResourceTablePage total must be > 0';
+    }
+    this._total = value;
+  }
+
+  get page(): number {
+    return Math.floor(this._offset / this._limit) + 1;
+  }
+
+  /* Update a page's properties all at once */
+  turn(offset, limit, total) {
+    this.offset = offset;
+    this.limit = limit;
+    this.total = total;
+  }
 }
