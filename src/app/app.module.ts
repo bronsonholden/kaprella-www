@@ -12,12 +12,16 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { ResourceTableComponent } from './resource-table/resource-table.component';
 import { FieldListComponent } from './lists/field-list/field-list.component';
+import { MobileResizeableDirective } from './mobile-resizeable.directive';
+import { MatResourceTableComponent } from './mat-resource-table/mat-resource-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResourceTableComponent,
-    FieldListComponent
+    FieldListComponent,
+    MobileResizeableDirective,
+    MatResourceTableComponent
   ],
   imports: [
     BrowserModule,

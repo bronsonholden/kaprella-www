@@ -1,0 +1,77 @@
+<div fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
+  <div fxFlex="0 1 em" class="filter-chips">
+    <mat-chip-list aria-label="Filters">
+      <mat-chip color="accent" selected>Add filter</mat-chip>
+      <mat-chip>
+        Name like ACME, Inc
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Location within 5 mi of <mat-icon svgIcon="map-marker"></mat-icon>
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Area < 100
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Name like ACME, Inc
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Location within 5 mi of <mat-icon svgIcon="map-marker"></mat-icon>
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Area < 100
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+  <div fxFlex="auto" style="overflow-y: auto;">
+    <table style="padding-right: 200px; table-layout: fixed;" mat-table [dataSource]="dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th style="padding: 0px 12px 0px 12px;" [matSortDirection]="'asc'" [matSortActive]="'position'" mat-header-cell *matHeaderCellDef mat-sort-header="position" matSort (matSortChange)="onSortChange($event)">
+          <div class="mobile-resizeable" mobileResizeable>
+            No.
+          </div>
+        </th>
+        <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th style="padding: 0px 8px 0px 8px;" mat-header-cell *matHeaderCellDef mat-sort-header="name" matSort (matSortChange)="onSortChange($event)">
+          <div class="mobile-resizeable" mobileResizeable>
+            Name
+          </div> </th>
+        <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th style="padding: 0px 12px 0px 12px;" mat-header-cell *matHeaderCellDef mat-sort-header="weight" matSort (matSortChange)="onSortChange($event)">
+          <div class="mobile-resizeable" mobileResizeable>
+            Weight
+          </div> </th>
+        <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th style="padding: 0px 12px 0px 12px;" mat-header-cell *matHeaderCellDef mat-sort-header="symbol" matSort (matSortChange)="onSortChange($event)">
+          <div class="mobile-resizeable" mobileResizeable>
+            Symbol
+          </div> </th>
+        <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div fxFlex="0 1 auto">
+    <mat-paginator (page)="onPageChange($event)" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

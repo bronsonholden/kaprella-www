@@ -5,6 +5,7 @@
 
 .side-nav {
   min-width: 140px;
+  max-width: 300px;
 }
 
 .router-container {
@@ -13,6 +14,16 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
+}
+
+/* The drawer container has an off-white background for some reason. A full
+ * size div is put behind the outlet with a white background in case the
+ * routed component doesn't fill the available space.
+ */
+.router-outlet-container {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
 }
 
 /* Topbar is 56px height on small screens. */

@@ -43,13 +43,18 @@ export class ResourceTableComponent implements OnInit {
   // @Input()
   tableConfig: ResourceTableConfig = {
     select: 'multiple',
+    columns: {
+
+    },
     display: [
       {
         title: 'Col 1',
+        columnIdentifier: 'col1',
         width: 100
       },
       {
         title: 'Col 2',
+        columnIdentifier: 'col2',
         width: 100
       }
     ]
@@ -98,10 +103,50 @@ export class ResourceTableComponent implements OnInit {
 
 }
 
+/* Column type affects what filters can be applied, as well as how the data
+ * is displayed in the table.
+ */
+export enum ResourceTableColumnType {
+  Text = 1,
+  Numeric,
+  Boolean,
+  Geographic
+}
+
+export enum ResourceTableFilterType {
+  Empty = 1,
+  NotEmpty,
+  TextEqual,
+  TextNotEqual,
+  TextIn,
+  TextNotIn,
+  NumericEqual,
+  NumericNotEqual,
+  NumericGreaterThan,
+  NumericGreaterThanOrEqual,
+  NumericLessThan,
+  NumericLessThanOrEqual,
+  BooleanTrue,
+  BooleanFalse,
+  GeographicWithinRadius,
+  GeographicWithinCountry
+}
+
+export class ResourceTableFilter {
+  constructor(public filterType: ResourceTableFilterType,
+              public columnIdentifier: string,
+              public operand: any) {}
+}
+
+export class ResourceTableColumnConfig {
+  constructor(public columnType: ResourceTableColumnType) {}
+}
+
 /* Display configuration for columns in a resource table */
 export class ResourceTableColumnDisplay {
   public title: string;
   public width: number;
+  public columnIdentifier: string;
 
   constructor() {}
 }
@@ -112,6 +157,7 @@ export class ResourceTableColumnDisplay {
 export class ResourceTableConfig {
   public display: ResourceTableColumnDisplay[] = [];
   public select = 'multiple';
+  public columns: { [id: string]: ResourceTableColumnConfig } = {};
 
   constructor() {}
 }

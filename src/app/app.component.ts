@@ -9,8 +9,16 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export class AppComponent {
   title = 'Kaprella';
 
+  /* Topbar is shorter on xs screens (< 600px width). This query allows us to
+   * adjust the sidenav top gap accordingly.
+   */
   mobileQuery: MediaQueryList;
   mobileQueryListener: () => void;
+  /* Sidenav will open over the main content area on lt-md screens (< 960px
+   * width). This query allows us to switch the drawer mode accordingly.
+   */
+  ltMdQuery: MediaQueryList;
+  ltMdQueryListener: () => void;
 
   topbarConfig: TopbarConfig = {
     sections: [
@@ -62,13 +70,17 @@ export class AppComponent {
 
   constructor(changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia('(max-width: 599px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
+    this.ltMdQuery = media.matchMedia('(max-width: 959px)');
+    this.ltMdQueryListener = () => changeDetectorRef.detectChanges();
+    this.ltMdQuery.addListener(this.ltMdQueryListener);
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this.mobileQueryListener);
+    this.ltMdQuery.removeListener(this.ltMdQueryListener);
   }
 }
 

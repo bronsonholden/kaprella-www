@@ -78,8 +78,8 @@
           *ngFor="let display of tableConfig.display"
           [name]="display.title"
           [width]="display.width"
-          [resizeable]="false"
-          [sortable]="false">
+          [resizeable]="true"
+          [sortable]="true">
         <ng-template ngx-datatable-header-template let-sort="sortFn">
           <span class="text-no-select">
             {{ display.title }}
