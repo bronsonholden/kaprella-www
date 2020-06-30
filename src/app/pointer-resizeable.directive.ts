@@ -53,7 +53,6 @@ export class PointerResizeableDirective implements OnDestroy, AfterViewInit {
 
   onMouseup(event: MouseEvent): void {
     event.stopPropagation();
-    event.preventDefault();
     this.resizing = false;
 
     if (this.subscription && !this.subscription.closed) {
@@ -69,7 +68,6 @@ export class PointerResizeableDirective implements OnDestroy, AfterViewInit {
     const mouseDownScreenX = event.screenX;
 
     if (isHandle) {
-      event.preventDefault();
       event.stopPropagation();
       this.resizing = true;
 

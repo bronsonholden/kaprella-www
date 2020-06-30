@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { DatatableComponent, SortType } from '@swimlane/ngx-datatable';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
 
 /* Wrapper component for ngx-datatable. Displays data with the given table
  * configuration and emits events upon user interaction with the display
@@ -13,17 +15,10 @@ import { MediaObserver, MediaChange } from '@angular/flex-layout';
   styleUrls: ['./resource-table.component.scss']
 })
 export class ResourceTableComponent implements OnInit {
-  @ViewChild('dataTable', { static: true }) datatable: DatatableComponent;
-
-  /* Expose to template */
-  SortType = SortType;
-  Math = Math;
+  selection = new SelectionModel<any>(true, []);
 
   /* Whether data table loading indicator should be shown */
   @Input() loading = true;
-
-  /* Footer height increases on small screens to make room for two rows */
-  footerHeight = 50;
 
   /* Which resources are currently selected in the display */
   selected: any[] = [];
@@ -37,56 +32,51 @@ export class ResourceTableComponent implements OnInit {
   @Input() page: ResourceTablePage;
 
   /* Resource data */
-  @Input() rows: any;
+  @Input() rows: any[] = [];
 
   // Sample table config
   // @Input()
   tableConfig: ResourceTableConfig = {
-    select: 'multiple',
     columns: {
-
-    },
-    display: [
-      {
-        title: 'Col 1',
-        columnIdentifier: 'col1',
-        width: 100
+      col1: {
+        title: 'Long column name Element',
+        columnType: ResourceTableColumnType.Text
       },
-      {
-        title: 'Col 2',
-        columnIdentifier: 'col2',
-        width: 100
+      col2: {
+        title: 'Column Name That Is Long',
+        columnType: ResourceTableColumnType.Text
       }
+    },
+    displayedColumns: [
+      'select',
+      'col2',
+      'col1'
     ]
   };
 
   constructor(private mediaObserver: MediaObserver) { }
 
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.rows.length;
+    return numSelected == numRows;
+  }
+
+  masterToggle() {
+    this.isAllSelected() ?
+    this.selection.clear() :
+    this.rows.forEach(row => this.selection.select(row));
+  }
+
+  addToSelection(row) {
+    this.selection.toggle(row)
+  }
+
   ngOnInit(): void {
-    /* Larger footer for smaller screens, to split the widgets into two rows
-     * instead of one. */
-    this.mediaObserver.media$.subscribe((mediaChange: MediaChange) => {
-      if (mediaChange.mqAlias === 'xs') {
-        this.footerHeight = 80;
-      } else {
-        this.footerHeight = 50;
-      }
-      /* Footer height occasionally doesn't update for some reason. The
-       * recalculate method will force an update to various dimensions of the
-       * data table, including footer height.
-       */
-      this.datatable.recalculate();
-    });
   }
 
   /* Called when a column sort is modified (header is clicked) */
   onSort(sort) {
-  }
-
-  /* Called when selection is changed in multiple element selection, i.e.
-   * tableConfig.select === 'multiple'
-   */
-  onSelect(select) {
   }
 
   /* Called when a selection is changed in single element selection, i.e.
@@ -95,10 +85,10 @@ export class ResourceTableComponent implements OnInit {
   onRadioChangeFn(event, row) {
   }
 
-  /* Called when the pager component in the custom header is changed to a
-   * different page.
+  /* Called when the pager is changed
    */
-  onPagerChange(event) {
+  onPageChange(event) {
+    console.log(event);
   }
 
 }
@@ -139,12 +129,12 @@ export class ResourceTableFilter {
 }
 
 export class ResourceTableColumnConfig {
-  constructor(public columnType: ResourceTableColumnType) {}
+  constructor(public columnType: ResourceTableColumnType,
+              public title: string) {}
 }
 
 /* Display configuration for columns in a resource table */
 export class ResourceTableColumnDisplay {
-  public title: string;
   public width: number;
   public columnIdentifier: string;
 
@@ -155,7 +145,7 @@ export class ResourceTableColumnDisplay {
  * be displayed.
  */
 export class ResourceTableConfig {
-  public display: ResourceTableColumnDisplay[] = [];
+  public displayedColumns: string[] = [];
   public select = 'multiple';
   public columns: { [id: string]: ResourceTableColumnConfig } = {};
 

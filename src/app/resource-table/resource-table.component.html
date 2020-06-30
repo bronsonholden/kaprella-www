@@ -1,4 +1,4 @@
-<div fxLayout="column" class="resource-table">
+<div fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
   <div fxFlex="0 1 em" class="filter-chips">
     <mat-chip-list aria-label="Filters">
       <mat-chip color="accent" selected>Add filter</mat-chip>
@@ -14,129 +14,65 @@
         Area < 100
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
+      <mat-chip>
+        Name like ACME, Inc
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Location within 5 mi of <mat-icon svgIcon="map-marker"></mat-icon>
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Area < 100
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
     </mat-chip-list>
   </div>
-  <div fxFlex="1 0 1em">
-    <ngx-datatable
-        #dataTable
-        class="material"
-        [rows]="rows"
-        [loadingIndicator]="loading"
-        columnMode="standard"
-        [headerHeight]="32"
-        [footerHeight]="footerHeight"
-        [rowHeight]="'auto'"
-        [scrollbarH]="true"
-        [scrollbarV]="true"
-        [selected]="selected"
-        (select)="onSelect($event)"
-        selectionType="checkbox"
-        [sortType]="SortType.multi"
-        [externalPaging]="true"
-        [externalSorting]="true"
-        [virtualization]="false"
-        [offset]="page.offset"
-        [count]="page.total"
-        [limit]="page.limit"
-        (sort)="onSort($event)"
-        [sorts]="sorts">
-      <ngx-datatable-column
-          *ngIf="tableConfig.select === 'multiple'"
-          [width]="50"
-          [sortable]="false"
-          [canAutoResize]="false"
-          [resizeable]="false">
-        <ng-template
-            ngx-datatable-header-template
-            let-value="value"
-            let-allRowsSelected="allRowsSelected"
-            let-selectFn="selectFn">
-          <mat-checkbox [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"></mat-checkbox>
-        </ng-template>
-        <ng-template
-            ngx-datatable-cell-template
-            let-value="value"
-            let-isSelected="isSelected"
-            let-onCheckboxChangeFn="onCheckboxChangeFn">
-          <mat-checkbox [disableRipple]="true" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column
-          *ngIf="tableConfig.select === 'single'"
-          [width]="50"
-          [sortable]="false"
-          [canAutoResize]="false"
-          [resizeable]="false">
-        <ng-template
-            ngx-datatable-cell-template
-            let-row="row"
-            let-isSelected="isSelected">
-          <mat-radio-button [checked]="isSelected" (change)="onRadioChangeFn($event, row)"></mat-radio-button>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column
-          *ngFor="let display of tableConfig.display"
-          [name]="display.title"
-          [width]="display.width"
-          [resizeable]="true"
-          [sortable]="true">
-        <ng-template ngx-datatable-header-template let-sort="sortFn">
-          <span class="text-no-select">
-            {{ display.title }}
-          </span>
-        </ng-template>
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row.id }}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-footer>
-        <!-- TODO: Create component for footer -->
-        <ng-template
-          ngx-datatable-footer-template
-          let-rowCount="rowCount"
-          let-pageSize="pageSize"
-          let-selectedCount="selectedCount"
-          let-curPage="curPage"
-          let-offset="offset">
-          <div
-              style="width: 100%; padding: 8px;"
-              [fxLayout.xs]="'column'"
-              [fxLayout.gt-xs]="'row'">
-            <div class="footer-widgets-row" fxFlex>
-              <div fxLayout="row" [fxLayoutAlign.xs]="'space-between'" [fxLayoutAlign.gt-xs]="'start'">
-                <div class="footer-widget" fxFlex="0 1 auto">
-                  <mat-icon matRipple [matRippleRadius]="16" [matRippleUnbounded]="true" [matRippleCentered]="true" class="filter-icon" svgIcon="menu"></mat-icon>
-                </div>
-                <div style="text-align: center;" class="footer-widget" [fxFlex.xs]="'1 0 auto'" [fxFlex.gt-xs]="'0 1 auto'">
-                  <mat-label>Size:</mat-label>
-                  &nbsp;
-                  <mat-select style="width: 40px">
-                    <mat-option [value]="5">5</mat-option>
-                    <mat-option [value]="10">10</mat-option>
-                    <mat-option [value]="25">25</mat-option>
-                    <mat-option [value]="50">50</mat-option>
-                    <mat-option [value]="100">100</mat-option>
-                  </mat-select>
-                </div>
-                <div class="footer-widget" [fxFlex.xs]="'0 1 auto'" [fxFlex.gt-xs]="'1 0 auto'">
-                  {{ offset + 1 }} &ndash; {{ Math.min(rowCount, offset + pageSize) }} of {{ rowCount }}
-                </div>
+  <div fxFlex="auto" style="overflow-y: auto;">
+    <table style="table-layout: fixed;" mat-table [dataSource]="rows">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? addToSelection(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container *ngFor="let column of tableConfig.columns | keyvalue" [matColumnDef]="column.key">
+        <th
+            class="text-no-select resource-table-header"
+            mat-header-cell
+            *matHeaderCellDef>
+          <div style="position: relative;">
+            <div class="resize-area" style="width: 200px;" touchResizeable pointerResizeable>
+              <div
+                  style="padding-right: 4px;"
+                  [mat-sort-header]="column.key"
+                  matSort
+                  [arrowPosition]="'after'"
+                  [matSortDirection]="'asc'"
+                  [matSortActive]="column.key"
+                  (matSortChange)="onSort($event)">
+                {{ column.value.title }}
               </div>
             </div>
-            <datatable-pager
-              fxFlex
-              [pagerLeftArrowIcon]="'datatable-icon-left'"
-              [pagerRightArrowIcon]="'datatable-icon-right'"
-              [pagerPreviousIcon]="'datatable-icon-prev'"
-              [pagerNextIcon]="'datatable-icon-skip'"
-              [page]="curPage"
-              [size]="pageSize"
-              [count]="rowCount"
-              (change)="onPagerChange($event)">
-            </datatable-pager>
           </div>
-        </ng-template>
-      </ngx-datatable-footer>
-    </ngx-datatable>
+        </th>
+        <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="tableConfig.displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: tableConfig.displayedColumns;"></tr>
+    </table>
+  </div>
+  <div fxFlex="0 1 auto">
+    <mat-paginator (page)="onPageChange($event)" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

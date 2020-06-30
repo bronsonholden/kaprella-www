@@ -1,39 +1,41 @@
-.resource-table {
-  height: 100%;
+th {
+  touch-action: none;
 }
 
-.ngx-datatable {
-  height: 100%;
-  width: 100%;
-  box-shadow: none;
+::ng-deep .mat-sort-header-button {
+  text-align: left;
+}
+
+.resource-table-header {
+  padding: 0 12px;
 }
 
 .filter-chips {
   padding: 8px;
 }
 
-.filter-icon {
-  font-size: 12px !important;
-  vertical-align: middle;
-  opacity: 0.35;
-  margin-bottom: 2px;
+th.mat-sort-header-sorted {
+  color: black;
 }
 
-.filter-icon:hover {
-  opacity: 1;
-  cursor: pointer;
+.resize-handle {
+  position: absolute;
+  right: -12px;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  padding: 0 4px;
 }
 
-.footer-widgets-row {
-  height: 100%;
-  line-height: 34px;
-  vertical-align: middle;
+.resize-handle {
+  cursor: ew-resize;
 }
 
-.footer-widget {
-  padding: 0px 6px 0px 6px;
-}
-
-.mobile-resize-icon {
-  transform: scale(0.66);
+.resize-area {
+  min-width: 80px;
+  box-sizing: border-box;
+  /* Slight padding on right side keeps the sort arrow from being right next
+   * to the pointer resize bar on small columns.
+   */
+  padding: 0 6px 0 0;
 }

@@ -59,8 +59,4 @@ export class MatResourceTableComponent implements OnInit {
   onPageChange(event) {
     console.log(event);
   }
-
-  onClickHeader(event) {
-    console.log('asdf')
-  }
 }
