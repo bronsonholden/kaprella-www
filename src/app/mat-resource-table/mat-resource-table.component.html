@@ -32,9 +32,24 @@
     <table style="padding-right: 200px; table-layout: fixed;" mat-table [dataSource]="dataSource">
       <!-- Position Column -->
       <ng-container matColumnDef="position">
-        <th style="padding: 0px 12px 0px 12px;" [matSortDirection]="'asc'" [matSortActive]="'position'" mat-header-cell *matHeaderCellDef mat-sort-header="position" matSort (matSortChange)="onSortChange($event)">
-          <div class="mobile-resizeable" mobileResizeable>
-            No.
+        <th
+            style="padding: 0px 12px 0px 12px;"
+            mat-header-cell
+            *matHeaderCellDef>
+          <div fxLayout="row" style="position: relative;">
+            <div
+                style="background-color: blue"
+                fxFlex="0 1 auto"
+                mat-sort-header="position"
+                matSort
+                [arrowPosition]="'before'"
+                [matSortDirection]="'asc'"
+                [matSortActive]="'position'"
+                class="touch-resizeable"
+                (matSortChange)="onSortChange($event)">
+              No.
+            </div>
+            <div fxFlex="1 0 em" touchResizeable pointerResizeable style="min-width: 15px; background-color: red"></div>
           </div>
         </th>
         <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element"> {{element.position}} </td>
@@ -42,8 +57,8 @@
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th style="padding: 0px 8px 0px 8px;" mat-header-cell *matHeaderCellDef mat-sort-header="name" matSort (matSortChange)="onSortChange($event)">
-          <div class="mobile-resizeable" mobileResizeable>
+        <th style="padding: 0px 28px 0px 12px;" mat-header-cell *matHeaderCellDef mat-sort-header="name" matSort (matSortChange)="onSortChange($event)">
+          <div class="touch" touchResizeable>
             Name
           </div> </th>
         <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -51,8 +66,8 @@
 
       <!-- Weight Column -->
       <ng-container matColumnDef="weight">
-        <th style="padding: 0px 12px 0px 12px;" mat-header-cell *matHeaderCellDef mat-sort-header="weight" matSort (matSortChange)="onSortChange($event)">
-          <div class="mobile-resizeable" mobileResizeable>
+        <th style="padding: 0px 28px 0px 12px;" mat-header-cell *matHeaderCellDef mat-sort-header="weight" matSort (matSortChange)="onSortChange($event)">
+          <div class="touch" touchResizeable>
             Weight
           </div> </th>
         <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element"> {{element.weight}} </td>
@@ -60,8 +75,8 @@
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="symbol">
-        <th style="padding: 0px 12px 0px 12px;" mat-header-cell *matHeaderCellDef mat-sort-header="symbol" matSort (matSortChange)="onSortChange($event)">
-          <div class="mobile-resizeable" mobileResizeable>
+        <th style="padding: 0px 28px 0px 12px;" mat-header-cell *matHeaderCellDef mat-sort-header="symbol" matSort (matSortChange)="onSortChange($event)">
+          <div class="touch" touchResizeable>
             Symbol
           </div> </th>
         <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element"> {{element.symbol}} </td>

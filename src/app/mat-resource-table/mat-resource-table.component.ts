@@ -34,10 +34,7 @@ export class MatResourceTableComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-
   ngOnInit() {
-    this.dataSource.sort = this.sort;
   }
 
   onSortChange(event) {
@@ -46,5 +43,9 @@ export class MatResourceTableComponent implements OnInit {
 
   onPageChange(event) {
     console.log(event);
+  }
+
+  onClickHeader(event) {
+    console.log('asdf')
   }
 }

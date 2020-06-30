@@ -13,12 +13,12 @@ import { Subscription, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Directive({
-  selector: '[mobileResizeable]',
+  selector: '[touchResizeable]',
   host: {
     '[class.resizeable]': 'resizeEnabled'
   }
 })
-export class MobileResizeableDirective implements OnDestroy {
+export class TouchResizeableDirective implements OnDestroy {
   @Input() resizeEnabled: boolean = true;
   @Input() minWidth: number;
   @Input() maxWidth: number;

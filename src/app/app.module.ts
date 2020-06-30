@@ -12,7 +12,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { ResourceTableComponent } from './resource-table/resource-table.component';
 import { FieldListComponent } from './lists/field-list/field-list.component';
-import { MobileResizeableDirective } from './mobile-resizeable.directive';
+import { TouchResizeableDirective } from './touch-resizeable.directive';
+import { PointerResizeableDirective } from './pointer-resizeable.directive';
 import { MatResourceTableComponent } from './mat-resource-table/mat-resource-table.component';
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MatResourceTableComponent } from './mat-resource-table/mat-resource-tab
     AppComponent,
     ResourceTableComponent,
     FieldListComponent,
-    MobileResizeableDirective,
+    TouchResizeableDirective,
+    PointerResizeableDirective,
     MatResourceTableComponent
   ],
   imports: [
