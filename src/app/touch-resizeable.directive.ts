@@ -5,21 +5,15 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnDestroy,
-  AfterViewInit,
-  Renderer2
+  OnDestroy
 } from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Directive({
-  selector: '[touchResizeable]',
-  host: {
-    '[class.resizeable]': 'resizeEnabled'
-  }
+  selector: '[touchResizeable]'
 })
 export class TouchResizeableDirective implements OnDestroy {
-  @Input() resizeEnabled: boolean = true;
   @Input() minWidth: number;
   @Input() maxWidth: number;
 
@@ -30,50 +24,49 @@ export class TouchResizeableDirective implements OnDestroy {
   resizing: boolean = false;
   private resizeHandle: HTMLElement;
 
-  constructor(element: ElementRef, private renderer: Renderer2) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
   ngOnDestroy(): void {
-    this._destroySubscription();
+    this.destroySubscription();
   }
 
-  onMouseup(): void {
+  onTouchEnd(): void {
     this.resizing = false;
 
     if (this.subscription && !this.subscription.closed) {
-      this._destroySubscription();
+      this.destroySubscription();
       this.resize.emit(this.element.clientWidth);
     }
   }
 
   @HostListener('touchstart', ['$event'])
-  onMousedown(event: TouchEvent): void {
+  onTouchStart(event: TouchEvent): void {
     const initialWidth = this.element.clientWidth;
     const touchIndex = event.which;
-    const mouseDownScreenX = event.changedTouches[touchIndex].screenX;
+    const touchStartScreenX = event.changedTouches[touchIndex].screenX;
 
     event.stopPropagation();
     this.resizing = true;
 
-    const mouseup = fromEvent(document, 'touchend');
-    this.subscription = mouseup.subscribe((ev: MouseEvent) => this.onMouseup());
+    const touchEnd = fromEvent(document, 'touchend');
+    this.subscription = touchEnd.subscribe((ev: TouchEvent) => this.onTouchEnd());
 
-    const mouseMoveSub = fromEvent(document, 'touchmove')
-      .pipe(takeUntil(mouseup))
+    const touchMoveSub = fromEvent(document, 'touchmove')
+      .pipe(takeUntil(touchEnd))
       .subscribe((e: TouchEvent) => {
-        this.move(e, initialWidth, mouseDownScreenX);
+        this.move(e, initialWidth, touchStartScreenX);
       });
 
-    this.subscription.add(mouseMoveSub);
+    this.subscription.add(touchMoveSub);
   }
 
-  move(event: TouchEvent, initialWidth: number, mouseDownScreenX: number): void {
+  move(event: TouchEvent, initialWidth: number, touchStartScreenX: number): void {
     event.stopPropagation();
     const touchIndex = event.which;
-    const movementX = event.changedTouches[touchIndex].screenX - mouseDownScreenX;
+    const movementX = event.changedTouches[touchIndex].screenX - touchStartScreenX;
     const newWidth = initialWidth + movementX;
-
     const overMinWidth = !this.minWidth || newWidth >= this.minWidth;
     const underMaxWidth = !this.maxWidth || newWidth <= this.maxWidth;
 
@@ -82,7 +75,7 @@ export class TouchResizeableDirective implements OnDestroy {
     }
   }
 
-  private _destroySubscription() {
+  private destroySubscription() {
     if (this.subscription) {
       this.subscription.unsubscribe();
       this.subscription = undefined;

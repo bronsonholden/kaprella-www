@@ -16,7 +16,6 @@ import { takeUntil } from 'rxjs/operators';
   selector: '[pointerResizeable]'
 })
 export class PointerResizeableDirective implements OnDestroy, AfterViewInit {
-  @Input() resizeEnabled: boolean = true;
   @Input() minWidth: number;
   @Input() maxWidth: number;
 
@@ -34,16 +33,12 @@ export class PointerResizeableDirective implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     const renderer2 = this.renderer;
     this.resizeHandle = renderer2.createElement('span');
-    if (this.resizeEnabled) {
-      renderer2.addClass(this.resizeHandle, 'resize-handle');
-    } else {
-      renderer2.addClass(this.resizeHandle, 'resize-handle--not-resizable');
-    }
+    renderer2.addClass(this.resizeHandle, 'resize-handle');
     renderer2.appendChild(this.element, this.resizeHandle);
   }
 
   ngOnDestroy(): void {
-    this._destroySubscription();
+    this.destroySubscription();
     if (this.renderer.destroyNode) {
       this.renderer.destroyNode(this.resizeHandle);
     } else if (this.resizeHandle) {
@@ -56,7 +51,7 @@ export class PointerResizeableDirective implements OnDestroy, AfterViewInit {
     this.resizing = false;
 
     if (this.subscription && !this.subscription.closed) {
-      this._destroySubscription();
+      this.destroySubscription();
       this.resize.emit(this.element.clientWidth);
     }
   }
@@ -84,9 +79,7 @@ export class PointerResizeableDirective implements OnDestroy, AfterViewInit {
 
   move(event: MouseEvent, initialWidth: number, mouseDownScreenX: number): void {
     const movementX = event.screenX - mouseDownScreenX;
-
     const newWidth = initialWidth + movementX;
-
     const overMinWidth = !this.minWidth || newWidth >= this.minWidth;
     const underMaxWidth = !this.maxWidth || newWidth <= this.maxWidth;
 
@@ -95,7 +88,7 @@ export class PointerResizeableDirective implements OnDestroy, AfterViewInit {
     }
   }
 
-  private _destroySubscription() {
+  private destroySubscription() {
     if (this.subscription) {
       this.subscription.unsubscribe();
       this.subscription = undefined;
