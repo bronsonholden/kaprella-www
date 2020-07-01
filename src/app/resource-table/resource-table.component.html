@@ -52,11 +52,12 @@
     </mat-chip-list>
   </div>
   <div fxFlex="0 1 auto">
-    <div [fxLayout.xs]="'column'" [fxLayout.gt-xs]="'row'">
-      <mat-chip-list [fxLayout.xs]="'row-reverse'" [fxLayout.gt-xs]="'row'" fxFlex style="margin: auto 8px;" aria-label="Add filter">
+    <div [fxLayout.lt-w500]="'column'" [fxLayout.gt-w500]="'row'">
+      <mat-chip-list [fxLayout.lt-w500]="'row-reverse'" [fxLayout.gt-w500]="'row'" style="margin: auto 8px;" aria-label="Add filter">
         <mat-chip color="accent" selected>Add filter</mat-chip>
       </mat-chip-list>
-      <mat-paginator fxFlex (page)="onPageChange($event)" [hidePageSize]="true" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+      <mat-paginator fxFlex="1 0 auto" (page)="onPageChange($event)" [hidePageSize]="true" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons>
+      </mat-paginator>
     </div>
   </div>
   <div fxFlex="auto" style="overflow-y: auto;">

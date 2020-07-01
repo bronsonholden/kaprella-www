@@ -8,7 +8,22 @@
   max-width: 300px;
 }
 
+/* TODO: On Safari iOS, set overflow to 'hidden' when sidenav is open to
+ * prevent momentum scrolling on the content. If you attempt to scroll the
+ * content behind the backdrop, a ~1 "bounce" animation is played, and if
+ * you don't wait for the animation to complete, the sidenav will not respond
+ * to scroll gestures, even if the gesture targets the sidenav itself. This
+ * causes a frustrating loop that a user might get stuck in and makes the
+ * experience feel buggy.
+ */
 .router-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidenav-container {
+  position: inherit;
 }
 
 /* The drawer container has an off-white background for some reason. A full
@@ -16,8 +31,6 @@
  * routed component doesn't fill the available space.
  */
 .router-outlet-container {
-  width: 100%;
-  height: 100%;
   background-color: #fff;
 }
 

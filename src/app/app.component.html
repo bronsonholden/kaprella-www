@@ -1,15 +1,17 @@
 <div class="router-container">
-  <mat-sidenav-container>
+  <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
         [style.flex]="ltMdQuery.matches ? '1 0 auto' : '1'"
         autoFocus="false"
         class="side-nav"
         #sideNav
         [mode]="ltMdQuery.matches ? 'over' : 'side'"
-        [fixedInViewport]="true">
+        [fixedInViewport]="true"
+        [fixedBottomGap]="0"
+        [fixedTopGap]="0">
       <span *ngIf="ltMdQuery.matches">
         <mat-toolbar color="primary">
-          <button mat-button (click)="sideNav.toggle()">Close</button>
+          <button mat-button (click)="sideNav.close()">Close</button>
         </mat-toolbar>
       </span>
       <div style="padding: 8px;">

@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
+import { CustomWidthBreakPoints } from './flex-ext/custom-width-break-points';
+import { LayoutGtW500Directive } from './flex-ext/layout-gt-w500.directive';
+import { LayoutLtW500Directive } from './flex-ext/layout-lt-w500.directive';
+
 import { ResourceTableComponent } from './resource-table/resource-table.component';
 import { FieldListComponent } from './lists/field-list/field-list.component';
 import { TouchResizeableDirective } from './touch-resizeable.directive';
@@ -21,7 +25,9 @@ import { PointerResizeableDirective } from './pointer-resizeable.directive';
     ResourceTableComponent,
     FieldListComponent,
     TouchResizeableDirective,
-    PointerResizeableDirective
+    PointerResizeableDirective,
+    LayoutGtW500Directive,
+    LayoutLtW500Directive
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,9 @@ import { PointerResizeableDirective } from './pointer-resizeable.directive';
     MaterialModule,
     NgxDatatableModule
   ],
-  providers: [],
+  providers: [
+    CustomWidthBreakPoints
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
