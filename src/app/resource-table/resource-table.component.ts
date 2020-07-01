@@ -146,7 +146,6 @@ export class ResourceTableColumnDisplay {
  */
 export class ResourceTableConfig {
   public displayedColumns: string[] = [];
-  public select = 'multiple';
   public columns: { [id: string]: ResourceTableColumnConfig } = {};
 
   constructor() {}
