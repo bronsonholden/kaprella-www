@@ -39,3 +39,10 @@ th.mat-sort-header-sorted {
    */
   padding: 0 6px 0 0;
 }
+
+/* Ripple is disabled because it doesn't display properly in headers. Until
+ * fixed, also disable the background of checkboxes on hover.
+ */
+.resource-table .resource-table-header .mat-checkbox-ripple.mat-focus-indicator {
+  display: none;
+}

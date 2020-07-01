@@ -53,23 +53,24 @@
   </div>
   <div fxFlex="0 1 auto">
     <div [fxLayout.xs]="'column'" [fxLayout.gt-xs]="'row'">
-      <mat-chip-list fxLayout="row-reverse" fxFlex style="margin: auto 8px;" aria-label="Add filter">
+      <mat-chip-list [fxLayout.xs]="'row-reverse'" [fxLayout.gt-xs]="'row'" fxFlex style="margin: auto 8px;" aria-label="Add filter">
         <mat-chip color="accent" selected>Add filter</mat-chip>
       </mat-chip-list>
       <mat-paginator fxFlex (page)="onPageChange($event)" [hidePageSize]="true" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
   <div fxFlex="auto" style="overflow-y: auto;">
-    <table style="table-layout: fixed;" mat-table [dataSource]="rows">
+    <table class="resource-table" style="table-layout: fixed;" mat-table [dataSource]="rows">
       <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="$event ? masterToggle() : null"
+        <th class="resource-table-header" mat-header-cell *matHeaderCellDef>
+          <mat-checkbox [disableRipple]="true" (change)="$event ? masterToggle() : null"
                         [checked]="selection.hasValue() && isAllSelected()"
                         [indeterminate]="selection.hasValue() && !isAllSelected()">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row">
-          <mat-checkbox (click)="$event.stopPropagation()"
+          <mat-checkbox [disableRipple]="true"
+                        (click)="$event.stopPropagation()"
                         (change)="$event ? addToSelection(row) : null"
                         [checked]="selection.isSelected(row)">
           </mat-checkbox>
