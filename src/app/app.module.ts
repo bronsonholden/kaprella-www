@@ -14,7 +14,6 @@ import { ResourceTableComponent } from './resource-table/resource-table.componen
 import { FieldListComponent } from './lists/field-list/field-list.component';
 import { TouchResizeableDirective } from './touch-resizeable.directive';
 import { PointerResizeableDirective } from './pointer-resizeable.directive';
-import { MatResourceTableComponent } from './mat-resource-table/mat-resource-table.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,7 @@ import { MatResourceTableComponent } from './mat-resource-table/mat-resource-tab
     ResourceTableComponent,
     FieldListComponent,
     TouchResizeableDirective,
-    PointerResizeableDirective,
-    MatResourceTableComponent
+    PointerResizeableDirective
   ],
   imports: [
     BrowserModule,
