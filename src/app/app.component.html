@@ -1,24 +1,17 @@
-<mat-toolbar color="primary" class="app-toolbar">
-  <mat-toolbar-row>
-   <button mat-icon-button aria-label="Menu">
-      <mat-icon (click)="sideNav.toggle()">menu</mat-icon>
-    </button>
-    <div class="brand-logo">
-      <img src="assets/logo.png" height="100%">
-    </div>
-    <div class="h-fill"></div>
-  </mat-toolbar-row>
-</mat-toolbar>
 <div class="router-container">
-  <mat-sidenav-container style="width: 100%; height: 100%;">
+  <mat-sidenav-container>
     <mat-sidenav
         [style.flex]="ltMdQuery.matches ? '1 0 auto' : '1'"
         autoFocus="false"
         class="side-nav"
         #sideNav
         [mode]="ltMdQuery.matches ? 'over' : 'side'"
-        [fixedInViewport]="ltMdQuery.matches"
-        [fixedTopGap]="mobileQuery.matches ? 56 : 64">
+        [fixedInViewport]="true">
+      <span *ngIf="ltMdQuery.matches">
+        <mat-toolbar color="primary">
+          <button mat-button (click)="sideNav.toggle()">Close</button>
+        </mat-toolbar>
+      </span>
       <div style="padding: 8px;">
         <mat-card style="margin-bottom: 8px;">
           On touch-screen devices, you can resize a column by tapping and sliding on the header.
@@ -48,6 +41,17 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
+      <mat-toolbar color="primary" class="app-toolbar">
+        <mat-toolbar-row>
+         <button mat-icon-button aria-label="Menu">
+            <mat-icon (click)="sideNav.toggle()">menu</mat-icon>
+          </button>
+          <div class="brand-logo">
+            <img src="assets/logo.png" height="100%">
+          </div>
+          <div class="h-fill"></div>
+        </mat-toolbar-row>
+      </mat-toolbar>
       <div class="router-outlet-container">
         <router-outlet></router-outlet>
       </div>

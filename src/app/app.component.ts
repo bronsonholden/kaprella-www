@@ -1,6 +1,5 @@
 import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -72,27 +71,16 @@ export class AppComponent implements OnInit {
   }
 
   constructor(changeDetectorRef: ChangeDetectorRef,
-              media: MediaMatcher,
-              private snackBar: MatSnackBar) {
+              media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 599px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
     this.ltMdQuery = media.matchMedia('(max-width: 959px)');
     this.ltMdQueryListener = () => changeDetectorRef.detectChanges();
     this.ltMdQuery.addListener(this.ltMdQueryListener);
-
-    const userAgent = window.navigator.userAgent;
-    const isIos = !!userAgent.match(/iPad/i) || !!userAgent.match(/iPhone/i);
-    const isWebkit = !!userAgent.match(/WebKit/i);
-    this.isMobileSafari = isIos && isWebkit && !userAgent.match(/CriOS/i);
   }
 
   ngOnInit(): void {
-    if (this.isMobileSafari) {
-      this.snackBar.open('Using iOS Safari in landscape mode may be troublesome. Consider using Google Chrome or staying in portrait mode.', 'OK', {
-        duration: 10000
-      });
-    }
   }
 
   ngOnDestroy(): void {
