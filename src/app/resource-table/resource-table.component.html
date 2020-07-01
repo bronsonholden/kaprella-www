@@ -1,7 +1,6 @@
 <div fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
   <div fxFlex="0 1 em" class="filter-chips">
     <mat-chip-list aria-label="Filters">
-      <mat-chip color="accent" selected>Add filter</mat-chip>
       <mat-chip>
         Name like ACME, Inc
         <mat-icon matChipRemove>cancel</mat-icon>
@@ -51,6 +50,14 @@
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
     </mat-chip-list>
+  </div>
+  <div fxFlex="0 1 auto">
+    <div [fxLayout.xs]="'column'" [fxLayout.gt-xs]="'row'">
+      <mat-chip-list fxLayout="row-reverse" fxFlex style="margin: auto 8px;" aria-label="Add filter">
+        <mat-chip color="accent" selected>Add filter</mat-chip>
+      </mat-chip-list>
+      <mat-paginator fxFlex (page)="onPageChange($event)" [hidePageSize]="true" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
   </div>
   <div fxFlex="auto" style="overflow-y: auto;">
     <table style="table-layout: fixed;" mat-table [dataSource]="rows">
