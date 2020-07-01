@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isMobileSafari) {
-      this.snackBar.open('Using iOS Safari in landscape mode may be troublesome. Consider using Google Chrome.', 'OK', {
+      this.snackBar.open('Using iOS Safari in landscape mode may be troublesome. Consider using Google Chrome or staying in portrait mode.', 'OK', {
         duration: 5000
       });
     }
