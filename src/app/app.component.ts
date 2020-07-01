@@ -1,13 +1,16 @@
-import { Component, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Kaprella';
+
+  isMobileSafari;
 
   /* Topbar is shorter on xs screens (< 600px width). This query allows us to
    * adjust the sidenav top gap accordingly.
@@ -69,13 +72,27 @@ export class AppComponent {
   }
 
   constructor(changeDetectorRef: ChangeDetectorRef,
-              media: MediaMatcher) {
+              media: MediaMatcher,
+              private snackBar: MatSnackBar) {
     this.mobileQuery = media.matchMedia('(max-width: 599px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
     this.ltMdQuery = media.matchMedia('(max-width: 959px)');
     this.ltMdQueryListener = () => changeDetectorRef.detectChanges();
     this.ltMdQuery.addListener(this.ltMdQueryListener);
+
+    var ua = window.navigator.userAgent;
+    var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+    var webkit = !!ua.match(/WebKit/i);
+    this.isMobileSafari = iOS && webkit && !ua.match(/CriOS/i);
+  }
+
+  ngOnInit(): void {
+    if (this.isMobileSafari) {
+      this.snackBar.open('Using iOS Safari in landscape mode may be troublesome. Consider using Google Chrome.', 'OK', {
+        duration: 5000
+      });
+    }
   }
 
   ngOnDestroy(): void {
