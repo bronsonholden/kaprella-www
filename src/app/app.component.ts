@@ -81,10 +81,10 @@ export class AppComponent implements OnInit {
     this.ltMdQueryListener = () => changeDetectorRef.detectChanges();
     this.ltMdQuery.addListener(this.ltMdQueryListener);
 
-    var ua = window.navigator.userAgent;
-    var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
-    var webkit = !!ua.match(/WebKit/i);
-    this.isMobileSafari = iOS && webkit && !ua.match(/CriOS/i);
+    const userAgent = window.navigator.userAgent;
+    const isIos = !!userAgent.match(/iPad/i) || !!userAgent.match(/iPhone/i);
+    const isWebkit = !!userAgent.match(/WebKit/i);
+    this.isMobileSafari = isIos && isWebkit && !userAgent.match(/CriOS/i);
   }
 
   ngOnInit(): void {
