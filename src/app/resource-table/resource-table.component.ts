@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 
-/* Wrapper component for ngx-datatable. Displays data with the given table
+/* Wrapper component for tables. Displays data with the given table
  * configuration and emits events upon user interaction with the display
  * e.g. page changes or selections. Responding to such events to reload data,
  * etc. is left to parent components.
@@ -22,6 +22,10 @@ export class ResourceTableComponent implements OnInit {
 
   /* Which resources are currently selected in the display */
   selected: any[] = [];
+
+  /* Currently applied filters
+   */
+  @Input() filters: ResourceTableFilter[] = [];
 
   /* Internal property that affects how the datatable displays sort icons
    * next to column headers.
@@ -91,6 +95,10 @@ export class ResourceTableComponent implements OnInit {
     console.log(event);
   }
 
+  removeFilterByIdx(idx) {
+    this.filters.splice(idx, 1);
+  }
+
 }
 
 /* Column type affects what filters can be applied, as well as how the data
@@ -122,10 +130,18 @@ export enum ResourceTableFilterType {
   GeographicWithinCountry
 }
 
+/* Describes a filter as configured with the resource table filter wizard.
+ * The parent component is responsible for applying or extending filters
+ * on the actual data source.
+ */
 export class ResourceTableFilter {
   constructor(public filterType: ResourceTableFilterType,
               public columnIdentifier: string,
               public operand: any) {}
+
+  get label(): string {
+    return 'Filter';
+  }
 }
 
 export class ResourceTableColumnConfig {

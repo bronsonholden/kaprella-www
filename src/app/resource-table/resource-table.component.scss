@@ -10,8 +10,8 @@ th {
   padding: 0 12px;
 }
 
-.filter-chips {
-  padding: 8px;
+.filter-chips:not(:empty) {
+  padding: 8px 8px 0px 8px;
 }
 
 th.mat-sort-header-sorted {

@@ -1,60 +1,16 @@
 <div fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
   <div fxFlex="0 1 em" class="filter-chips">
-    <mat-chip-list aria-label="Filters">
-      <mat-chip>
-        Name like ACME, Inc
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Location within 5 mi of <mat-icon svgIcon="map-marker"></mat-icon>
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Area < 100
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Name like ACME, Inc
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Location within 5 mi of <mat-icon svgIcon="map-marker"></mat-icon>
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Area < 100
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Name like ACME, Inc
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Location within 5 mi of <mat-icon svgIcon="map-marker"></mat-icon>
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Area < 100
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Name like ACME, Inc
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Location within 5 mi of <mat-icon svgIcon="map-marker"></mat-icon>
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <mat-chip>
-        Area < 100
-        <mat-icon matChipRemove>cancel</mat-icon>
+    <mat-chip-list aria-label="Filters" *ngIf="filters.length > 0">
+      <mat-chip *ngFor="let filter of filters; index as idx;">
+        {{ filter.label }}
+        <mat-icon matChipRemove (click)="removeFilterByIdx(idx)">cancel</mat-icon>
       </mat-chip>
     </mat-chip-list>
   </div>
   <div fxFlex="0 1 auto">
     <div [fxLayout.lt-w500]="'column'" [fxLayout.gt-w500]="'row'">
-      <mat-chip-list [fxLayout.lt-w500]="'row-reverse'" [fxLayout.gt-w500]="'row'" style="margin: auto 8px;" aria-label="Add filter">
-        <mat-chip color="accent" selected>Add filter</mat-chip>
+      <mat-chip-list [fxLayout.lt-w500]="'row-reverse'" [fxLayout.gt-w500]="'row'" style="margin: 0 8px;" aria-label="Add filter">
+        <mat-chip color="accent" selectable="false" selected tabindex="-1">Add filter</mat-chip>
       </mat-chip-list>
       <mat-paginator fxFlex="1 0 auto" (page)="onPageChange($event)" [hidePageSize]="true" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons>
       </mat-paginator>
