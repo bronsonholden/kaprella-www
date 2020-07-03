@@ -25,7 +25,9 @@
           <mat-expansion-panel *ngFor="let section of topbarConfig.sections">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                {{ section.title }}
+                <span class="text-no-select">
+                  {{ section.title }}
+                </span>
               </mat-panel-title>
               <mat-panel-description>
               </mat-panel-description>
@@ -33,8 +35,10 @@
             <mat-nav-list>
               <a
                 *ngFor="let button of section.buttons"
+                [disableRipple]="true"
                 mat-list-item
                 (click)="sideNav.close()"
+                (mouseup)="ripple.launch()"
                 [routerLink]="button.routerLink">{{ button.label }}</a>
             </mat-nav-list>
           </mat-expansion-panel>
@@ -45,8 +49,8 @@
     <mat-sidenav-content>
       <mat-toolbar color="primary" class="app-toolbar">
         <mat-toolbar-row>
-         <button mat-icon-button aria-label="Menu">
-            <mat-icon (click)="sideNav.toggle()">menu</mat-icon>
+         <button mat-icon-button aria-label="Menu" (click)="sideNav.toggle()">
+            <mat-icon >menu</mat-icon>
           </button>
           <div class="brand-logo">
             <img src="assets/logo.png" height="100%">
