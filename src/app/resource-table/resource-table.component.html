@@ -1,4 +1,4 @@
-<div fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
+<div *ngIf="!loading; else loadingDisplay" fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
   <div fxFlex="0 1 em" class="filter-chips">
     <mat-chip-list aria-label="Filters" *ngIf="filters.length > 0">
       <mat-chip *ngFor="let filter of filters; index as idx;">
@@ -65,3 +65,9 @@
     <mat-paginator (page)="onPageChange($event)" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
 </div>
+
+<ng-template #loadingDisplay>
+  <div style="padding-top: 48px;" fxLayout="row" fxLayoutAlign="center center">
+    <mat-spinner indeterminate color="accent"></mat-spinner>
+  </div>
+</ng-template>
