@@ -22,7 +22,7 @@
           On a computer, you can resize a column by hovering over the right side of the header. When your cursor changes to a horizontal arrow, click and drag to increase or decrease the width.
         </mat-card>
         <mat-accordion multi>
-          <mat-expansion-panel *ngFor="let section of topbarConfig.sections">
+          <mat-expansion-panel #sideNavPanel (afterExpand)="scrollToMenuPanel(idx)" *ngFor="let section of topbarConfig.sections; index as idx">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <span class="text-no-select">

@@ -1,4 +1,13 @@
-import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef,
+  OnInit,
+  OnDestroy,
+  ViewChildren,
+  ElementRef,
+  QueryList
+} from '@angular/core';
+
 import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
@@ -7,6 +16,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  @ViewChildren('sideNavPanel', { read: ElementRef }) sideNavPanels: QueryList<ElementRef>;
+
   title = 'Kaprella';
 
   isMobileSafari;
@@ -86,6 +97,14 @@ export class AppComponent implements OnInit {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this.mobileQueryListener);
     this.ltMdQuery.removeListener(this.ltMdQueryListener);
+  }
+
+  scrollToMenuPanel(idx) {
+    const panel = this.sideNavPanels.toArray()[idx];
+    const element = panel.nativeElement;
+    if (element.getBoundingClientRect().bottom > window.innerHeight) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }
 
