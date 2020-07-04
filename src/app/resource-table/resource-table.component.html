@@ -1,6 +1,14 @@
 <div *ngIf="!loading; else loadingDisplay" fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
   <div fxFlex="0 1 em" class="filter-chips">
-    <mat-chip-list aria-label="Filters" *ngIf="filters.length > 0">
+    <mat-chip-list aria-label="Filters" *ngIf="true">
+      <mat-chip>
+        Blah
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip>
+        Blah
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
       <mat-chip *ngFor="let filter of filters; index as idx;">
         {{ filter.label }}
         <mat-icon matChipRemove (click)="removeFilterByIdx(idx)">cancel</mat-icon>
@@ -57,8 +65,8 @@
         <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let row">
           <app-resource-table-cell
             [row]="row"
-            [columnDisplay]="column.value.columnDisplay"
-            [columnValue]="column.value.columnValue">
+            [value]="column.value.value"
+            [display]="column.value.display">
           </app-resource-table-cell>
         </td>
       </ng-container>

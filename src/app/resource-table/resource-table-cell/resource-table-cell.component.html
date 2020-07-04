@@ -1,1 +1,13 @@
-{{ raw }}
+<div *ngIf="display.type === 'text'">
+  {{ raw }}
+</div>
+
+<div *ngIf="display.type === 'link'">
+  <a class="primary-color mat-body-2" [routerLink]="raw">
+    <app-resource-table-cell
+      [row]="row"
+      [value]="display.label"
+      [display]="{ type: 'text' }">
+    </app-resource-table-cell>
+  </a>
+</div>

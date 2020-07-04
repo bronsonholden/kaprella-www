@@ -1,4 +1,4 @@
-<div class="router-container">
+<div class="router-container theme-container" [class.theme-alternate]="darkMode.checked">
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
         [style.flex]="ltMdQuery.matches ? '1 0 auto' : '1'"
@@ -55,6 +55,13 @@
             <img src="assets/logo.png" height="100%">
           </div>
           <div class="h-fill"></div>
+          <mat-slide-toggle color="accent" #darkMode>
+            <mat-icon
+              style="padding-left: 8px;"
+              [color]="darkMode.checked ? 'accent' : 'light'"
+              svgIcon="moon-waning-crescent">
+            </mat-icon>
+          </mat-slide-toggle>
         </mat-toolbar-row>
       </mat-toolbar>
       <div class="router-outlet-container">

@@ -117,8 +117,8 @@ export class ResourceTableFilter {
 }
 
 export class ResourceTableColumnConfig {
-  constructor(public columnValue: ResourceTableColumnValue,
-              public columnDisplay: ResourceTableColumnDisplay,
+  constructor(public value: any,
+              public display: any,
               public title: string) {}
 }
 

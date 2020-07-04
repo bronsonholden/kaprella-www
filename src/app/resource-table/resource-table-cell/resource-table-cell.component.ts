@@ -12,8 +12,8 @@ import {
 })
 export class ResourceTableCellComponent implements OnInit {
 
-  @Input() columnDisplay: ResourceTableColumnDisplay;
-  @Input() columnValue: ResourceTableColumnValue;
+  @Input() display: any;
+  @Input() value: any;
   @Input() row: any;
 
   constructor() { }
@@ -22,7 +22,14 @@ export class ResourceTableCellComponent implements OnInit {
   }
 
   get raw(): any {
-    return this.columnValue.value(this.row);
+    switch (this.value.type) {
+      case 'id':
+        return this.row.id;
+      case 'attribute':
+        return this.row.attributes[this.value.path];
+      default:
+        return null;
+    }
   }
 
 }

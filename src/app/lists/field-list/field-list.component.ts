@@ -23,13 +23,26 @@ export class FieldListComponent implements OnInit {
     columns: {
       name: {
         title: 'Name',
-        columnValue: new ResourceTableColumnAttributeValue('name'),
-        columnDisplay: new ResourceTableColumnLinkDisplay(new ResourceTableColumnAttributeValue('name'), new ResourceTableColumnAttributeValue('name'))
+        value: {
+          type: 'id'
+        },
+        display: {
+          type: 'link',
+          label: {
+            type: 'attribute',
+            path: 'name'
+          }
+        }
       },
       area: {
         title: 'Area',
-        columnValue: new ResourceTableColumnAttributeValue('area'),
-        columnDisplay: new ResourceTableColumnDisplay()
+        value: {
+          type: 'attribute',
+          path: 'area'
+        },
+        display: {
+          type: 'text'
+        }
       }
     },
     displayedColumns: [

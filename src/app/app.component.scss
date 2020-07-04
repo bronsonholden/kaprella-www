@@ -26,14 +26,6 @@
   position: inherit;
 }
 
-/* The drawer container has an off-white background for some reason. A full
- * size div is put behind the outlet with a white background in case the
- * routed component doesn't fill the available space.
- */
-.router-outlet-container {
-  background-color: #fff;
-}
-
 /* Topbar is 56px height on small screens. */
 @media screen and (max-width: 599px) {
  .router-container {

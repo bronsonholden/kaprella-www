@@ -2,10 +2,6 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 
-@import '~@swimlane/ngx-datatable/index.css';
-@import '~@swimlane/ngx-datatable/themes/material.css';
-@import '~@swimlane/ngx-datatable/assets/icons.css';
-
 // Fonts
 @import 'https://fonts.googleapis.com/css?family=Material+Icons';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
@@ -214,11 +210,49 @@ $theme-warn: mat-palette($mat-warn, main, lighter, darker);;
 $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 
-// Theme Init
+@mixin theme-color-grabber($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .primary-color {
+    color: mat-color($theme-primary) !important;
+  }
+
+  .warn-color {
+    color: mat-color($theme-warn) !important
+  }
+}
+
 @include angular-material-theme($theme);
+
+.resource-table a {
+  color: mat-color(map-get($theme, primary));
+}
+
+.theme-container {
+  background-color: $light-text;
+}
 
 .theme-alternate {
   @include angular-material-theme($altTheme);
+
+  .resource-table a {
+    color: mat-color(map-get($altTheme, accent));
+  }
+
+  /* For some reason, a light backdrop is used for open drawers with the
+   * 'over' configuration . This darkens it to be easy on the eyes, as
+   * expected with a dark theme.
+   */
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: rgba(40, 40, 40, 0.6);
+  }
+
+  .theme-container,
+  &.theme-container {
+    background-color: $dark-bg-lighter-5;
+  }
 }
 
 // Specific component overrides, pieces that are not in line with the general theming
@@ -229,6 +263,16 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   margin: 0 .65em;
   min-width: 3em;
   line-height: 36.4px
+}
+
+/* No need to select this text, and doesn't cause text highlighting on
+ * touch screen devices when long tapping.
+ */
+.mat-paginator-range-label {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .mat-standard-chip {
@@ -305,4 +349,12 @@ body {
 /* Hide the pesky ripple indicator behind checkboxes in resource tables. */
 .resource-table .mat-checkbox .mat-checkbox-ripple.mat-focus-indicator {
   display: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.pseudo-link {
+  cursor: pointer;
 }
