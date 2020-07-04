@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
         buttons: [
           {
             label: 'Farmers',
-            routerLink: ''
+            routerLink: 'farmers'
           },
           {
             label: 'Fields',

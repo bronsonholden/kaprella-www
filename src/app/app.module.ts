@@ -20,6 +20,7 @@ import { TouchResizeableDirective } from './touch-resizeable.directive';
 import { PointerResizeableDirective } from './pointer-resizeable.directive';
 import { ResourceTableCellComponent } from './resource-table/resource-table-cell/resource-table-cell.component';
 import { ResourceTableCellLinkComponent } from './resource-table/resource-table-cell/resource-table-cell-link/resource-table-cell-link.component';
+import { FarmerListComponent } from './lists/farmer-list/farmer-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ResourceTableCellLinkComponent } from './resource-table/resource-table-
     LayoutGtW500Directive,
     LayoutLtW500Directive,
     ResourceTableCellComponent,
-    ResourceTableCellLinkComponent
+    ResourceTableCellLinkComponent,
+    FarmerListComponent
   ],
   imports: [
     BrowserModule,
