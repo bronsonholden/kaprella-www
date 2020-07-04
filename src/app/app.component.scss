@@ -19,11 +19,19 @@
 .router-container {
   width: 100%;
   height: 100%;
-  overflow: auto;
+}
+
+.router-outlet-container {
+  height: 100%;
 }
 
 .sidenav-container {
   position: inherit;
+  /* TODO: On Chrome mobile browser, apply the below min-height style to
+   * allow pull-down-to-refresh regardless of content height. It's a handy
+   * feature.
+   */
+  // min-height: calc(100% + 1px);
 }
 
 /* Topbar is 56px height on small screens. */
