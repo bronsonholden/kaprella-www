@@ -57,6 +57,11 @@
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
+/* Polyfill for scrollIntoView({ behavior: 'smooth' })
+ * This is an experimental feature that is not supported by all browsers yet.
+ */
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
