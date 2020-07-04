@@ -46,7 +46,7 @@
                   [mat-sort-header]="column.key"
                   matSort
                   [arrowPosition]="'after'"
-                  [matSortDirection]="'asc'"
+                  [matSortDirection]=""
                   [matSortActive]="column.key"
                   (matSortChange)="onSort($event)">
                 {{ column.value.title }}
@@ -54,7 +54,13 @@
             </div>
           </div>
         </th>
-        <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <td style="padding: 0px 12px 0px 12px;" mat-cell *matCellDef="let row">
+          <app-resource-table-cell
+            [row]="row"
+            [columnDisplay]="column.value.columnDisplay"
+            [columnValue]="column.value.columnValue">
+          </app-resource-table-cell>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="tableConfig.displayedColumns; sticky: true"></tr>

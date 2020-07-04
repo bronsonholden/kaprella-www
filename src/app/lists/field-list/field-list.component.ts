@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ResourceTablePage } from '../../resource-table/resource-table.component';
+import {
+  ResourceTableConfig,
+  ResourceTableColumnAttributeValue,
+  ResourceTableColumnLinkDisplay,
+  ResourceTableColumnDisplay,
+  ResourceTablePage
+} from '../../resource-table/resource-table.component';
 
 @Component({
   selector: 'app-field-list',
@@ -12,6 +18,26 @@ export class FieldListComponent implements OnInit {
   page = new ResourceTablePage();
   fields = [];
   loading = true;
+
+  tableConfig: ResourceTableConfig = {
+    columns: {
+      name: {
+        title: 'Name',
+        columnValue: new ResourceTableColumnAttributeValue('name'),
+        columnDisplay: new ResourceTableColumnLinkDisplay(new ResourceTableColumnAttributeValue('name'), new ResourceTableColumnAttributeValue('name'))
+      },
+      area: {
+        title: 'Area',
+        columnValue: new ResourceTableColumnAttributeValue('area'),
+        columnDisplay: new ResourceTableColumnDisplay()
+      }
+    },
+    displayedColumns: [
+      'select',
+      'name',
+      'area'
+    ]
+  };
 
   constructor(private httpClient: HttpClient) { }
 

@@ -38,25 +38,7 @@ export class ResourceTableComponent implements OnInit {
   /* Resource data */
   @Input() rows: any[] = [];
 
-  // Sample table config
-  // @Input()
-  tableConfig: ResourceTableConfig = {
-    columns: {
-      col1: {
-        title: 'Long column name Element',
-        columnType: ResourceTableColumnType.Text
-      },
-      col2: {
-        title: 'Column Name That Is Long',
-        columnType: ResourceTableColumnType.Text
-      }
-    },
-    displayedColumns: [
-      'select',
-      'col2',
-      'col1'
-    ]
-  };
+  @Input() tableConfig: ResourceTableConfig;
 
   constructor(private mediaObserver: MediaObserver) { }
 
@@ -101,16 +83,6 @@ export class ResourceTableComponent implements OnInit {
 
 }
 
-/* Column type affects what filters can be applied, as well as how the data
- * is displayed in the table.
- */
-export enum ResourceTableColumnType {
-  Text = 1,
-  Numeric,
-  Boolean,
-  Geographic
-}
-
 export enum ResourceTableFilterType {
   Empty = 1,
   NotEmpty,
@@ -145,16 +117,53 @@ export class ResourceTableFilter {
 }
 
 export class ResourceTableColumnConfig {
-  constructor(public columnType: ResourceTableColumnType,
+  constructor(public columnValue: ResourceTableColumnValue,
+              public columnDisplay: ResourceTableColumnDisplay,
               public title: string) {}
 }
 
 /* Display configuration for columns in a resource table */
 export class ResourceTableColumnDisplay {
-  public width: number;
-  public columnIdentifier: string;
+  public defaultWidth: number;
 
   constructor() {}
+}
+
+/* Column type affects what filters can be applied, as well as how the data
+ * is displayed in the table. The column type is the canonical data type of
+ * the attribute that is associated with the column table. The setting that
+ * determines its appearance (button, link, icon, etc.) is the column's
+ * display type.
+ */
+export abstract class ResourceTableColumnValue {
+  constructor() {}
+
+  /* Retrieve the raw string value that is used to display the column's
+   * cell values
+   */
+  abstract value(row: any): string;
+}
+
+export class ResourceTableColumnAttributeValue {
+  constructor(public attribute: string) {
+  }
+
+  value(row: any): string {
+    return row.attributes[this.attribute];
+  }
+}
+
+export class ResourceTableColumnLinkDisplay extends ResourceTableColumnDisplay {
+  constructor(
+    public linkLocation: ResourceTableColumnValue,
+    public linkLabel: ResourceTableColumnValue
+  ) {
+    super();
+  }
+
+  value(row: any): string {
+    return this.linkLabel.value(row);
+  }
 }
 
 /* Resource table configuration. Specifies how a table of resources should
