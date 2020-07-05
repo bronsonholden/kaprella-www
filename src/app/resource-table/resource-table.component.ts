@@ -122,50 +122,6 @@ export class ResourceTableColumnConfig {
               public title: string) {}
 }
 
-/* Display configuration for columns in a resource table */
-export class ResourceTableColumnDisplay {
-  public defaultWidth: number;
-
-  constructor() {}
-}
-
-/* Column type affects what filters can be applied, as well as how the data
- * is displayed in the table. The column type is the canonical data type of
- * the attribute that is associated with the column table. The setting that
- * determines its appearance (button, link, icon, etc.) is the column's
- * display type.
- */
-export abstract class ResourceTableColumnValue {
-  constructor() {}
-
-  /* Retrieve the raw string value that is used to display the column's
-   * cell values
-   */
-  abstract value(row: any): string;
-}
-
-export class ResourceTableColumnAttributeValue {
-  constructor(public attribute: string) {
-  }
-
-  value(row: any): string {
-    return row.attributes[this.attribute];
-  }
-}
-
-export class ResourceTableColumnLinkDisplay extends ResourceTableColumnDisplay {
-  constructor(
-    public linkLocation: ResourceTableColumnValue,
-    public linkLabel: ResourceTableColumnValue
-  ) {
-    super();
-  }
-
-  value(row: any): string {
-    return this.linkLabel.value(row);
-  }
-}
-
 /* Resource table configuration. Specifies how a table of resources should
  * be displayed.
  */
