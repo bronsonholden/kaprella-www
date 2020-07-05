@@ -12,7 +12,7 @@
       <mat-chip-list [fxLayout.lt-w500]="'row-reverse'" [fxLayout.gt-w500]="'row'" style="margin: 0 8px;" aria-label="Add filter">
         <mat-chip color="accent" selectable="false" selected tabindex="-1">Add filter</mat-chip>
       </mat-chip-list>
-      <mat-paginator fxFlex="1 0 auto" (page)="onPageChange($event)" [hidePageSize]="true" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons>
+      <mat-paginator fxFlex="1 0 auto" (page)="onPageChange($event)" [hidePageSize]="true" [pageIndex]="page.offset" [pageSize]="page.limit" [length]="page.total" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons>
       </mat-paginator>
     </div>
   </div>
@@ -68,7 +68,7 @@
     </table>
   </div>
   <div fxFlex="0 1 auto">
-    <mat-paginator (page)="onPageChange($event)" [pageIndex]="1" [length]="1000" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+    <mat-paginator (page)="onPageChange($event)" [pageIndex]="page.offset" [pageSize]="page.limit" [length]="page.total" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
 </div>
 
