@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   ResourceTableConfig,
-  ResourceTableColumnAttributeValue,
-  ResourceTableColumnLinkDisplay,
-  ResourceTableColumnDisplay,
   ResourceTablePage
 } from '../../resource-table/resource-table.component';
 

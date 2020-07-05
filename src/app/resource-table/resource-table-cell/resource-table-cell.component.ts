@@ -1,9 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {
-  ResourceTableColumnValue,
-  ResourceTableColumnLinkDisplay,
-  ResourceTableColumnDisplay
-} from '../resource-table.component';
 
 @Component({
   selector: 'app-resource-table-cell',
