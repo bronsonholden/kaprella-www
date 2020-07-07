@@ -140,7 +140,7 @@ export class ResourceTablePage {
   _offset = 0;
   _total = 0;
 
-  constructor(offset, limit, total) {
+  constructor(offset = 0, limit = 25, total = 0) {
     this.offset = offset;
     this.limit = limit;
     this.total = total;
