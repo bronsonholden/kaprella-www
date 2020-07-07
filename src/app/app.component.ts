@@ -21,8 +21,6 @@ export class AppComponent implements OnInit {
 
   title = 'Kaprella';
 
-  isMobileSafari;
-
   /* Topbar is shorter on xs screens (< 600px width). This query allows us to
    * adjust the sidenav top gap accordingly.
    */
