@@ -255,6 +255,10 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   }
 }
 
+.mat-drawer-backdrop.mat-drawer-shown {
+  -webkit-overflow-scrolling: touch;
+}
+
 // Specific component overrides, pieces that are not in line with the general theming
 
 // Handle buttons appropriately, with respect to line-height
@@ -295,6 +299,10 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body.no-overflow {
+  overflow: hidden;
 }
 
 .text-no-select {

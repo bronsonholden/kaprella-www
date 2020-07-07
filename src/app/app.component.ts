@@ -5,7 +5,8 @@ import {
   OnDestroy,
   ViewChildren,
   ElementRef,
-  QueryList
+  QueryList,
+  Renderer2
 } from '@angular/core';
 
 import { MediaMatcher } from '@angular/cdk/layout';
@@ -81,7 +82,8 @@ export class AppComponent implements OnInit {
     ]
   }
 
-  constructor(changeDetectorRef: ChangeDetectorRef,
+  constructor(private renderer: Renderer2,
+              changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 599px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -89,6 +91,14 @@ export class AppComponent implements OnInit {
     this.ltMdQuery = media.matchMedia('(max-width: 959px)');
     this.ltMdQueryListener = () => changeDetectorRef.detectChanges();
     this.ltMdQuery.addListener(this.ltMdQueryListener);
+  }
+
+  sideNavOpened() {
+    this.renderer.addClass(document.body, 'no-overflow');
+  }
+
+  sideNavClosed() {
+    this.renderer.removeClass(document.body, 'no-overflow');
   }
 
   ngOnInit(): void {
