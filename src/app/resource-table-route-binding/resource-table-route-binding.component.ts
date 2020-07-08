@@ -24,7 +24,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
   @Input() apiService: ResourceApiService;
   page: ResourceTablePage;
-  @Output pageChange = new EventEmitter<ResourceTablePage>();
+  @Output() pageChange = new EventEmitter<ResourceTablePage>();
   @Input() tableConfig: ResourceTableConfig = new ResourceTableConfig();
   rows: any[] = [];
   loading = true;
