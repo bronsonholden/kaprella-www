@@ -1,4 +1,4 @@
-<div *ngIf="!loading; else loadingDisplay" fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
+<div fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
   <div fxFlex="0 1 em" class="filter-chips">
     <mat-chip-list aria-label="Filters" *ngIf="true">
       <mat-chip *ngFor="let filter of filters; index as idx;">
@@ -17,7 +17,7 @@
     </div>
   </div>
   <div fxFlex="auto" style="overflow-y: auto;">
-    <table class="resource-table" style="table-layout: fixed;" mat-table [dataSource]="rows">
+    <table class="resource-table" style="table-layout: fixed;" mat-table [dataSource]="loading ? [] : rows">
       <ng-container matColumnDef="select">
         <th class="resource-table-header" mat-header-cell *matHeaderCellDef>
           <mat-checkbox [disableRipple]="true" (change)="$event ? masterToggle() : null"
@@ -67,13 +67,10 @@
       <tr mat-row *matRowDef="let row; columns: tableConfig.displayedColumns;"></tr>
     </table>
   </div>
+  <div *ngIf="loading" style="padding-top: 48px;" fxLayout="row" fxLayoutAlign="center center">
+    <mat-spinner indeterminate color="accent"></mat-spinner>
+  </div>
   <div fxFlex="0 1 auto">
     <mat-paginator (page)="onPageChange($event)" [pageIndex]="page.offset" [pageSize]="page.limit" [length]="page.total" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
 </div>
-
-<ng-template #loadingDisplay>
-  <div style="padding-top: 48px;" fxLayout="row" fxLayoutAlign="center center">
-    <mat-spinner indeterminate color="accent"></mat-spinner>
-  </div>
-</ng-template>

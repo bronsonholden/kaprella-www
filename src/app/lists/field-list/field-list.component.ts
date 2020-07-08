@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { FieldApiService } from '../../field-api.service';
+
 import {
   ResourceTableConfig,
   ResourceTablePage
@@ -12,12 +13,19 @@ import {
 })
 export class FieldListComponent implements OnInit {
 
-  page = new ResourceTablePage();
-  fields = [];
   loading = true;
 
   tableConfig: ResourceTableConfig = {
     columns: {
+      id: {
+        title: 'ID',
+        value: {
+          type: 'id'
+        },
+        display: {
+          type: 'text'
+        }
+      },
       name: {
         title: 'Name',
         value: {
@@ -49,16 +57,9 @@ export class FieldListComponent implements OnInit {
     ]
   };
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private fieldApi: FieldApiService) { }
 
   ngOnInit(): void {
-    this.httpClient.get('fields').subscribe((res: any) => {
-      this.fields = res.data;
-      this.page.turn(0, 5, res.data.length);
-      this.loading = false;
-    }, err => {
-      console.log(err);
-    })
   }
 
 }

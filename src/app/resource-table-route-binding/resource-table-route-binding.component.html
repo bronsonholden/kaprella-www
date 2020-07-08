@@ -1,0 +1,8 @@
+<div class="theme-container">
+  <app-resource-table
+    [tableConfig]="tableConfig"
+    [rows]="rows"
+    [page]="page"
+    (pageChange)="onPageChange($event)"
+    [loading]="loading"></app-resource-table>
+</div>

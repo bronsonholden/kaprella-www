@@ -21,6 +21,7 @@ import { PointerResizeableDirective } from './pointer-resizeable.directive';
 import { ResourceTableCellComponent } from './resource-table/resource-table-cell/resource-table-cell.component';
 import { ResourceTableCellLinkComponent } from './resource-table/resource-table-cell/resource-table-cell-link/resource-table-cell-link.component';
 import { FarmerListComponent } from './lists/farmer-list/farmer-list.component';
+import { ResourceTableRouteBindingComponent } from './resource-table-route-binding/resource-table-route-binding.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FarmerListComponent } from './lists/farmer-list/farmer-list.component';
     LayoutLtW500Directive,
     ResourceTableCellComponent,
     ResourceTableCellLinkComponent,
-    FarmerListComponent
+    FarmerListComponent,
+    ResourceTableRouteBindingComponent
   ],
   imports: [
     BrowserModule,

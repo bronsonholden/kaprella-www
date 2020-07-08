@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  Input,
+  ViewChild
+} from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -34,6 +41,9 @@ export class ResourceTableComponent implements OnInit {
 
   /* Page properties of the resources displayed */
   @Input() page: ResourceTablePage;
+
+  /* Emits changed pages from the table paginator element */
+  @Output() pageChange = new EventEmitter<ResourceTablePage>();
 
   /* Resource data */
   @Input() rows: any[] = [];
@@ -74,7 +84,7 @@ export class ResourceTableComponent implements OnInit {
   /* Called when the pager is changed
    */
   onPageChange(event) {
-    console.log(event);
+    this.pageChange.emit(new ResourceTablePage(event.pageIndex, event.pageSize, event.length));
   }
 
   removeFilterByIdx(idx) {

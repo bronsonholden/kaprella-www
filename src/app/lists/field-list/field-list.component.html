@@ -1,7 +1,5 @@
 <div class="theme-container">
-  <app-resource-table
+  <app-resource-table-route-binding
     [tableConfig]="tableConfig"
-    [rows]="fields"
-    [page]="page"
-    [loading]="loading"></app-resource-table>
+    [apiService]="fieldApi"></app-resource-table-route-binding>
 </div>
