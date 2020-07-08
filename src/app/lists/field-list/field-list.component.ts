@@ -57,7 +57,7 @@ export class FieldListComponent implements OnInit {
     ]
   };
 
-  constructor(private fieldApi: FieldApiService) { }
+  constructor(public fieldApi: FieldApiService) { }
 
   ngOnInit(): void {
   }
