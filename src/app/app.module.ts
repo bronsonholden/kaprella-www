@@ -23,6 +23,10 @@ import { ResourceTableCellLinkComponent } from './resource-table/resource-table-
 import { FarmerListComponent } from './lists/farmer-list/farmer-list.component';
 import { ResourceTableRouteBindingComponent } from './resource-table-route-binding/resource-table-route-binding.component';
 import { TipsComponent } from './tips/tips.component';
+import { ShowFieldComponent } from './show/show-field/show-field.component';
+import { ShowFarmerComponent } from './show/show-farmer/show-farmer.component';
+import { CreateFieldComponent } from './create/create-field/create-field.component';
+import { CreateFarmerComponent } from './create/create-farmer/create-farmer.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { TipsComponent } from './tips/tips.component';
     ResourceTableCellLinkComponent,
     FarmerListComponent,
     ResourceTableRouteBindingComponent,
-    TipsComponent
+    TipsComponent,
+    ShowFieldComponent,
+    ShowFarmerComponent,
+    CreateFieldComponent,
+    CreateFarmerComponent
   ],
   imports: [
     BrowserModule,
