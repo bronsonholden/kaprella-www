@@ -11,6 +11,7 @@ import {
 
 import { version } from '../../package.json';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { Title } from '@angular/platform-browser';
 import { ApiService } from './api.service';
 
 @Component({
@@ -26,8 +27,6 @@ export class AppComponent implements OnInit {
    * GET /
    */
   apiVersion: string;
-
-  title = 'Kaprella';
 
   /* Query list of sidenav accordion sections. Used to scroll expanded
    * panels into view if they extend below the bottom edge of the viewport
@@ -96,6 +95,7 @@ export class AppComponent implements OnInit {
 
   constructor(private api: ApiService,
               private renderer: Renderer2,
+              private title: Title,
               changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 599px)');
@@ -122,6 +122,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Kaprella');
     this.api.getApiVersion().subscribe((apiVersion: string) => {
       this.apiVersion = apiVersion;
     });
