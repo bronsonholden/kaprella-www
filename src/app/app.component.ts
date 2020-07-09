@@ -10,21 +10,30 @@ import {
 } from '@angular/core';
 
 import { version } from '../../package.json';
-
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ApiService } from './api.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  /* Version number for the web application, pulled from package.json */
   webVersion: string = version;
+
+  /* Version number for the API server, pulled from the root endpoint, i.e.
+   * GET /
+   */
   apiVersion: string;
 
-  @ViewChildren('sideNavPanel', { read: ElementRef }) sideNavPanels: QueryList<ElementRef>;
-
   title = 'Kaprella';
+
+  /* Query list of sidenav accordion sections. Used to scroll expanded
+   * panels into view if they extend below the bottom edge of the viewport
+   * when expanded.
+   */
+  @ViewChildren('sideNavPanel', { read: ElementRef }) sideNavPanels: QueryList<ElementRef>;
 
   /* Topbar is shorter on xs screens (< 600px width). This query allows us to
    * adjust the sidenav top gap accordingly.
@@ -98,6 +107,13 @@ export class AppComponent implements OnInit {
   }
 
   sideNavOpened() {
+    /* On Safari iOS, allowing the body to scroll, i.e. have the overflow
+     * property as anything other than 'none', will cause it to exhibit the
+     * "bouncy" or elastic scroll at the edges. This takes away scroll focus
+     * from the sidenav, which is the only element the user should be
+     * interacting with while it is open. Setting overflow to none prevents
+     * this behavior.
+     */
     this.renderer.addClass(document.body, 'no-overflow');
   }
 
