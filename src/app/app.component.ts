@@ -9,6 +9,8 @@ import {
   Renderer2
 } from '@angular/core';
 
+import { version } from '../../package.json';
+
 import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
@@ -17,6 +19,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  public version: string = version;
+
   @ViewChildren('sideNavPanel', { read: ElementRef }) sideNavPanels: QueryList<ElementRef>;
 
   title = 'Kaprella';
