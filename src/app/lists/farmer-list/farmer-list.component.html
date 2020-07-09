@@ -1,7 +1,5 @@
 <div class="theme-container">
-  <app-resource-table
+  <app-resource-table-route-binding
     [tableConfig]="tableConfig"
-    [rows]="farmers"
-    [page]="page"
-    [loading]="false"></app-resource-table>
+    [apiService]="farmerApi"></app-resource-table-route-binding>
 </div>

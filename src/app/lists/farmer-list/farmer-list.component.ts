@@ -5,6 +5,8 @@ import {
   ResourceTablePage
 } from '../../resource-table/resource-table.component';
 
+import { FarmerApiService } from '../../farmer-api.service';
+
 @Component({
   selector: 'app-farm-list',
   templateUrl: './farmer-list.component.html',
@@ -38,7 +40,7 @@ export class FarmerListComponent implements OnInit {
     ]
   };
 
-  constructor() { }
+  constructor(public farmerApi: FarmerApiService) { }
 
   ngOnInit(): void {
     this.farmers = [];
