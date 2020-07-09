@@ -29,12 +29,7 @@
         </mat-toolbar>
       </span>
       <div class="sidenav-content">
-        <mat-card style="margin-bottom: 8px;">
-          On touch-screen devices, you can resize a column by tapping and sliding on the header.
-        </mat-card>
-        <mat-card style="margin-bottom: 8px;">
-          On a computer, you can resize a column by hovering over the right side of the header. When your cursor changes to a horizontal arrow, click and drag to increase or decrease the width.
-        </mat-card>
+        <app-tips></app-tips>
         <div fxLayout="row" style="margin-bottom: 8px;">
           <button mat-button>Web v{{ webVersion }}</button>
           <button mat-button>API v{{ apiVersion }}</button>

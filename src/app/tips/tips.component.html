@@ -1,0 +1,10 @@
+<mat-card style="margin-bottom: 8px;" *ngIf="showTips">
+  <mat-card-subtitle>
+    <span class="text-no-select">DID YOU KNOW?</span>
+  </mat-card-subtitle>
+  {{ getCurrentTip() }}
+  <mat-card-actions>
+    <button mat-button (click)="showNextTip()" color="accent">Next</button>
+    <button mat-button (click)="hideTips()">Hide</button>
+  </mat-card-actions>
+</mat-card>
