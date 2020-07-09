@@ -13,8 +13,6 @@ import {
 })
 export class FieldListComponent implements OnInit {
 
-  loading = true;
-
   tableConfig: ResourceTableConfig = {
     columns: {
       id: {
