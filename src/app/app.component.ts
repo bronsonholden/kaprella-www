@@ -114,11 +114,11 @@ export class AppComponent implements OnInit {
      * interacting with while it is open. Setting overflow to none prevents
      * this behavior.
      */
-    this.renderer.addClass(document.body, 'no-overflow');
+    this.renderer.addClass(document.body, 'lt-md-no-overflow');
   }
 
   sideNavClosed() {
-    this.renderer.removeClass(document.body, 'no-overflow');
+    this.renderer.removeClass(document.body, 'lt-md-no-overflow');
   }
 
   ngOnInit(): void {

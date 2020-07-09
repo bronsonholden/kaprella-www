@@ -301,8 +301,10 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-body.no-overflow {
-  overflow: hidden;
+@media screen and (max-width: 959px) {
+  body.lt-md-no-overflow {
+    overflow: hidden;
+  }
 }
 
 .text-no-select {
