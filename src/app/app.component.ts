@@ -12,14 +12,15 @@ import {
 import { version } from '../../package.json';
 
 import { MediaMatcher } from '@angular/cdk/layout';
-
+import { ApiService } from './api.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public version: string = version;
+  webVersion: string = version;
+  apiVersion: string;
 
   @ViewChildren('sideNavPanel', { read: ElementRef }) sideNavPanels: QueryList<ElementRef>;
 
@@ -84,7 +85,8 @@ export class AppComponent implements OnInit {
     ]
   }
 
-  constructor(private renderer: Renderer2,
+  constructor(private api: ApiService,
+              private renderer: Renderer2,
               changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 599px)');
@@ -104,6 +106,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.api.getApiVersion().subscribe((apiVersion: string) => {
+      this.apiVersion = apiVersion;
+    });
   }
 
   ngOnDestroy(): void {
