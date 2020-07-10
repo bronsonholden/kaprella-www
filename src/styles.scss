@@ -366,3 +366,13 @@ a {
 .pseudo-link {
   cursor: pointer;
 }
+
+.button-row {
+  display: table-cell;
+  padding: 8px;
+}
+
+.button-row button:not(:last-child) {
+  display: table-cell;
+  margin-right: 8px;
+}
