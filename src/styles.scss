@@ -210,18 +210,16 @@ $theme-warn: mat-palette($mat-warn, main, lighter, darker);;
 $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 
-@mixin theme-color-grabber($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
+.primary-color {
+  color: mat-color($theme-primary) !important;
+}
 
-  .primary-color {
-    color: mat-color($theme-primary) !important;
-  }
+.warn-color {
+  color: mat-color($theme-warn) !important;
+}
 
-  .warn-color {
-    color: mat-color($theme-warn) !important
-  }
+.accent-color {
+  color: mat-color($theme-accent) !important;
 }
 
 @include angular-material-theme($theme);
