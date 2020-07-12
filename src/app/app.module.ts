@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -48,6 +49,7 @@ import { CreateFarmerComponent } from './create/create-farmer/create-farmer.comp
     CreateFarmerComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     ApiModule,
