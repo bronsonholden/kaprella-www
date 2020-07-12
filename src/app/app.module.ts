@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { ApiModule } from './api.module';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { CreateFarmerComponent } from './create/create-farmer/create-farmer.comp
     FormsModule,
     BrowserModule,
     HttpClientModule,
+    GoogleMapsModule,
     ApiModule,
     AppRoutingModule,
     FlexLayoutModule,

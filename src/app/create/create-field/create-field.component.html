@@ -1,6 +1,28 @@
-<div class="mat-typography theme-container">
-  <mat-form-field appearance="standard">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" [(ngModel)]="name">
-  </mat-form-field>
+<div class="mat-typography resource-form">
+  <div fxLayout="column">
+    <div fxLayout="row" class="resource-form-row">
+      <div class="resource-form-widget">
+        <mat-form-field appearance="standard">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" [(ngModel)]="name">
+        </mat-form-field>
+      </div>
+      <div class="resource-form-widget">
+        <mat-form-field appearance="standard">
+          <mat-label>Farmer</mat-label>
+          <mat-select [(ngModel)]="farmerId">
+            <mat-option [value]="1">ACME Farming, Inc.</mat-option>
+            <mat-option [value]="2">Anvil Breeding Co</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="resource-form-widget" fxFlex="auto">
+        <google-map
+          width="100%"
+          height="400px"
+          [options]="options"></google-map>
+      </div>
+    </div>
+  </div>
+  {{ name }} - {{ farmerId }}
 </div>

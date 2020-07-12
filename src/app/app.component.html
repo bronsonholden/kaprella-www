@@ -9,9 +9,8 @@
 -->
 <div
     class="router-container theme-container"
-    [style.touch-action]="sideNav.opened ? 'none' : undefined"
-    [class.theme-alternate]="darkMode.checked">
-  <mat-sidenav-container class="sidenav-container">
+    [style.touch-action]="sideNav.opened ? 'none' : undefined">
+  <mat-sidenav-container class="sidenav-container theme-container">
     <mat-sidenav
         [style.flex]="ltMdQuery.matches ? '1 0 auto' : '1'"
         autoFocus="false"
@@ -68,10 +67,10 @@
             <img src="assets/logo.png" height="100%">
           </div>
           <div class="h-fill"></div>
-          <mat-slide-toggle color="accent" #darkMode matTooltip="Toggle dark mode">
+          <mat-slide-toggle color="accent" #darkModeToggle matTooltip="Toggle dark mode" [checked]="darkMode" (change)="onDarkModeToggle($event)">
             <mat-icon
               style="vertical-align: middle; padding-left: 8px;"
-              [color]="darkMode.checked ? 'accent' : 'light'"
+              [color]="darkModeToggle.checked ? 'accent' : 'light'"
               svgIcon="moon-waning-crescent">
             </mat-icon>
           </mat-slide-toggle>

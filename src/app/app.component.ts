@@ -93,6 +93,8 @@ export class AppComponent implements OnInit {
     ]
   }
 
+  darkMode = false;
+
   constructor(private api: ApiService,
               private renderer: Renderer2,
               private title: Title,
@@ -104,6 +106,15 @@ export class AppComponent implements OnInit {
     this.ltMdQuery = media.matchMedia('(max-width: 959px)');
     this.ltMdQueryListener = () => changeDetectorRef.detectChanges();
     this.ltMdQuery.addListener(this.ltMdQueryListener);
+  }
+
+  onDarkModeToggle(event) {
+    this.darkMode = event.checked;
+    if (this.darkMode) {
+      this.renderer.addClass(document.body, 'theme-alternate');
+    } else {
+      this.renderer.removeClass(document.body, 'theme-alternate');
+    }
   }
 
   sideNavOpened() {

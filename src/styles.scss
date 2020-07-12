@@ -80,7 +80,7 @@ $mat-dark-theme-foreground: (
 
 // Background config
 // Light bg
-$light-background:    #fafafa;
+$light-background:    #ffffff;
 $light-bg-darker-5:   darken($light-background, 5%);
 $light-bg-darker-10:  darken($light-background, 10%);
 $light-bg-darker-20:  darken($light-background, 20%);
@@ -209,6 +209,10 @@ $theme-warn: mat-palette($mat-warn, main, lighter, darker);;
 
 $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
+/* Applied to certain components in dark mode to make them a bit more visible
+ * and user-friendly.
+ */
+$altThemeAccent: mat-dark-theme($theme-accent, $theme-accent, $theme-warn);
 
 .primary-color {
   color: mat-color($theme-primary) !important;
@@ -234,6 +238,13 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 
 .theme-alternate {
   @include angular-material-theme($altTheme);
+
+  /* In dark mode, use accent-only theme to maximize visibility of labels,
+   * etc.
+   */
+  .resource-form-widget {
+    @include angular-material-theme($altThemeAccent);
+  }
 
   .resource-table a {
     color: mat-color(map-get($altTheme, accent));
@@ -370,6 +381,29 @@ a {
 .button-row {
   display: table-cell;
   padding: 8px;
+}
+
+@media only screen and (max-width: 599px) {
+  .resource-form {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width: 1007px) and (min-width: 600px) {
+  .resource-form {
+    margin: 24px;
+  }
+}
+
+@media only screen and (min-width: 1008px) {
+  .resource-form {
+    max-width: 960px;
+    margin: 24px auto;
+  }
+}
+
+.resource-form-row .resource-form-widget:not(:last-child) {
+  margin-right: 16px;
 }
 
 .button-row button:not(:last-child) {
