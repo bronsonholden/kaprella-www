@@ -29,6 +29,7 @@ import { ShowFieldComponent } from './show/show-field/show-field.component';
 import { ShowFarmerComponent } from './show/show-farmer/show-farmer.component';
 import { CreateFieldComponent } from './create/create-field/create-field.component';
 import { CreateFarmerComponent } from './create/create-farmer/create-farmer.component';
+import { DrawBoundaryComponent } from './maps/draw-boundary/draw-boundary.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CreateFarmerComponent } from './create/create-farmer/create-farmer.comp
     ShowFieldComponent,
     ShowFarmerComponent,
     CreateFieldComponent,
-    CreateFarmerComponent
+    CreateFarmerComponent,
+    DrawBoundaryComponent
   ],
   imports: [
     FormsModule,

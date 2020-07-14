@@ -239,12 +239,11 @@ $altThemeAccent: mat-dark-theme($theme-accent, $theme-accent, $theme-warn);
 .theme-alternate {
   @include angular-material-theme($altTheme);
 
-  /* In dark mode, use accent-only theme to maximize visibility of labels,
-   * etc.
+  /* In dark mode, use accent-only theme to maximize visibility of certain
+   * elements.
    */
-  .resource-form-widget {
-    @include angular-material-theme($altThemeAccent);
-  }
+  @include mat-button-theme($altThemeAccent);
+  @include mat-form-field-theme($altThemeAccent);
 
   .resource-table a {
     color: mat-color(map-get($altTheme, accent));
@@ -380,6 +379,9 @@ a {
 
 .button-row {
   display: table-cell;
+}
+
+.button-row-container {
   padding: 8px;
 }
 

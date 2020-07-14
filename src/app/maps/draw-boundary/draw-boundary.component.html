@@ -1,0 +1,35 @@
+<div style="min-height: 492px;">
+  <mat-tab-group [animationDuration]="0">
+    <mat-tab label="Draw">
+      <google-map
+          width="100%"
+          height="400px"
+          (mapClick)="onMapClick($event)"
+          [options]="options">
+        <map-marker
+          *ngFor="let point of outerPolygon; index as i"
+          [position]="point"
+          [clickable]="true"
+          (mapClick)="onOuterPolygonPointClick(i)">
+        </map-marker>
+        <!-- The outer polygon of the boundary -->
+        <map-polygon
+          [paths]="createPolygonPaths()"
+          (polygonClick)="onOuterPolygonClick($event)">
+        </map-polygon>
+      </google-map>
+      <div style="padding-top: 8px;" fxLayout="row" class="button-row">
+        <button mat-button disabled>Undo</button>
+        <div class="h-fill"></div>
+        <button mat-button color="warn" (click)="clearPolygons()">Clear</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Data">
+      <div style="height: 100%;">
+        <mat-form-field>
+          <input matInput>
+        </mat-form-field>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
