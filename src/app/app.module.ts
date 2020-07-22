@@ -22,7 +22,6 @@ import { FieldListComponent } from './lists/field-list/field-list.component';
 import { TouchResizeableDirective } from './touch-resizeable.directive';
 import { PointerResizeableDirective } from './pointer-resizeable.directive';
 import { ResourceTableCellComponent } from './resource-table/resource-table-cell/resource-table-cell.component';
-import { ResourceTableCellLinkComponent } from './resource-table/resource-table-cell/resource-table-cell-link/resource-table-cell-link.component';
 import { FarmerListComponent } from './lists/farmer-list/farmer-list.component';
 import { ResourceTableRouteBindingComponent } from './resource-table-route-binding/resource-table-route-binding.component';
 import { TipsComponent } from './tips/tips.component';
@@ -43,7 +42,6 @@ import { FieldFormComponent } from './forms/field-form/field-form.component';
     LayoutGtW500Directive,
     LayoutLtW500Directive,
     ResourceTableCellComponent,
-    ResourceTableCellLinkComponent,
     FarmerListComponent,
     ResourceTableRouteBindingComponent,
     TipsComponent,
