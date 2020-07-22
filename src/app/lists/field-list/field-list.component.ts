@@ -37,6 +37,30 @@ export class FieldListComponent implements OnInit {
           }
         }
       },
+      farmerName: {
+        title: 'Farmer',
+        value: {
+          type: 'concat',
+          parts: [
+            {
+              type: 'literal',
+              value: 'farmers'
+            },
+            {
+              type: 'id'
+            }
+          ],
+          separator: '/'
+        },
+        display: {
+          type: 'link',
+          label: {
+            type: 'meta',
+            path: 'farmerName'
+          },
+          absolute: true
+        }
+      },
       area: {
         title: 'Area',
         value: {
@@ -44,16 +68,25 @@ export class FieldListComponent implements OnInit {
           path: 'area'
         },
         display: {
-          type: 'text'
+          type: 'fieldArea',
+          unit: 'ha',
+          format: '%.2f'
         }
       }
     },
     displayedColumns: [
       'select',
       'name',
+      'farmerName',
       'area'
     ]
   };
+
+  scope = {
+    generate: {
+      farmerName: 'lookup_s("farmer", "name")'
+    }
+  }
 
   constructor(public fieldApi: FieldApiService) { }
 

@@ -9,7 +9,6 @@ import {
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
 
 /* Wrapper component for tables. Displays data with the given table
  * configuration and emits events upon user interaction with the display
@@ -22,7 +21,7 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./resource-table.component.scss']
 })
 export class ResourceTableComponent implements OnInit {
-  selection = new SelectionModel<any>(true, []);
+  selection = new Set();
 
   /* Whether data table loading indicator should be shown */
   @Input() loading = true;
@@ -53,19 +52,34 @@ export class ResourceTableComponent implements OnInit {
   constructor(private mediaObserver: MediaObserver) { }
 
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.rows.length;
-    return numSelected == numRows;
+    for (let row of this.rows) {
+      if (!this.selection.has(row.id)) {
+        return false;
+      }
+    }
+
+    return this.selection.size === this.rows.length;
   }
 
   masterToggle() {
-    this.isAllSelected() ?
-    this.selection.clear() :
-    this.rows.forEach(row => this.selection.select(row));
+    /* If anything is selected and master toggle is clicked, remove all
+     * rows from selection. Otherwise, add all rows.
+     */
+    if (this.selection.size > 0) {
+      this.selection.clear();
+    } else {
+      for (let row of this.rows) {
+        this.selection.add(row.id);
+      }
+    }
   }
 
-  addToSelection(row) {
-    this.selection.toggle(row)
+  toggleSelection(row) {
+    if (this.selection.has(row.id)) {
+      this.selection.delete(row.id);
+    } else {
+      this.selection.add(row.id);
+    }
   }
 
   ngOnInit(): void {
@@ -84,6 +98,7 @@ export class ResourceTableComponent implements OnInit {
   /* Called when the pager is changed
    */
   onPageChange(event) {
+    this.selection.clear();
     this.pageChange.emit(new ResourceTablePage(event.pageIndex, event.pageSize, event.length));
   }
 

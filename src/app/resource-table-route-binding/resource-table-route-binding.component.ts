@@ -1,11 +1,12 @@
 import {
   Component,
   OnInit,
-  OnChanges,
   Input,
   Output,
   EventEmitter
 } from '@angular/core';
+
+import { merge } from 'lodash';
 
 import {
   ResourceTableConfig,
@@ -22,11 +23,34 @@ import { ResourceApiService } from '../resource-api.service';
 })
 export class ResourceTableRouteBindingComponent implements OnInit {
 
+  /* The API service to query for resources to display in the table */
   @Input() apiService: ResourceApiService;
+
+  /* A set of query parameters that are always provided in the query */
+  @Input() scope: any;
+
+  /* Whether interacting with the table updates the activated route's
+   * query parameters.
+   */
+  @Input() updateQuery = true;
+
+  /* The current table page */
   page: ResourceTablePage;
+
+  /* Emits pages when the paginator is updated (e.g. next page or page size
+   * is changed).
+   */
   @Output() pageChange = new EventEmitter<ResourceTablePage>();
+
+  /* The table configuration to use when displaying the resources */
   @Input() tableConfig: ResourceTableConfig = new ResourceTableConfig();
+
+  /* Resource rows to display in the table */
   rows: any[] = [];
+
+  /* Whether to show a loading graphic. Initially displayed while the first
+   * set of rows is loaded, but page changes do not display the graphic.
+   */
   loading = true;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -66,24 +90,26 @@ export class ResourceTableRouteBindingComponent implements OnInit {
     if (!query.limit && !query.offset) {
       this.reloadData();
     } else if (parseInt(query.limit) === this.page.limit && parseInt(query.offset) === this.page.offset) {
-      // If exactly the same, a relaod won't happen, so do it here
+      // If exactly the same, a reload won't happen, so do it here
       this.reloadData();
     }
 
   }
 
-  ngOnChanges(changes: any): void {
-  }
-
   onPageChange(page) {
-    this.router.navigate([], {
-      relativeTo: this.activatedRoute,
-      queryParams: {
-        offset: `${page.offset}`,
-        limit: `${page.limit}`
-      },
-      queryParamsHandling: 'merge',
-    });
+    if (this.updateQuery) {
+      this.router.navigate([], {
+        relativeTo: this.activatedRoute,
+        queryParams: {
+          offset: `${page.offset}`,
+          limit: `${page.limit}`
+        },
+        queryParamsHandling: 'merge',
+      });
+    } else {
+      this.page.turn(page.offset, page.limit, this.page.total);
+      this.reloadData();
+    }
   }
 
   reloadData(): void {
@@ -91,13 +117,11 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       return;
     }
 
-    this.apiService.index(this.page.offset, this.page.limit, {}).subscribe((res: any) => {
+    this.apiService.index(this.page.offset, this.page.limit, this.scope || {}).subscribe((res: any) => {
       this.rows = res.data;
       this.page.turn(res.meta.page_offset, res.meta.page_limit, res.meta.item_count);
       this.loading = false;
-    }, err => {
-      console.log(err);
-    })
+    });
   }
 
 }

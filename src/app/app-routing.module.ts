@@ -38,7 +38,14 @@ const routes: Routes = [
       },
       {
         path: ':id',
-        component: ShowFarmerComponent
+        component: ShowFarmerComponent,
+        children: [
+          {
+            path: '',
+            component: FieldListComponent,
+            outlet: 'farmer-fields-outlet'
+          }
+        ]
       }
     ]
   }

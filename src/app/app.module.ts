@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -30,6 +31,7 @@ import { ShowFarmerComponent } from './show/show-farmer/show-farmer.component';
 import { CreateFieldComponent } from './create/create-field/create-field.component';
 import { CreateFarmerComponent } from './create/create-farmer/create-farmer.component';
 import { DrawBoundaryComponent } from './maps/draw-boundary/draw-boundary.component';
+import { FieldFormComponent } from './forms/field-form/field-form.component';
 
 @NgModule({
   declarations: [
@@ -49,11 +51,13 @@ import { DrawBoundaryComponent } from './maps/draw-boundary/draw-boundary.compon
     ShowFarmerComponent,
     CreateFieldComponent,
     CreateFarmerComponent,
-    DrawBoundaryComponent
+    DrawBoundaryComponent,
+    FieldFormComponent
   ],
   imports: [
-    FormsModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     GoogleMapsModule,
     ApiModule,

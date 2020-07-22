@@ -1,29 +1,10 @@
-<div class="mat-typography resource-form">
+<div class="resource-form">
   <div fxLayout="column" fxLayoutGap="24px">
     <div class="button-row" fxLayout="row">
-      <button mat-raised-button color="primary">Create</button>
+      <button mat-raised-button color="primary" (click)="createField()">Create</button>
       <div class="h-fill"></div>
-      <button mat-button color="warn">Cancel</button>
+      <button mat-button color="warn" (click)="goBack()">Cancel</button>
     </div>
-    <div fxLayout="row" class="resource-form-row">
-      <div class="resource-form-widget">
-        <mat-form-field appearance="standard">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Name" [(ngModel)]="name">
-        </mat-form-field>
-      </div>
-      <div class="resource-form-widget">
-        <mat-form-field appearance="standard">
-          <mat-label>Farmer</mat-label>
-          <mat-select [(ngModel)]="farmerId">
-            <mat-option [value]="1">ACME Farming, Inc.</mat-option>
-            <mat-option [value]="2">Anvil Breeding Co</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="resource-form-widget" fxFlex="auto">
-      <app-draw-boundary></app-draw-boundary>
-    </div>
+    <app-field-form [(field)]="field"></app-field-form>
   </div>
 </div>

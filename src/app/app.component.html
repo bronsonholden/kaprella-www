@@ -49,7 +49,7 @@
                 *ngFor="let button of section.buttons"
                 [disableRipple]="true"
                 mat-list-item
-                (click)="sideNav.close()"
+                (click)="ltMdQuery.matches && sideNav.close()"
                 [routerLink]="button.routerLink">{{ button.label }}</a>
             </mat-nav-list>
           </mat-expansion-panel>

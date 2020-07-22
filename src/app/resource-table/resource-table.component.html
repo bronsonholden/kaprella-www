@@ -20,16 +20,18 @@
     <table class="resource-table" style="table-layout: fixed;" mat-table [dataSource]="loading ? [] : rows">
       <ng-container matColumnDef="select">
         <th class="resource-table-header" mat-header-cell *matHeaderCellDef>
-          <mat-checkbox [disableRipple]="true" (change)="$event ? masterToggle() : null"
-                        [checked]="selection.hasValue() && isAllSelected()"
-                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          <mat-checkbox [disableRipple]="true"
+                        (click)="$event.stopPropagation()"
+                        (change)="masterToggle()"
+                        [checked]="selection.size !== 0"
+                        [indeterminate]="selection.size !== 0 && !isAllSelected()">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row">
           <mat-checkbox [disableRipple]="true"
                         (click)="$event.stopPropagation()"
-                        (change)="$event ? addToSelection(row) : null"
-                        [checked]="selection.isSelected(row)">
+                        (change)="toggleSelection(row)"
+                        [checked]="selection.has(row.id)">
           </mat-checkbox>
         </td>
       </ng-container>

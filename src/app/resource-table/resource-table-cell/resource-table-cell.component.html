@@ -2,8 +2,18 @@
   {{ raw }}
 </div>
 
+<div *ngIf="display.type === 'format'">
+  {{ formatted }}
+</div>
+
+<div *ngIf="display.type === 'fieldArea'">
+  <span [matTooltip]="fieldAreaTooltip" class="mat-body-2 accent-color" style="cursor: pointer;" (click)="switchAreaUnit()">
+    {{ fieldArea }} {{ display.unit }}
+  </span>
+</div>
+
 <div *ngIf="display.type === 'link'">
-  <a class="mat-body-2" [routerLink]="raw">
+  <a class="mat-body-2" [routerLink]="routerLink">
     <app-resource-table-cell
       [row]="row"
       [value]="display.label"
