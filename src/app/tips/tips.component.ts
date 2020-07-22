@@ -9,10 +9,12 @@ export class TipsComponent implements OnInit {
 
   showTips = true;
   tips: string[] = [
-    `On touch-screen devices, you can resize a column by tapping and sliding on
-    the header.`,
+    `On touch-screen devices, you can resize a column by tapping and sliding
+    on the header.`,
     `On a computer, you can resize a column by clicking and dragging over the
-    right side of the header.`
+    right side of the header.`,
+    `You can click or tap table cells that show area to switch between acres
+    and hectares.`
   ];
 
   currentTipIdx = 0;

@@ -7,7 +7,13 @@
 </div>
 
 <div *ngIf="display.type === 'fieldArea'">
-  <span [matTooltip]="fieldAreaTooltip" class="mat-body-2 accent-color" style="cursor: pointer;" (click)="switchAreaUnit()">
+  <span
+      #tooltip="matTooltip"
+      matTooltipTouchGestures="off"
+      [matTooltip]="fieldAreaTooltip"
+      class="mat-body-2 accent-color"
+      style="cursor: pointer;"
+      (click)="switchAreaUnit()">
     {{ fieldArea }} {{ display.unit }}
   </span>
 </div>

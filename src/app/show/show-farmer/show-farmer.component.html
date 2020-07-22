@@ -2,7 +2,7 @@
   <div class="resource-form">
     <div fxLayout="column" fxLayoutGap="24px">
       <div class="button-row" fxLayout="row">
-        <button mat-stroked-button routerLink="..">Farmers</button>
+        <button mat-stroked-button routerLink="..">All Farmers</button>
       </div>
       <div>
         <h1><span>{{ farmer.attributes.name }}</span></h1>
@@ -21,19 +21,19 @@
         </div>
       </div>
     </div>
-  </div>
-  <div>
-    <mat-tab-group dynamicHeight="true">
-      <mat-tab label="Fields">
-        <app-resource-table-route-binding
-          [tableConfig]="fieldTableConfig"
-          [apiService]="fieldApi"
-          [updateQuery]="false"
-          [scope]="scope"></app-resource-table-route-binding>
-      </mat-tab>
-      <mat-tab label="Plantings">
-      </mat-tab>
-    </mat-tab-group>
+    <div>
+      <mat-tab-group dynamicHeight="true">
+        <mat-tab label="Fields">
+          <app-resource-table-route-binding
+            [tableConfig]="fieldTableConfig"
+            [apiService]="fieldApi"
+            [updateQuery]="false"
+            [scope]="scope"></app-resource-table-route-binding>
+        </mat-tab>
+        <mat-tab label="Plantings">
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </div>
 <ng-template #loadingIndicator>
