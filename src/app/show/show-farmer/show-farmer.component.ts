@@ -49,16 +49,12 @@ export class ShowFarmerComponent implements OnInit {
       area: {
         title: 'Area',
         value: {
-          type: 'list',
-          values: [
-            {
-              type: 'attribute',
-              path: 'area'
-            }
-          ]
+          type: 'attribute',
+          path: 'area'
         },
         display: {
-          type: 'format',
+          type: 'fieldArea',
+          unit: 'ha',
           format: '%.2f'
         }
       }
