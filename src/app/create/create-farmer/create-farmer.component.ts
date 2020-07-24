@@ -12,4 +12,8 @@ export class CreateFarmerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onAddressSelection(address) {
+    console.log(address);
+  }
+
 }

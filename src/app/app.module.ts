@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { ApiModule } from './api.module';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
@@ -58,6 +59,7 @@ import { FieldFormComponent } from './forms/field-form/field-form.component';
     ReactiveFormsModule,
     HttpClientModule,
     GoogleMapsModule,
+    GooglePlaceModule,
     ApiModule,
     AppRoutingModule,
     FlexLayoutModule,

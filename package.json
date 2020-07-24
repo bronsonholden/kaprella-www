@@ -27,6 +27,7 @@
     "@angular/router": "~9.1.11",
     "@swimlane/ngx-datatable": "^17.0.0",
     "lodash": "^4.17.19",
+    "ngx-google-places-autocomplete": "^2.0.4",
     "rxjs": "~6.5.4",
     "smoothscroll-polyfill": "^0.4.4",
     "sprintf-js": "^1.1.2",
