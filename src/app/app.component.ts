@@ -13,6 +13,7 @@ import { version } from '../../package.json';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Title } from '@angular/platform-browser';
 import { ApiService } from './api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -96,6 +97,7 @@ export class AppComponent implements OnInit {
   darkMode = false;
 
   constructor(private api: ApiService,
+              private router: Router,
               private renderer: Renderer2,
               private title: Title,
               changeDetectorRef: ChangeDetectorRef,

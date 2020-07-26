@@ -1,7 +1,11 @@
 .brand-logo {
-  vertical-align: baseline;
-  padding: 0 4px;
+  padding: 0px 4px;
   height: 100%;
+
+  img {
+    padding: 4px 0;
+    height: calc(100% - 8px);
+  }
 }
 
 .side-nav {

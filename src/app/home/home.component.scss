@@ -22,7 +22,7 @@
 }
 
 .mission-statement {
-  padding: 48px 72px;
+  padding: 24px 0;
   font-weight: bold;
   font-size: 24px;
   line-height: 24px;
@@ -32,25 +32,9 @@
 .abstract-statement {
 }
 
-@media screen and (max-width: 599px) {
-  .mission-statement {
-    padding: 36px 0 16px 0;
-    text-align: left;
-  }
-
-  .site-banner-description {
-    left: 0px;
-    bottom: 0px;
-    padding: 32px;
-    font-size: 24px;
-    line-height: 24px;
-    width: auto;
-  }
-}
-
 .resource-banner-container:hover {
   .resource-banner:not(:hover) {
-    filter: brightness(60%);
+    filter: brightness(50%);
     transition: 0.4s;
   }
 }
@@ -64,7 +48,7 @@
 
 .resource-banner-image {
   width: 100%;
-  height: 150px;
+  height: 100%;
   object-fit: cover;
   -webkit-animation: fadein 1.5s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 1.5s; /* Firefox < 16 */
@@ -76,10 +60,44 @@
 .resource-banner-title {
   color: white;
   font-family: roboto;
-  font-size: 3em;
+  font-size: 42px;
+  line-height: 42px;
   position: absolute;
   bottom: 16px;
   left: 12px;
+}
+
+@media screen and (max-width: 599px) {
+  .site-banner {
+    height: 300px;
+  }
+
+  .resource-banner {
+    height: 85px;
+  }
+
+  .resource-banner-title {
+    bottom: 4px;
+    left: 6px;
+  }
+
+  .mission-statement {
+    padding: 16px 0;
+    text-align: left;
+  }
+
+  .abstract-statement {
+    padding: 0;
+  }
+
+  .site-banner-description {
+    left: 0px;
+    bottom: 0px;
+    padding: 32px;
+    font-size: 24px;
+    line-height: 24px;
+    width: auto;
+  }
 }
 
 @keyframes fadein {

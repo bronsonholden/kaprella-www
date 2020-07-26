@@ -60,11 +60,17 @@
     <mat-sidenav-content style="height: 100%;">
       <mat-toolbar color="primary" class="app-toolbar">
         <mat-toolbar-row>
-         <button mat-icon-button aria-label="Menu" (click)="sideNav.toggle()">
+         <button
+              *ngIf="router.url !== '/'"
+              mat-icon-button
+              aria-label="Menu"
+              (click)="sideNav.toggle()">
             <mat-icon>menu</mat-icon>
           </button>
           <div class="brand-logo text-no-select">
-            <img src="assets/logo.png" height="100%">
+            <a routerLink="/">
+              <img src="assets/logo.png">
+            </a>
           </div>
           <div class="h-fill"></div>
           <mat-slide-toggle color="accent" #darkModeToggle matTooltip="Toggle dark mode" [checked]="darkMode" (change)="onDarkModeToggle($event)">
