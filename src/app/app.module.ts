@@ -32,6 +32,8 @@ import { CreateFieldComponent } from './create/create-field/create-field.compone
 import { CreateFarmerComponent } from './create/create-farmer/create-farmer.component';
 import { DrawBoundaryComponent } from './maps/draw-boundary/draw-boundary.component';
 import { FieldFormComponent } from './forms/field-form/field-form.component';
+import { HomeComponent } from './home/home.component';
+import { PlantVarietyListComponent } from './lists/plant-variety-list/plant-variety-list.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { FieldFormComponent } from './forms/field-form/field-form.component';
     CreateFieldComponent,
     CreateFarmerComponent,
     DrawBoundaryComponent,
-    FieldFormComponent
+    FieldFormComponent,
+    HomeComponent,
+    PlantVarietyListComponent
   ],
   imports: [
     BrowserModule,

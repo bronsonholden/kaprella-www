@@ -401,6 +401,12 @@ a {
   max-width: 960px;
 }
 
+.content {
+  margin: 0 auto;
+  padding: 48px;
+  max-width: 740px;
+}
+
 .resource-form-row .resource-form-widget:not(:last-child) {
   margin-right: 16px;
 }
