@@ -6,8 +6,10 @@ import { FarmerListComponent } from './lists/farmer-list/farmer-list.component';
 import { PlantVarietyListComponent } from './lists/plant-variety-list/plant-variety-list.component';
 import { CreateFieldComponent } from './create/create-field/create-field.component';
 import { CreateFarmerComponent } from './create/create-farmer/create-farmer.component';
+import { CreatePlantVarietyComponent } from './create/create-plant-variety/create-plant-variety.component';
 import { ShowFieldComponent } from './show/show-field/show-field.component';
 import { ShowFarmerComponent } from './show/show-farmer/show-farmer.component';
+import { ShowPlantVarietyComponent } from './show/show-plant-variety/show-plant-variety.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,14 @@ const routes: Routes = [
       {
         path: '',
         component: PlantVarietyListComponent
+      },
+      {
+        path: 'new',
+        component: CreatePlantVarietyComponent
+      },
+      {
+        path: ':id',
+        component: ShowPlantVarietyComponent
       }
     ]
   }

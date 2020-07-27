@@ -34,6 +34,8 @@ import { DrawBoundaryComponent } from './maps/draw-boundary/draw-boundary.compon
 import { FieldFormComponent } from './forms/field-form/field-form.component';
 import { HomeComponent } from './home/home.component';
 import { PlantVarietyListComponent } from './lists/plant-variety-list/plant-variety-list.component';
+import { ShowPlantVarietyComponent } from './show/show-plant-variety/show-plant-variety.component';
+import { CreatePlantVarietyComponent } from './create/create-plant-variety/create-plant-variety.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { PlantVarietyListComponent } from './lists/plant-variety-list/plant-vari
     DrawBoundaryComponent,
     FieldFormComponent,
     HomeComponent,
-    PlantVarietyListComponent
+    PlantVarietyListComponent,
+    ShowPlantVarietyComponent,
+    CreatePlantVarietyComponent
   ],
   imports: [
     BrowserModule,
