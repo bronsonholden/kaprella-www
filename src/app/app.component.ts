@@ -97,7 +97,7 @@ export class AppComponent implements OnInit {
   darkMode = false;
 
   constructor(private api: ApiService,
-              private router: Router,
+              public router: Router,
               private renderer: Renderer2,
               private title: Title,
               changeDetectorRef: ChangeDetectorRef,

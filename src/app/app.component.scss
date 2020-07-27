@@ -1,11 +1,15 @@
-.brand-logo {
-  padding: 0px 4px;
-  height: 100%;
+.toolbar-menu-button {
+  margin-right: 4px;
+}
 
-  img {
-    padding: 4px 0;
-    height: calc(100% - 8px);
-  }
+.brand-logo {
+  padding: 0;
+  height: 100%;
+}
+
+.site-logo {
+  padding: 7px 0;
+  height: calc(100% - 14px);
 }
 
 .side-nav {

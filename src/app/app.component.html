@@ -61,6 +61,7 @@
       <mat-toolbar color="primary" class="app-toolbar">
         <mat-toolbar-row>
          <button
+              class="toolbar-menu-button"
               *ngIf="router.url !== '/'"
               mat-icon-button
               aria-label="Menu"
@@ -69,7 +70,7 @@
           </button>
           <div class="brand-logo text-no-select">
             <a routerLink="/">
-              <img src="assets/logo.png">
+              <img class="site-logo" src="assets/logo.png">
             </a>
           </div>
           <div class="h-fill"></div>
