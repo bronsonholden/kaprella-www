@@ -392,19 +392,29 @@ a {
 }
 
 .button-row-container {
-  padding: 8px;
+  padding: 12px;
 }
 
 .resource-form {
   margin: 0 auto;
-  padding: 24px;
+  padding: 48px;
   max-width: 960px;
 }
 
 .content {
   margin: 0 auto;
-  padding: 24px;
+  padding: 48px;
   max-width: 680px;
+}
+
+@media screen and (max-width: 599px) {
+  .resource-form {
+    padding: 24px;
+  }
+
+  .content {
+    padding: 24px;
+  }
 }
 
 .resource-form-row .resource-form-widget:not(:last-child) {
@@ -413,7 +423,7 @@ a {
 
 .button-row button:not(:last-child) {
   display: table-cell;
-  margin-right: 8px;
+  margin-right: 12px;
 }
 
 .mat-form-field {
