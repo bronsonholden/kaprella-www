@@ -31,14 +31,18 @@ export class CreateFieldComponent implements OnInit {
       boundary: this.field.boundary
     };
 
-    let relationships = {
-      farmer: {
-        data: {
-          type: 'farmers',
-          id: this.field.farmerId
+    let relationships;
+
+    if (!!this.farmerId) {
+      relationships = {
+        farmer: {
+          data: {
+            type: 'farmers',
+            id: this.field.farmerId
+          }
         }
-      }
-    };
+      };
+    }
 
     this.fieldApi.create(attributes, relationships).subscribe((res: any) => {
       const field = res.data;
