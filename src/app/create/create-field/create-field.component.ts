@@ -33,7 +33,7 @@ export class CreateFieldComponent implements OnInit {
 
     let relationships;
 
-    if (!!this.farmerId) {
+    if (!!this.field.farmerId) {
       relationships = {
         farmer: {
           data: {
