@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -63,6 +64,7 @@ import { CreatePlantVarietyComponent } from './create/create-plant-variety/creat
   ],
   imports: [
     BrowserModule,
+    ClipboardModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

@@ -11,6 +11,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as wkt from 'terraformer-wkt-parser';
 import { GoogleMap } from '@angular/google-maps';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Multipolygon } from '../geometries/multipolygon';
 import { Polygon } from '../geometries/polygon';
@@ -37,6 +38,8 @@ export enum DrawBoundaryMode {
 export class DrawBoundaryComponent implements OnInit, ControlValueAccessor {
 
   @ViewChild('googleMap', { static: true }) googleMap: GoogleMap;
+
+  wkt: string;
 
   @Input('value') _wkt = '';
   @Output() valueChange = new EventEmitter<string>();
@@ -69,7 +72,7 @@ export class DrawBoundaryComponent implements OnInit, ControlValueAccessor {
   selectedHole: -1;
   multipolygon = new Multipolygon();
 
-  constructor() { }
+  constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -94,6 +97,7 @@ export class DrawBoundaryComponent implements OnInit, ControlValueAccessor {
 
   set value(val: string) {
     this._wkt = this.parseWkt(val);
+    this.wkt = this._wkt;
   }
 
   onZoomChange() {
@@ -105,6 +109,20 @@ export class DrawBoundaryComponent implements OnInit, ControlValueAccessor {
     this.center = { lat: coord.lat(), lng: coord.lng() };
   }
 
+  wktCopyResult(successful) {
+    let message;
+
+    if (successful) {
+      message = 'Well-Known Text copied to clipboard';
+    } else {
+      message = 'An error occurred copying the text to your clipboard. Try again.';
+    }
+
+    this.snackBar.open(message, '', {
+      duration: 2000
+    });
+  }
+
   parseWkt(val) {
     if (!val) {
       return;
@@ -114,7 +132,7 @@ export class DrawBoundaryComponent implements OnInit, ControlValueAccessor {
      * shapes on the map)
      */
     if (val === this._wkt) {
-      return;
+      return val;
     }
 
     const geometry = <any>wkt.parse(val);
@@ -203,6 +221,7 @@ export class DrawBoundaryComponent implements OnInit, ControlValueAccessor {
       }
     });
     this._wkt = `MULTIPOLYGON ((${polygons.filter(n => n).join(', ')}))`;
+    this.wkt = this._wkt;
     this.onChange(this._wkt);
     this.valueChange.emit(this._wkt);
     this.onTouched();
