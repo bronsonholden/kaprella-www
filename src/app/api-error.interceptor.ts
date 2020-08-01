@@ -23,7 +23,8 @@ export class ApiErrorInterceptor implements HttpInterceptor {
         this.snackBar.open('Unable to connect to API server', 'OK', {
           duration: 5000
         });
-        return;
+
+        return throwError(error);
       }
 
       let messages = error.error.errors.map(item => {
