@@ -121,6 +121,8 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       this.rows = res.data;
       this.page.turn(res.meta.page_offset, res.meta.page_limit, res.meta.item_count);
       this.loading = false;
+    }, (err: any) => {
+      this.loading = false;
     });
   }
 
