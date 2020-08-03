@@ -37,6 +37,7 @@ import { HomeComponent } from './home/home.component';
 import { PlantVarietyListComponent } from './lists/plant-variety-list/plant-variety-list.component';
 import { ShowPlantVarietyComponent } from './show/show-plant-variety/show-plant-variety.component';
 import { CreatePlantVarietyComponent } from './create/create-plant-variety/create-plant-variety.component';
+import { FarmerFormComponent } from './forms/farmer-form/farmer-form.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { CreatePlantVarietyComponent } from './create/create-plant-variety/creat
     HomeComponent,
     PlantVarietyListComponent,
     ShowPlantVarietyComponent,
-    CreatePlantVarietyComponent
+    CreatePlantVarietyComponent,
+    FarmerFormComponent
   ],
   imports: [
     BrowserModule,

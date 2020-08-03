@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { FarmerApiService } from '../../farmer-api.service';
 
 @Component({
   selector: 'app-create-farmer',
@@ -7,13 +12,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateFarmerComponent implements OnInit {
 
-  constructor() { }
+  farmer: any = {};
+
+  constructor(private farmerApi: FarmerApiService,
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private location: Location) { }
 
   ngOnInit(): void {
   }
 
-  onAddressSelection(address) {
-    console.log(address);
+  goBack() {
+    this.location.back();
+  }
+
+  createFarmer() {
+    let attributes = {
+      name: this.farmer.name
+    };
+
+    this.farmerApi.create(attributes).subscribe((res: any) => {
+      const farmer = res.data;
+      const snackBarRef = this.snackBar.open(`Farmer ${farmer.attributes.name} created`, 'Show me', {
+        duration: 5000
+      });
+
+      snackBarRef.onAction().subscribe(() => {
+        this.router.navigateByUrl(`/farmers/${farmer.id}`);
+      });
+
+      this.goBack();
+    });
   }
 
 }
