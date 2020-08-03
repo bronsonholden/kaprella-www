@@ -15,4 +15,8 @@ export class CreateLicensorComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goBack() {
+    this.location.back();
+  }
+
 }
