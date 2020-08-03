@@ -38,6 +38,9 @@ import { PlantVarietyListComponent } from './lists/plant-variety-list/plant-vari
 import { ShowPlantVarietyComponent } from './show/show-plant-variety/show-plant-variety.component';
 import { CreatePlantVarietyComponent } from './create/create-plant-variety/create-plant-variety.component';
 import { FarmerFormComponent } from './forms/farmer-form/farmer-form.component';
+import { LicensorListComponent } from './lists/licensor-list/licensor-list.component';
+import { ShowLicensorComponent } from './show/show-licensor/show-licensor.component';
+import { CreateLicensorComponent } from './create/create-licensor/create-licensor.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,10 @@ import { FarmerFormComponent } from './forms/farmer-form/farmer-form.component';
     PlantVarietyListComponent,
     ShowPlantVarietyComponent,
     CreatePlantVarietyComponent,
-    FarmerFormComponent
+    FarmerFormComponent,
+    LicensorListComponent,
+    ShowLicensorComponent,
+    CreateLicensorComponent
   ],
   imports: [
     BrowserModule,
