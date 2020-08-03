@@ -44,6 +44,8 @@ export class LicensorListComponent implements OnInit {
     ]
   };
 
+  scope: {};
+
   constructor(public licensorApi: LicensorApiService) { }
 
   ngOnInit(): void {
