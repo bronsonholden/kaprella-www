@@ -22,14 +22,17 @@
 }
 
 .mission-statement {
-  padding: 24px 0;
+  padding: 64px 0 24px 0px;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 24px;
+  font-size: 30px;
+  line-height: 38px;
   text-align: left;
 }
 
 .abstract-statement {
+  font-size: 18px;
+  line-height: 23px;
+  padding: 12px 0;
 }
 
 .resource-banner-container:hover {
@@ -55,6 +58,7 @@
   -ms-animation: fadein 1.5s; /* Internet Explorer */
   -o-animation: fadein 1.5s; /* Opera < 12.1 */
   animation: fadein 1.5s;
+  border-radius: 6px;
 }
 
 .resource-banner-title {
@@ -89,10 +93,14 @@
   .mission-statement {
     padding: 16px 0;
     text-align: left;
+    font-size: 24px;
+    line-height: 31px;
   }
 
   .abstract-statement {
     padding: 0;
+    font-size: 16px;
+    line-height: 21px;
   }
 
   .site-banner-description {
