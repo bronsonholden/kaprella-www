@@ -403,7 +403,7 @@ a {
 
 .resource-page {
   margin: 0 auto;
-  padding: 48px 0;
+  padding: 24px;
   max-width: 960px;
 }
 
@@ -414,17 +414,13 @@ a {
 }
 
 @media screen and (max-width: 599px) {
-  .resource-form {
-    padding: 24px;
+  .resource-page {
+    padding: 16px;
   }
 
   .content {
     padding: 24px;
   }
-}
-
-.resource-form-row .resource-form-widget:not(:last-child) {
-  margin-right: 16px;
 }
 
 .button-row button:not(:last-child) {
