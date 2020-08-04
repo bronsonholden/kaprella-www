@@ -32,11 +32,42 @@ export class FarmerListComponent implements OnInit {
             path: 'name'
           }
         }
+      },
+      fieldCount: {
+        title: 'Fields',
+        value: {
+          type: 'literal',
+          value: 'fields'
+        },
+        display: {
+          type: 'link',
+          label: {
+            type: 'meta',
+            path: 'fieldCount'
+          },
+          absolute: true,
+          queryParams: {
+            'filter[]': {
+              type: 'concat',
+              parts: [
+                {
+                  type: 'literal',
+                  value: 'prop("farmer_id")'
+                },
+                {
+                  type: 'id'
+                }
+              ],
+              separator: '=='
+            }
+          }
+        }
       }
     },
     displayedColumns: [
       'select',
-      'name'
+      'name',
+      'fieldCount'
     ]
   };
 

@@ -90,4 +90,14 @@ export class ResourceTableCellComponent implements OnInit {
     }
   }
 
+  get queryParams(): { [key: string]: any } {
+    let query = {};
+
+    for (let key of Object.keys(this.display.queryParams || {})) {
+      query[key] = this.evaluateCellValue(this.display.queryParams[key]);
+    }
+
+    return query;
+  }
+
 }

@@ -19,7 +19,7 @@
 </div>
 
 <div *ngIf="display.type === 'link'">
-  <a class="mat-body-2" [routerLink]="routerLink">
+  <a class="mat-body-2" [routerLink]="routerLink" [queryParams]="queryParams">
     <app-resource-table-cell
       [row]="row"
       [value]="display.label"
