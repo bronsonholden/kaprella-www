@@ -76,7 +76,7 @@ export class ShowFarmerComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: any) => {
       this.scope = {
-        'filter': [ `prop('farmer_id') == ${params.id}`]
+        'filter[]': [ `prop('farmer_id') == ${params.id}` ]
       };
 
       this.farmerApi.get(params.id).subscribe((res: any) => {

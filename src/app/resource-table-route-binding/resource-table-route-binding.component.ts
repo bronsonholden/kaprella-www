@@ -6,7 +6,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { merge } from 'lodash';
+import { mergeWith, isArray } from 'lodash';
 
 import {
   ResourceTableConfig,
@@ -28,6 +28,8 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
   /* A set of query parameters that are always provided in the query */
   @Input() scope: any;
+
+  filters: any;
 
   /* Whether interacting with the table updates the activated route's
    * query parameters.
@@ -77,6 +79,15 @@ export class ResourceTableRouteBindingComponent implements OnInit {
         });
       }
 
+      if (typeof params['filter[]'] !== 'undefined') {
+        reload = true;
+        let newFilters = params['filter[]'];
+        if (!isArray(newFilters)) {
+          newFilters = [newFilters];
+        }
+        this.filters = newFilters;
+      }
+
       if (reload) {
         this.reloadData();
       }
@@ -117,7 +128,21 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       return;
     }
 
-    this.apiService.index(this.page.offset, this.page.limit, this.scope || {}).subscribe((res: any) => {
+    let query = {};
+
+    if (this.filters) {
+      query['filter[]'] = this.filters;
+    }
+
+    if (this.scope) {
+      query = mergeWith(query, this.scope, (obj, src) => {
+        if (isArray(obj) && isArray(src)) {
+          return obj.concat(src);
+        }
+      });
+    }
+
+    this.apiService.index(this.page.offset, this.page.limit, query).subscribe((res: any) => {
       this.rows = res.data;
       this.page.turn(res.meta.page_offset, res.meta.page_limit, res.meta.item_count);
       this.loading = false;

@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
+import { isArray } from 'lodash';
+
 export abstract class ResourceApiService {
 
   constructor(protected httpClient: HttpClient) { }
@@ -38,9 +40,13 @@ export abstract class ResourceApiService {
     }
 
     for (let param of arrayParams) {
-      const array = query[param] || [];
+      const paramKey = `${param}[]`;
+      let array = query[paramKey] || [];
+      if (!isArray(array)) {
+        array = [array];
+      }
       for (let val of array) {
-        params = params.append(`${param}[]`, val);
+        params = params.append(paramKey, val);
       }
     }
 
