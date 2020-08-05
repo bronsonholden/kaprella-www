@@ -12,7 +12,7 @@ export class PlantVarietyApiService extends ResourceApiService {
   }
 
   resourceName(): string {
-    return 'plant-varieties';
+    return 'plantVarieties';
   }
 
 }

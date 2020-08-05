@@ -78,7 +78,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'plant-varieties',
+    path: 'plantVarieties',
     children: [
       {
         path: '',

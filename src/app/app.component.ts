@@ -87,7 +87,7 @@ export class AppComponent implements OnInit {
           },
           {
             label: 'Plant Varieties',
-            routerLink: 'plant-varieties'
+            routerLink: 'plantVarieties'
           }
         ]
       }
