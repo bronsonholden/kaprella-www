@@ -144,7 +144,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
     this.apiService.index(this.page.offset, this.page.limit, query).subscribe((res: any) => {
       this.rows = res.data;
-      this.page.turn(res.meta.page_offset, res.meta.page_limit, res.meta.item_count);
+      this.page.turn(res.meta.page.pageOffset, res.meta.page.pageLimit, res.meta.page.itemCount);
       this.loading = false;
     }, (err: any) => {
       this.loading = false;
