@@ -41,6 +41,7 @@ import { FarmerFormComponent } from './forms/farmer-form/farmer-form.component';
 import { LicensorListComponent } from './lists/licensor-list/licensor-list.component';
 import { ShowLicensorComponent } from './show/show-licensor/show-licensor.component';
 import { CreateLicensorComponent } from './create/create-licensor/create-licensor.component';
+import { FieldMapComponent } from './maps/field-map/field-map.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { CreateLicensorComponent } from './create/create-licensor/create-licenso
     FarmerFormComponent,
     LicensorListComponent,
     ShowLicensorComponent,
-    CreateLicensorComponent
+    CreateLicensorComponent,
+    FieldMapComponent
   ],
   imports: [
     BrowserModule,

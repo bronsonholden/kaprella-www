@@ -1,0 +1,24 @@
+<div class="resource-page">
+  <mat-tab-group [animationDuration]="0">
+    <mat-tab label="Map">
+      <google-map
+          #googleMap
+          width="100%"
+          height="400px"
+          [options]="options">
+        <div *ngFor="let multipolygon of multipolygons; index as i">
+          <map-polygon
+            *ngFor="let polygon of multipolygon.polygons; index as j"
+            [paths]="polygon.path"
+            [options]="polygonOptions">
+          </map-polygon>
+        </div>
+      </google-map>
+    </mat-tab>
+    <mat-tab label="Data">
+      <div class="resource-page">
+        table here
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
