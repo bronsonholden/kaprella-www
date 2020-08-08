@@ -42,6 +42,7 @@ import { LicensorListComponent } from './lists/licensor-list/licensor-list.compo
 import { ShowLicensorComponent } from './show/show-licensor/show-licensor.component';
 import { CreateLicensorComponent } from './create/create-licensor/create-licensor.component';
 import { FieldMapComponent } from './maps/field-map/field-map.component';
+import { LicensorFormComponent } from './forms/licensor-form/licensor-form.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { FieldMapComponent } from './maps/field-map/field-map.component';
     LicensorListComponent,
     ShowLicensorComponent,
     CreateLicensorComponent,
-    FieldMapComponent
+    FieldMapComponent,
+    LicensorFormComponent
   ],
   imports: [
     BrowserModule,

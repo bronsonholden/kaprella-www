@@ -1,9 +1,10 @@
 <div class="resource-page">
   <div fxLayout="column" fxLayoutGap="24px">
     <div class="button-row" fxLayout="row">
-      <button mat-raised-button color="primary">Create</button>
+      <button mat-raised-button color="primary" (click)="createLicensor()">Create</button>
       <div class="h-fill"></div>
       <button mat-button color="warn" (click)="goBack()">Cancel</button>
     </div>
+    <app-licensor-form [(licensor)]="licensor"></app-licensor-form>
   </div>
 </div>
