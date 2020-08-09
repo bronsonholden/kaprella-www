@@ -27,6 +27,8 @@ export class ResourceTableCellComponent implements OnInit {
         return this.row.id;
       case 'attribute':
         return this.row.attributes[value.path];
+      case 'relationship':
+        return this.row.relationships[value.name].data.id;
       case 'meta':
         return this.row.meta[value.path];
       case 'literal':

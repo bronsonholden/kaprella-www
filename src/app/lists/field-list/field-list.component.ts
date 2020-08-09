@@ -47,7 +47,8 @@ export class FieldListComponent implements OnInit {
               value: 'farmers'
             },
             {
-              type: 'id'
+              type: 'relationship',
+              name: 'farmer'
             }
           ],
           separator: '/'
