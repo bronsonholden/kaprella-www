@@ -79,9 +79,9 @@ export class ResourceTableRouteBindingComponent implements OnInit {
         });
       }
 
-      if (typeof params['filter[]'] !== 'undefined') {
+      if (typeof params['filter'] !== 'undefined') {
         reload = true;
-        let newFilters = params['filter[]'];
+        let newFilters = params['filter'];
         if (!isArray(newFilters)) {
           newFilters = [newFilters];
         }
@@ -131,7 +131,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
     let query = {};
 
     if (this.filters) {
-      query['filter[]'] = this.filters;
+      query['filter'] = this.filters;
     }
 
     if (this.scope) {

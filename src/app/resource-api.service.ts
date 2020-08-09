@@ -39,9 +39,9 @@ export abstract class ResourceApiService {
       }
     }
 
-    for (let param of arrayParams) {
+    for (const param of arrayParams) {
       const paramKey = `${param}[]`;
-      let array = query[paramKey] || [];
+      let array = query[param] || [];
       if (!isArray(array)) {
         array = [array];
       }

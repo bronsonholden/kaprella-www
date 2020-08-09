@@ -47,7 +47,7 @@ export class FarmerListComponent implements OnInit {
           },
           absolute: true,
           queryParams: {
-            'filter[]': {
+            'filter': {
               type: 'concat',
               parts: [
                 {
