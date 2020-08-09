@@ -33,7 +33,7 @@ export class FarmerListComponent implements OnInit {
           }
         }
       },
-      fieldCount: {
+      fieldsCount: {
         title: 'Fields',
         value: {
           type: 'literal',
@@ -43,7 +43,7 @@ export class FarmerListComponent implements OnInit {
           type: 'link',
           label: {
             type: 'meta',
-            path: 'fieldCount'
+            path: 'fieldsCount'
           },
           absolute: true,
           queryParams: {
@@ -67,7 +67,7 @@ export class FarmerListComponent implements OnInit {
     displayedColumns: [
       'select',
       'name',
-      'fieldCount'
+      'fieldsCount'
     ]
   };
 
