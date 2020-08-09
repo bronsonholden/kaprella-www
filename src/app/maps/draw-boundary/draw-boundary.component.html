@@ -39,23 +39,7 @@
     </mat-tab>
     <mat-tab label="Data">
       <div class="resource-page">
-        <mat-form-field appearance="outline">
-          <mat-label>Well-Known Text</mat-label>
-          <input
-            matInput
-            style="text-overflow: ellipsis;"
-            placeholder="Well-Known Text"
-            [ngModel]="wkt"
-            disabled
-            #ctrl="ngModel">
-          <mat-icon
-              matSuffix
-              style="cursor: pointer;"
-              [cdkCopyToClipboard]="wkt"
-              (cdkCopyToClipboardCopied)="wktCopyResult($event)">
-            content_copy
-          </mat-icon>
-        </mat-form-field>
+        <app-wkt-clipboard disabled="true" [(wkt)]="wkt"></app-wkt-clipboard>
       </div>
     </mat-tab>
   </mat-tab-group>

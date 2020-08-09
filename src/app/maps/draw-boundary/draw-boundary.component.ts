@@ -109,20 +109,6 @@ export class DrawBoundaryComponent implements OnInit, ControlValueAccessor {
     this.center = { lat: coord.lat(), lng: coord.lng() };
   }
 
-  wktCopyResult(successful) {
-    let message;
-
-    if (successful) {
-      message = 'Well-Known Text copied to clipboard';
-    } else {
-      message = 'An error occurred copying the text to your clipboard. Try again.';
-    }
-
-    this.snackBar.open(message, '', {
-      duration: 2000
-    });
-  }
-
   parseWkt(val) {
     if (!val) {
       return;

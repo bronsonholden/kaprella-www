@@ -1,0 +1,19 @@
+<mat-form-field appearance="outline">
+  <mat-label>Well-Known Text</mat-label>
+  <input
+    matInput
+    style="text-overflow: ellipsis;"
+    placeholder="Well-Known Text"
+    [ngModel]="wkt"
+    (ngModelChange)="wktChange.emit($event)"
+    [disabled]="disabled"
+    #ctrl="ngModel">
+  <mat-icon
+      *ngIf="!!wkt"
+      matSuffix
+      style="cursor: pointer;"
+      [cdkCopyToClipboard]="wkt"
+      (cdkCopyToClipboardCopied)="wktCopyResult($event)">
+    content_copy
+  </mat-icon>
+</mat-form-field>

@@ -43,6 +43,7 @@ import { ShowLicensorComponent } from './show/show-licensor/show-licensor.compon
 import { CreateLicensorComponent } from './create/create-licensor/create-licensor.component';
 import { FieldMapComponent } from './maps/field-map/field-map.component';
 import { LicensorFormComponent } from './forms/licensor-form/licensor-form.component';
+import { WktClipboardComponent } from './maps/util/wkt-clipboard/wkt-clipboard.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { LicensorFormComponent } from './forms/licensor-form/licensor-form.compo
     ShowLicensorComponent,
     CreateLicensorComponent,
     FieldMapComponent,
-    LicensorFormComponent
+    LicensorFormComponent,
+    WktClipboardComponent
   ],
   imports: [
     BrowserModule,
