@@ -1,0 +1,25 @@
+/* Styling to make the catalog more compact and cleaner on small devices */
+
+::ng-deep .resource-table-filter-catalog .mat-expansion-panel-body {
+  padding: 0;
+}
+
+::ng-deep .resource-table-filter-catalog .mat-horizontal-content-container {
+  padding: 0;
+}
+
+::ng-deep .resource-table-filter-catalog .mat-selection-list {
+  padding: 0;
+}
+
+::ng-deep .resource-table-filter-catalog .mat-list-text {
+  padding-left: 0 !important;
+}
+
+::ng-deep .resource-table-filter-catalog .mat-expansion-panel-header {
+  padding-left: 16px;
+}
+
+.resource-table-filter-catalog .column-selected {
+  background-color: rgba(44, 44, 44, 0.12);
+}

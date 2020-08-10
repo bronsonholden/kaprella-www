@@ -73,6 +73,19 @@ import { MatTreeModule } from '@angular/material/tree';
 export class MaterialModule {
   constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
     matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'));
-    matIconRegistry.addSvgIcon('moon-waning-crescent', domSanitizer.bypassSecurityTrustResourceUrl('./assets/moon-waning-crescent.svg'));
+
+    const icons = [
+      'moon-waning-crescent',
+      'calendar-clock',
+      'numeric',
+      'decimal'
+    ];
+
+    for (const icon of icons) {
+      matIconRegistry.addSvgIcon(
+        icon,
+        domSanitizer.bypassSecurityTrustResourceUrl(`./assets/${icon}.svg`)
+      );
+    }
   }
 }

@@ -14,11 +14,16 @@ import { ShowFarmerComponent } from './show/show-farmer/show-farmer.component';
 import { ShowLicensorComponent } from './show/show-licensor/show-licensor.component';
 import { ShowPlantVarietyComponent } from './show/show-plant-variety/show-plant-variety.component';
 import { FieldMapComponent } from './maps/field-map/field-map.component';
+import { ResourceTableFilterCatalogComponent } from './resource-table/resource-table-filter-catalog/resource-table-filter-catalog.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'filtercatalog',
+    component: ResourceTableFilterCatalogComponent
   },
   {
     path: 'map',

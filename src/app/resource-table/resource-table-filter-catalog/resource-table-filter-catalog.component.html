@@ -1,0 +1,48 @@
+<div class="resource-table-filter-catalog"> <!-- *ngIf="useBuilder; else customExpression" -->
+  <mat-horizontal-stepper linear="true">
+    <mat-step>
+      <ng-template matStepLabel>Column</ng-template>
+      <mat-accordion displayMode="flat" class="mat-elevation-z0">
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header expandedHeight="48px">
+            <mat-panel-title>Data</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-selection-list multiple="false" (selectionChange)="onSelectionChange($event)">
+            <mat-list-option
+                #option
+                [class.column-selected]="selectedKey === column.key"
+                *ngFor="let column of columns"
+                [value]="column.key"
+                checkboxPosition="before">
+              <mat-icon
+                  style="opacity: 0.8"
+                  mat-list-icon
+                  color="accent">
+                <span *ngIf="column.foreignKey">vpn_key</span>
+              </mat-icon>
+              <mat-icon
+                style="opacity: 0.5"
+                mat-list-icon
+                [svgIcon]="columnIconName(column)">
+              </mat-icon>
+              {{ column.label }}
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="mat-elevation-z0" *ngFor="let relationship of relationships">
+          <mat-expansion-panel-header expandedHeight="48px">
+            <mat-panel-title>{{ relationship.label }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-selection-list>
+          </mat-selection-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Operator</ng-template>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Value</ng-template>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

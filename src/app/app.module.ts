@@ -44,6 +44,7 @@ import { CreateLicensorComponent } from './create/create-licensor/create-licenso
 import { FieldMapComponent } from './maps/field-map/field-map.component';
 import { LicensorFormComponent } from './forms/licensor-form/licensor-form.component';
 import { WktClipboardComponent } from './maps/util/wkt-clipboard/wkt-clipboard.component';
+import { ResourceTableFilterCatalogComponent } from './resource-table/resource-table-filter-catalog/resource-table-filter-catalog.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { WktClipboardComponent } from './maps/util/wkt-clipboard/wkt-clipboard.c
     CreateLicensorComponent,
     FieldMapComponent,
     LicensorFormComponent,
-    WktClipboardComponent
+    WktClipboardComponent,
+    ResourceTableFilterCatalogComponent
   ],
   imports: [
     BrowserModule,
