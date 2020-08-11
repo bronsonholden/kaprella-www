@@ -29,6 +29,8 @@ const NUMERIC_OPERATORS: FilterOperator[] = [
   { value: '<=', label: 'Less than or equal to' },
   { value: '==', label: 'Equal to' },
   { value: '!=', label: 'Not equal to' },
+  { value: 'isevent', label: 'Is even' },
+  { value: 'isodd', label: 'Is odd' },
   // inclrange values: range min, range max
   { value: 'inclrange', label: 'Inclusive range' },
   // exclrange values: range min, range max
@@ -62,7 +64,9 @@ const DATETIME_OPERATORS: FilterOperator[] = [
   // timerange values: from time, to time
   { value: 'timerange', label: 'Time range' },
   // datetimerange values: from datetime, to datetime
-  { value: 'datetimerange', label: 'Date & time range' }
+  { value: 'datetimerange', label: 'Date & time range' },
+  { value: 'before', label: 'On or before' },
+  { value: 'after', label: 'On or after' }
 ];
 
 @Component({
