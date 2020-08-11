@@ -5,7 +5,7 @@
       <mat-accordion displayMode="flat" class="mat-elevation-z0">
         <mat-expansion-panel class="mat-elevation-z0">
           <mat-expansion-panel-header expandedHeight="48px">
-            <mat-panel-title>Data</mat-panel-title>
+            <mat-panel-title style="font-size: 1.2rem;">Data</mat-panel-title>
           </mat-expansion-panel-header>
           <mat-selection-list multiple="false" (selectionChange)="onSelectionChange($event)">
             <mat-list-option
@@ -31,7 +31,7 @@
         </mat-expansion-panel>
         <mat-expansion-panel class="mat-elevation-z0" *ngFor="let relationship of relationships">
           <mat-expansion-panel-header expandedHeight="48px">
-            <mat-panel-title>{{ relationship.label }}</mat-panel-title>
+            <mat-panel-title style="font-size: 1.2rem;">{{ relationship.label }}</mat-panel-title>
           </mat-expansion-panel-header>
           <mat-selection-list>
           </mat-selection-list>
