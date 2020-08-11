@@ -10,6 +10,11 @@ import {
  * presents a simple interface for the user to select a column, operator, and
  * value. When a valid selection is made for all three, an object containing
  * the filter expression as well as a label is emitted.
+ *
+ * Filters created from this component are limited and relatively simple.
+ * More complex filters must be applied using filter expressions. These
+ * filters are bound to the 'cfilter' query parameter. Filter expressions
+ * remain in the 'filter' query parameter.
  */
 
 export interface FilterOperator {
