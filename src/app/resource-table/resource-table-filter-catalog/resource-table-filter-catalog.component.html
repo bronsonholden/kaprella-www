@@ -40,6 +40,15 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Operator</ng-template>
+      <mat-selection-list multiple="false" (selectionChange)="onOperatorChange($event)">
+        <mat-list-option
+            [class.column-selected]="selectedOperator === operator.value"
+            *ngFor="let operator of operators"
+            [value]="operator.value"
+            checkboxPosition="before">
+          {{ operator.label }}
+        </mat-list-option>
+      </mat-selection-list>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Value</ng-template>

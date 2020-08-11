@@ -12,6 +12,59 @@ import {
  * the filter expression as well as a label is emitted.
  */
 
+export interface FilterOperator {
+  value: string;
+  label: string;
+}
+
+/* Operators may have more than one "value", e.g. "Within radius" for
+ * geography columns. Where applicable, multiple values are described for
+ * each of the various operators.
+ */
+
+const NUMERIC_OPERATORS: FilterOperator[] = [
+  { value: '>', label: 'Greater than' },
+  { value: '>=', label: 'Greater than or equal to' },
+  { value: '<', label: 'Less than' },
+  { value: '<=', label: 'Less than or equal to' },
+  { value: '==', label: 'Equal to' },
+  { value: '!=', label: 'Not equal to' },
+  // inclrange values: range min, range max
+  { value: 'inclrange', label: 'Inclusive range' },
+  // exclrange values: range min, range max
+  { value: 'exclrange', label: 'Exclusive range' }
+];
+
+const STRING_OPERATORS: FilterOperator[] = [
+  { value: 'contains', label: 'Contains' },
+  { value: 'nocontains', label: 'Does not contain' },
+  { value: '==', label: 'Exactly matches' },
+  { value: 'like', label: 'Partially matches' }
+];
+
+const GEOGRAPHY_OPERATORS: FilterOperator[] = [
+  { value: 'intersects', label: 'Intersects' },
+  { value: 'nointersects', label: 'Does not intersect' },
+  { value: 'within', label: 'Within' },
+  { value: 'nowithin', label: 'Not within' },
+  // inradius values: point wkt, radius (meters)
+  { value: 'inradius', label: 'In radius' },
+  // outradius values: point wkt, radius (meters)
+  { value: 'outradius', label: 'Not in radius' }
+];
+
+const DATETIME_OPERATORS: FilterOperator[] = [
+  { value: '==', label: 'Equal to' },
+  { value: '!=', label: 'Not equal to' },
+  { value: 'hod', label: 'Hour of day' },
+  { value: 'dow', label: 'Day of week' },
+  { value: 'moy', label: 'Month of year' },
+  // timerange values: from time, to time
+  { value: 'timerange', label: 'Time range' },
+  // datetimerange values: from datetime, to datetime
+  { value: 'datetimerange', label: 'Date & time range' }
+];
+
 @Component({
   selector: 'app-resource-table-filter-catalog',
   templateUrl: './resource-table-filter-catalog.component.html',
@@ -137,6 +190,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
   columns: any[] = [];
   relationships: any[] = [];
   selectedKey: string;
+  selectedOperator: string;
 
   constructor() { }
 
@@ -158,6 +212,10 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
     } else {
       this.selectedKey = newKey;
     }
+  }
+
+  onOperatorChange(selection) {
+    this.selectedOperator = selection.option.value;
   }
 
   loadReflection(reflection: any) {
@@ -205,6 +263,26 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
         return 'checkbox-marked';
       default:
         return null;
+    }
+  }
+
+  get operators(): any[] {
+    if (!this.selectedKey) {
+      return [];
+    }
+
+    const selectedColumn = this.reflection.columns[this.selectedKey];
+    switch (selectedColumn.sqlTypeMetadata.type) {
+      case 'integer':
+        return NUMERIC_OPERATORS;
+      case 'string':
+        return STRING_OPERATORS;
+      case 'geography':
+        return GEOGRAPHY_OPERATORS;
+      case 'datetime':
+        return DATETIME_OPERATORS;
+      default:
+        return [];
     }
   }
 
