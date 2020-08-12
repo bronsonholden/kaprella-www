@@ -18,7 +18,6 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "lodash",
               "sprintf-js",
               "terraformer-wkt-parser",
               "ngx-google-places-autocomplete"

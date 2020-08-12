@@ -6,7 +6,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { mergeWith, isArray } from 'lodash';
+import { mergeWith, isArray } from 'lodash-es';
 
 import {
   ResourceTableConfig,

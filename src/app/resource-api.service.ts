@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
-import { isArray } from 'lodash';
+import { isArray } from 'lodash-es';
 
 export abstract class ResourceApiService {
 
