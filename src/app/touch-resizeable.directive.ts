@@ -44,7 +44,7 @@ export class TouchResizeableDirective implements OnDestroy {
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent): void {
     const initialWidth = this.element.clientWidth;
-    const touchIndex = event.which;
+    const touchIndex = 0;
     const touchStartScreenX = event.changedTouches[touchIndex].screenX;
 
     event.stopPropagation();
@@ -64,7 +64,7 @@ export class TouchResizeableDirective implements OnDestroy {
 
   move(event: TouchEvent, initialWidth: number, touchStartScreenX: number): void {
     event.stopPropagation();
-    const touchIndex = event.which;
+    const touchIndex = 0;
     const movementX = event.changedTouches[touchIndex].screenX - touchStartScreenX;
     const newWidth = initialWidth + movementX;
     const overMinWidth = !this.minWidth || newWidth >= this.minWidth;
