@@ -27,7 +27,7 @@ export interface FilterOperator {
  * each of the various operators.
  */
 
-const NUMERIC_OPERATORS: FilterOperator[] = [
+const INTEGER_OPERATORS: FilterOperator[] = [
   { value: '>', label: 'Greater than' },
   { value: '>=', label: 'Greater than or equal to' },
   { value: '<', label: 'Less than' },
@@ -283,7 +283,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
     const selectedColumn = this.reflection.columns[this.selectedKey];
     switch (selectedColumn.sqlTypeMetadata.type) {
       case 'integer':
-        return NUMERIC_OPERATORS;
+        return INTEGER_OPERATORS;
       case 'string':
         return STRING_OPERATORS;
       case 'geography':
