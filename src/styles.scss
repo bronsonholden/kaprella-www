@@ -247,13 +247,13 @@ $altTheme: mat-dark-theme($theme-alt-primary, $theme-accent, $theme-warn);
 }
 
 .theme-alternate {
-  @include angular-material-theme($altTheme);
+  @include angular-material-color($altTheme);
 
   /* In dark mode, use accent-only theme to maximize visibility of page
    * elements, with the exception of toolbars, which maintain the normal
    * primary color.
    */
-  @include mat-toolbar-theme($theme);
+  @include mat-toolbar-color($theme);
 
   .resource-table a {
     color: mat-color(map-get($altTheme, primary));
