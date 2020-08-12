@@ -177,7 +177,7 @@ export class ResourceTablePage {
 
   set offset(value: number) {
     if (value < 0) {
-      throw 'ResourceTablePage offset must be >= 0';
+      throw new Error('ResourceTablePage offset must be >= 0');
     }
     this._offset = value;
   }
@@ -188,7 +188,7 @@ export class ResourceTablePage {
 
   set limit(value: number) {
     if (value < 0) {
-      throw 'ResourceTablePage limit must be > 0';
+      throw new Error('ResourceTablePage limit must be > 0');
     }
     this._limit = value;
   }
@@ -199,7 +199,7 @@ export class ResourceTablePage {
 
   set total(value: number) {
     if (value < 0) {
-      throw 'ResourceTablePage total must be > 0';
+      throw new Error('ResourceTablePage total must be > 0');
     }
     this._total = value;
   }
