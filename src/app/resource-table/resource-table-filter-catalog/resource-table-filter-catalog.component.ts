@@ -263,7 +263,9 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
       case 'string':
         return 'format-quote-close';
       case 'integer':
-        return 'numeric';
+        return 'integer';
+      case 'float':
+        return 'decimal';
       case 'datetime':
         return 'calendar-clock';
       case 'geography':

@@ -77,7 +77,7 @@ export class MaterialModule {
     const icons = [
       'moon-waning-crescent',
       'calendar-clock',
-      'numeric',
+      'integer',
       'decimal'
     ];
 
