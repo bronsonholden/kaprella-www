@@ -13,7 +13,6 @@ import { ApiModule } from './api.module';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { CustomWidthBreakPoints } from './flex-ext/custom-width-break-points';
 import { LayoutGtW500Directive } from './flex-ext/layout-gt-w500.directive';
@@ -90,8 +89,7 @@ import { ResourceTableFilterCatalogComponent } from './resource-table/resource-t
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    NgxDatatableModule
+    MaterialModule
   ],
   providers: [
     CustomWidthBreakPoints
