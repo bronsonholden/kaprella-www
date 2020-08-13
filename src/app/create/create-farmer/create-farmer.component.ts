@@ -22,11 +22,11 @@ export class CreateFarmerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goBack() {
+  goBack(): void {
     this.location.back();
   }
 
-  createFarmer() {
+  createFarmer(): void {
     let attributes = {
       name: this.farmer.name
     };

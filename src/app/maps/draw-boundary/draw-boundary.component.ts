@@ -77,15 +77,15 @@ export class DrawBoundaryComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
   }
 
-  registerOnChange(fn) {
+  registerOnChange(fn): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn) {
+  registerOnTouched(fn): void {
     this.onTouched = fn;
   }
 
-  writeValue(value) {
+  writeValue(value): void {
     if (value) {
       this.value = value;
     }
@@ -100,16 +100,16 @@ export class DrawBoundaryComponent implements OnInit, ControlValueAccessor {
     this.wkt = this._wkt;
   }
 
-  onZoomChange() {
+  onZoomChange(): void {
     this.zoom = this.googleMap.getZoom();
   }
 
-  onCenterChange() {
+  onCenterChange(): void {
     const coord = this.googleMap.getCenter();
     this.center = { lat: coord.lat(), lng: coord.lng() };
   }
 
-  parseWkt(val) {
+  parseWkt(val: string | null): string {
     if (!val) {
       return;
     }

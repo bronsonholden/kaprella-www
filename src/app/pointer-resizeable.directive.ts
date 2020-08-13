@@ -88,7 +88,7 @@ export class PointerResizeableDirective implements OnDestroy, AfterViewInit {
     }
   }
 
-  private destroySubscription() {
+  private destroySubscription(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
       this.subscription = undefined;

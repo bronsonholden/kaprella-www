@@ -107,7 +107,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
   }
 
-  onPageChange(page) {
+  onPageChange(page): void {
     if (this.updateQuery) {
       this.router.navigate([], {
         relativeTo: this.activatedRoute,

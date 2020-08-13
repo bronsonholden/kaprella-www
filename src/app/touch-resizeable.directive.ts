@@ -75,7 +75,7 @@ export class TouchResizeableDirective implements OnDestroy {
     }
   }
 
-  private destroySubscription() {
+  private destroySubscription(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
       this.subscription = undefined;

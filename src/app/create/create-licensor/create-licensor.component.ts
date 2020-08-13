@@ -25,7 +25,7 @@ export class CreateLicensorComponent implements OnInit {
     this.location.back();
   }
 
-  createLicensor() {
+  createLicensor(): void {
     let attributes = {
       name: this.licensor.name
     };

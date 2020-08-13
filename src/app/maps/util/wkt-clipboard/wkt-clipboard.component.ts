@@ -24,7 +24,7 @@ export class WktClipboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  wktCopyResult(successful) {
+  wktCopyResult(successful: boolean): void {
     if (successful) {
       var message = 'Well-Known Text copied to clipboard';
     } else {

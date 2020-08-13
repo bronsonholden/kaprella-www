@@ -56,7 +56,7 @@ export class ResourceTableCellComponent implements OnInit {
     return sprintf(this.display.format, ...values);
   }
 
-  switchAreaUnit() {
+  switchAreaUnit(): void {
     if (this.display.unit === 'ha') {
       this.display.unit = 'ac';
     } else {

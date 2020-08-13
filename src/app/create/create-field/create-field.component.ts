@@ -21,11 +21,11 @@ export class CreateFieldComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goBack() {
+  goBack(): void {
     this.location.back();
   }
 
-  createField() {
+  createField(): void {
     let attributes = {
       name: this.field.name,
       boundary: this.field.boundary

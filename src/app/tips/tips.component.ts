@@ -25,19 +25,19 @@ export class TipsComponent implements OnInit {
     this.shuffleTips();
   }
 
-  shuffleTips() {
+  shuffleTips(): void {
     this.tips.sort(() => Math.random() - 0.5);
   }
 
-  hideTips() {
+  hideTips(): void {
     this.showTips = false;
   }
 
-  getCurrentTip() {
+  getCurrentTip(): string {
     return this.tips[this.currentTipIdx];
   }
 
-  showNextTip() {
+  showNextTip(): void {
     let nextIdx = this.currentTipIdx + 1;
 
     if (nextIdx >= this.tips.length) {

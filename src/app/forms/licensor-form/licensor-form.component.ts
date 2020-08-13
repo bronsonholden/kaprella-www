@@ -32,7 +32,7 @@ export class LicensorFormComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes): void {
     if (changes.licensor) {
       if (changes.licensor.firstChange) {
         this.licensorFormGroup.patchValue(changes.licensor.currentValue);

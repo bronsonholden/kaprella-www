@@ -68,7 +68,7 @@ export class FieldMapComponent implements OnInit {
     });
   }
 
-  reloadFields() {
+  reloadFields(): void {
     this.fieldApi.index(0, 100, this.query).subscribe((res: any) => {
       console.log(`Loaded ${res.meta.page.itemCount} fields in viewport`);
 

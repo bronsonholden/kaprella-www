@@ -207,13 +207,13 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
     this.loadReflection(this.reflection)
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes): void {
     if (changes.reflection) {
       this.loadReflection(changes.reflection);
     }
   }
 
-  onSelectionChange(selection) {
+  onSelectionChange(selection): void {
     const newKey = selection.option.value;
 
     if (this.selectedKey === newKey) {
@@ -223,11 +223,11 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
     }
   }
 
-  onOperatorChange(selection) {
+  onOperatorChange(selection): void {
     this.selectedOperator = selection.option.value;
   }
 
-  loadReflection(reflection: any) {
+  loadReflection(reflection: any): void {
     let attributes: any[] = [];
     let relationships: any[] = [];
 
@@ -258,7 +258,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
     this.relationships = relationships;
   }
 
-  attributeIconName(attribute) {
+  attributeIconName(attribute): string {
     switch (attribute.type) {
       case 'string':
         return 'format-quote-close';
@@ -273,7 +273,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
       case 'boolean':
         return 'checkbox-marked';
       default:
-        return null;
+        return '';
     }
   }
 

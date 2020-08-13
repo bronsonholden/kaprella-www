@@ -32,7 +32,7 @@ export class FarmerFormComponent implements OnInit {
     });
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes): void {
     if (changes.farmer) {
       if (changes.farmer.firstChange) {
         this.farmerFormGroup.patchValue(changes.farmer.currentValue);

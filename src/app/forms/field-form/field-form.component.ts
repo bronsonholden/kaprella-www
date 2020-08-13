@@ -42,7 +42,7 @@ export class FieldFormComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes): void {
     if (changes.field) {
       if (changes.field.firstChange) {
         this.fieldFormGroup.patchValue(changes.field.currentValue);

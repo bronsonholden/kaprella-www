@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
     this.ltMdQuery.addListener(this.ltMdQueryListener);
   }
 
-  onDarkModeToggle(event) {
+  onDarkModeToggle(event): void {
     this.darkMode = event.checked;
     if (this.darkMode) {
       this.renderer.addClass(document.body, 'theme-alternate');
@@ -119,7 +119,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  sideNavOpened() {
+  sideNavOpened(): void {
     /* On Safari iOS, allowing the body to scroll, i.e. have the overflow
      * property as anything other than 'none', will cause it to exhibit the
      * "bouncy" or elastic scroll at the edges. This takes away scroll focus
@@ -130,7 +130,7 @@ export class AppComponent implements OnInit {
     this.renderer.addClass(document.body, 'lt-md-no-overflow');
   }
 
-  sideNavClosed() {
+  sideNavClosed(): void {
     this.renderer.removeClass(document.body, 'lt-md-no-overflow');
   }
 
@@ -146,7 +146,7 @@ export class AppComponent implements OnInit {
     this.ltMdQuery.removeListener(this.ltMdQueryListener);
   }
 
-  scrollToMenuPanel(idx) {
+  scrollToMenuPanel(idx: number): void {
     const panel = this.sideNavPanels.toArray()[idx];
     const element = panel.nativeElement;
     if (element.getBoundingClientRect().bottom > window.innerHeight) {
