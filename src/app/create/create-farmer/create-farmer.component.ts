@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Farmer } from '../../models/farmer';
 
 import { FarmerApiService } from '../../farmer-api.service';
 
@@ -12,7 +13,7 @@ import { FarmerApiService } from '../../farmer-api.service';
 })
 export class CreateFarmerComponent implements OnInit {
 
-  farmer: any = {};
+  farmer: Farmer = {};
 
   constructor(private farmerApi: FarmerApiService,
               private router: Router,
@@ -27,12 +28,8 @@ export class CreateFarmerComponent implements OnInit {
   }
 
   createFarmer(): void {
-    let attributes = {
-      name: this.farmer.name
-    };
-
-    this.farmerApi.create(attributes).subscribe((res: any) => {
-      const farmer = res.data;
+    this.farmerApi.create(this.farmer).subscribe((res: any) => {
+      const farmer: Farmer = res.data;
       const snackBarRef = this.snackBar.open(`Farmer ${farmer.attributes.name} created`, 'Show me', {
         duration: 5000
       });

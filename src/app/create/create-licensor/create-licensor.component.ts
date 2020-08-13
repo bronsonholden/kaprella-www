@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { LicensorApiService } from '../../licensor-api.service';
+import { Licensor } from '../../models/licensor';
 
 @Component({
   selector: 'app-create-licensor',
@@ -11,7 +12,7 @@ import { LicensorApiService } from '../../licensor-api.service';
 })
 export class CreateLicensorComponent implements OnInit {
 
-  licensor: any = {};
+  licensor: Licensor = {};
 
   constructor(private licensorApi: LicensorApiService,
               private location: Location,
@@ -26,11 +27,7 @@ export class CreateLicensorComponent implements OnInit {
   }
 
   createLicensor(): void {
-    let attributes = {
-      name: this.licensor.name
-    };
-
-    this.licensorApi.create(attributes).subscribe((res: any) => {
+    this.licensorApi.create(this.licensor).subscribe((res: any) => {
       const licensor = res.data;
       const snackBarRef = this.snackBar.open(`Licensor ${licensor.attributes.name} created`, 'Show me', {
         duration: 5000

@@ -26,9 +26,19 @@ export class FieldFormComponent implements OnInit, OnChanges {
   constructor(private farmerApi: FarmerApiService,
               private formBuilder: FormBuilder) {
     this.fieldFormGroup = this.formBuilder.group({
-      name: [],
-      farmerId: [],
-      boundary: []
+      type: ['fields'],
+      attributes: this.formBuilder.group({
+        name: [],
+        boundary: []
+      }),
+      relationships: this.formBuilder.group({
+        farmer: this.formBuilder.group({
+          data: this.formBuilder.group({
+            id: [],
+            type: ['farmers']
+          })
+        })
+      })
     });
   }
 

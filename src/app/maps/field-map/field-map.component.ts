@@ -8,6 +8,7 @@ import { Coordinate } from '../geometries/coordinate';
 import { FieldApiService } from '../../field-api.service';
 import { interval } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Field } from '../../models/field';
 
 @Component({
   selector: 'app-field-map',
@@ -80,7 +81,7 @@ export class FieldMapComponent implements OnInit {
       }
 
       // Load the multipolygons
-      this.multipolygons = res.data.map(field => {
+      this.multipolygons = res.data.map((field: Field) => {
         const geometry = <any>wkt.parse(field.attributes.boundary);
 
         const polygons = geometry.coordinates.map(polygon => {

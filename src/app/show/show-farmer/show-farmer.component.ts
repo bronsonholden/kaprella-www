@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FieldApiService } from '../../field-api.service';
 import { FarmerApiService } from '../../farmer-api.service';
 import { ResourceTableConfig } from '../../resource-table/resource-table.component';
+import { Farmer } from '../../models/farmer';
 
 @Component({
   selector: 'app-show-farmer',
@@ -67,7 +68,7 @@ export class ShowFarmerComponent implements OnInit {
   };
 
   scope;
-  farmer: any;
+  farmer: Farmer;
 
   constructor(public fieldApi: FieldApiService,
               private farmerApi: FarmerApiService,

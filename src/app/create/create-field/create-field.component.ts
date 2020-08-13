@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FieldApiService } from '../../field-api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Farmer } from '../../models/farmer';
+import { Field } from '../../models/field';
 
 @Component({
   selector: 'app-create-field',
@@ -11,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CreateFieldComponent implements OnInit {
 
-  field: any = {};
+  field: Field = {};
 
   constructor(private fieldApi: FieldApiService,
               private location: Location,
@@ -26,25 +28,7 @@ export class CreateFieldComponent implements OnInit {
   }
 
   createField(): void {
-    let attributes = {
-      name: this.field.name,
-      boundary: this.field.boundary
-    };
-
-    let relationships;
-
-    if (!!this.field.farmerId) {
-      relationships = {
-        farmer: {
-          data: {
-            type: 'farmers',
-            id: this.field.farmerId
-          }
-        }
-      };
-    }
-
-    this.fieldApi.create(attributes, relationships).subscribe((res: any) => {
+    this.fieldApi.create(this.field).subscribe((res: any) => {
       const field = res.data;
       const snackBarRef = this.snackBar.open(`Field ${field.attributes.name} created`, 'Show me', {
         duration: 5000

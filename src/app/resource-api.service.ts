@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
-
+import { Resource } from './models/resource';
 import { isArray } from 'lodash-es';
 
 export abstract class ResourceApiService {
@@ -9,13 +9,9 @@ export abstract class ResourceApiService {
 
   abstract resourceName(): string;
 
-  create(attributes = {}, relationships = {}) {
+  create(resource: Resource) {
     return this.httpClient.post(this.resourceName(), {
-      data: {
-        type: this.resourceName(),
-        attributes,
-        relationships
-      }
+      data: resource
     });
   }
 

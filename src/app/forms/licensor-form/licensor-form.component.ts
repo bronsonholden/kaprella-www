@@ -22,7 +22,10 @@ export class LicensorFormComponent implements OnInit, OnChanges {
 
   constructor(private formBuilder: FormBuilder) {
     this.licensorFormGroup = this.formBuilder.group({
-      name: []
+      type: ['licensors'],
+      attributes: this.formBuilder.group({
+        name: []
+      })
     });
   }
 

@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Farmer } from '../../models/farmer';
 
 @Component({
   selector: 'app-farmer-form',
@@ -16,13 +17,16 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class FarmerFormComponent implements OnInit {
 
-  @Input() farmer: any;
+  @Input() farmer: Farmer;
   @Output() farmerChange = new EventEmitter<any>();
   farmerFormGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
     this.farmerFormGroup = this.formBuilder.group({
-      name: []
+      type: ['farmers'],
+      attributes: this.formBuilder.group({
+        name: []
+      })
     });
   }
 

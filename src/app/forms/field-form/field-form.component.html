@@ -5,26 +5,30 @@
         fxLayoutAlign.gt-xs="start"
         fxLayoutGap.gt-xs="24px"
         fxLayout.xs="column">
-      <div>
+      <div formGroupName="attributes">
         <mat-form-field appearance="standard">
           <mat-label>Name</mat-label>
           <input matInput placeholder="Name" name="name" formControlName="name">
         </mat-form-field>
       </div>
-      <div>
-        <mat-form-field appearance="standard">
-          <mat-label>Farmer</mat-label>
-          <mat-select name="farmerId" formControlName="farmerId">
-            <mat-option
-                *ngFor="let farmer of farmers"
-                [value]="farmer.id">
-              {{ farmer.attributes.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div formGroupName="relationships">
+        <div formGroupName="farmer">
+          <div formGroupName="data">
+            <mat-form-field appearance="standard">
+              <mat-label>Farmer</mat-label>
+              <mat-select name="farmerId" formControlName="id">
+                <mat-option
+                    *ngFor="let farmer of farmers"
+                    [value]="farmer.id">
+                  {{ farmer.attributes.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
       </div>
     </div>
-    <div fxFlex="auto">
+    <div fxFlex="auto" formGroupName="attributes">
       <app-draw-boundary name="boundary" formControlName="boundary"></app-draw-boundary>
     </div>
   </div>
