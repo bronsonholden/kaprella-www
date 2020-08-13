@@ -1,7 +1,7 @@
 <div class="resource-table-filter-catalog"> <!-- *ngIf="useBuilder; else customExpression" -->
   <mat-horizontal-stepper linear="true">
     <mat-step>
-      <ng-template matStepLabel>Column</ng-template>
+      <ng-template matStepLabel>Attribute</ng-template>
       <mat-accordion displayMode="flat" class="mat-elevation-z0">
         <mat-expansion-panel class="mat-elevation-z0">
           <mat-expansion-panel-header expandedHeight="48px">
@@ -10,21 +10,21 @@
           <mat-selection-list multiple="false" (selectionChange)="onSelectionChange($event)">
             <mat-list-option
                 #option
-                *ngFor="let column of columns"
-                [value]="column.key"
+                *ngFor="let attribute of attributes"
+                [value]="attribute.key"
                 checkboxPosition="before">
               <mat-icon
                   style="opacity: 0.8"
                   mat-list-icon
                   color="accent">
-                <span *ngIf="column.foreignKey">vpn_key</span>
+                <span *ngIf="attribute.foreignKey">vpn_key</span>
               </mat-icon>
               <mat-icon
                 style="opacity: 0.5"
                 mat-list-icon
-                [svgIcon]="columnIconName(column)">
+                [svgIcon]="attributeIconName(attribute)">
               </mat-icon>
-              {{ column.label }}
+              {{ attribute.label }}
             </mat-list-option>
           </mat-selection-list>
         </mat-expansion-panel>

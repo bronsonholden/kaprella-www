@@ -23,7 +23,7 @@ export interface FilterOperator {
 }
 
 /* Operators may have more than one "value", e.g. "Within radius" for
- * geography columns. Where applicable, multiple values are described for
+ * geography attributes. Where applicable, multiple values are described for
  * each of the various operators.
  */
 
@@ -82,7 +82,7 @@ const DATETIME_OPERATORS: FilterOperator[] = [
 export class ResourceTableFilterCatalogComponent implements OnInit {
 
   @Input() reflection: any = {
-    "columns": {
+    "attributes": {
       "id": {
         "sqlTypeMetadata": {
           "sqlType": "bigint",
@@ -196,7 +196,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
 
   @Output() filterChange = new EventEmitter<any>();
 
-  columns: any[] = [];
+  attributes: any[] = [];
   relationships: any[] = [];
   selectedKey: string;
   selectedOperator: string;
@@ -228,7 +228,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
   }
 
   loadReflection(reflection: any) {
-    let columns: any[] = [];
+    let attributes: any[] = [];
     let relationships: any[] = [];
 
     // Load relationships
@@ -243,23 +243,23 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
       });
     }
 
-    for (let key of Object.keys(reflection.columns)) {
-      const column = reflection.columns[key];
+    for (let key of Object.keys(reflection.attributes)) {
+      const attribute = reflection.attributes[key];
 
-      columns.push({
+      attributes.push({
         key,
-        type: column.sqlTypeMetadata.type,
-        foreignKey: relationships.map(r => r.foreignKey).indexOf(column.name) > -1,
-        label: column.prettyName
+        type: attribute.sqlTypeMetadata.type,
+        foreignKey: relationships.map(r => r.foreignKey).indexOf(attribute.name) > -1,
+        label: attribute.prettyName
       });
     }
 
-    this.columns = columns;
+    this.attributes = attributes;
     this.relationships = relationships;
   }
 
-  columnIconName(column) {
-    switch (column.type) {
+  attributeIconName(attribute) {
+    switch (attribute.type) {
       case 'string':
         return 'format-quote-close';
       case 'integer':
@@ -282,8 +282,8 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
       return [];
     }
 
-    const selectedColumn = this.reflection.columns[this.selectedKey];
-    switch (selectedColumn.sqlTypeMetadata.type) {
+    const selectedAttribute = this.reflection.attributes[this.selectedKey];
+    switch (selectedAttribute.sqlTypeMetadata.type) {
       case 'integer':
         return INTEGER_OPERATORS;
       case 'string':
