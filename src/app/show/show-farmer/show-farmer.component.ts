@@ -50,8 +50,8 @@ export class ShowFarmerComponent implements OnInit {
       area: {
         title: 'Area',
         value: {
-          type: 'attribute',
-          path: 'area'
+          type: 'meta',
+          path: 'boundaryArea'
         },
         display: {
           type: 'fieldArea',
