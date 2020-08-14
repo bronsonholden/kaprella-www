@@ -11,9 +11,12 @@
       <div>
         <div fxLayoutGap="24px" fxLayout.gt-xs="row" fxLayout.xs="column">
           <div fxFlex.xs="auto" fxFlex.gt-xs="50">
-            <p>Fields: <span>{{ farmer.meta.fieldsCount }}</span></p>
-            <p>Plantings: <span>0</span></p>
-            <p>Licensors: <span>0</span></p>
+            <div fxLayout="column">
+              <h2>Summary</h2>
+              <div>Fields: <span>{{ farmer.meta.fieldsCount }}</span></div>
+              <div>Plantings: <span>0</span></div>
+              <div>Licensors: <span>0</span></div>
+            </div>
           </div>
           <div fxFlex.xs="auto" fxFlex.gt-xs="50">
             <google-map width="100%" height="300px"></google-map>
