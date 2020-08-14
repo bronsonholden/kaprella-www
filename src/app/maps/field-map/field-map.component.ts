@@ -61,8 +61,8 @@ export class FieldMapComponent implements OnInit {
 
       /* Sort fields by ascending distance from center */
       this.query = {
-        'sort[]': `asc(st_distance(st_point(${center.lng()}, ${center.lat()}), st_centroid(prop('boundary'))))`,
-        'filter[]': `st_intersects(prop('boundary'), st_box(${boxStr}))`
+        'sort': `asc(st_distance(st_point(${center.lng()}, ${center.lat()}), st_centroid(prop('boundary'))))`,
+        'filter': `st_intersects(prop('boundary'), st_box(${boxStr}))`
       };
 
       this.reloadFields();
