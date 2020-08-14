@@ -9,25 +9,43 @@
         <mat-divider></mat-divider>
       </div>
       <div>
-        <div fxLayoutGap="24px" fxLayout.gt-xs="row" fxLayout.xs="column">
-          <div fxFlex.xs="auto" fxFlex.gt-xs="40">
+        <div fxLayoutGap="24px" fxLayout="row">
+          <div fxFlex.xs="35" fxFlex.gt-xs="50">
             <div fxLayout="row" fxLayoutAlign="space-around">
-              <img class="licensor-logo" width=250 height=250 src="./assets/licensor.webp">
+              <img class="licensor-logo" src="./assets/licensor.webp">
             </div>
           </div>
-          <div fxFlex.xs="auto" fxFlex.gt-xs="60">
-            <div fxLayout="column" fxLayoutGap="24px">
+          <div fxFlex.xs="65" fxFlex.gt-xs="50">
+            <div fxLayout="column" fxLayoutGap="24px" fxLayoutAlign="center">
               <div fxLayout="column">
                 <h2>Summary</h2>
-                <div>Planting Varieties: <span>0</span></div>
+                <div>Plant Varieties: <span>0</span></div>
                 <div>Licensees: <span>0</span></div>
-              </div>
-              <div>
-                <h2>About</h2>
-                <p style="white-space: pre-wrap;">{{ about }}</p>
+                <div>Total Active Plantings: <span>0</span></div>
+                <div>Total Acres: <span>0</span></div>
+                <div>Est. Total Plants: <span>0</span></div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap="24px">
+        <div fxFlex.gt-xs="50">
+          <div fxLayout="column">
+            <h2>People</h2>
+            <div fxLayout="row column" fxLayoutAlign.gt-xs="start start" fxLayoutAlign.xs="center">
+              <img class="people-avatar" width="100px" src="./assets/licensor.webp">
+              <img class="people-avatar" width="100px" src="./assets/licensor.webp">
+              <img class="people-avatar" width="100px" src="./assets/licensor.webp">
+              <img class="people-avatar" width="100px" src="./assets/licensor.webp">
+              <img class="people-avatar" width="100px" src="./assets/licensor.webp">
+              <img class="people-avatar" width="100px" src="./assets/licensor.webp">
+            </div>
+          </div>
+        </div>
+        <div fxFlex.gt-xs="50">
+          <h2>About</h2>
+          <p style="white-space: pre-wrap;">{{ about }}</p>
         </div>
       </div>
       <div>
