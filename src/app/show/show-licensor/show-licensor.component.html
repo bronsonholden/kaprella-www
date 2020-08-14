@@ -1,0 +1,48 @@
+<div *ngIf="!!licensor; else loadingIndicator">
+  <div class="resource-page">
+    <div fxLayout="column" fxLayoutGap="24px">
+      <div class="button-row" fxLayout="row">
+        <button mat-stroked-button routerLink="..">All Licensors</button>
+      </div>
+      <div>
+        <h1><span>{{ licensor.attributes.name }}</span></h1>
+        <mat-divider></mat-divider>
+      </div>
+      <div>
+        <div fxLayoutGap="24px" fxLayout.gt-xs="row" fxLayout.xs="column">
+          <div fxFlex.xs="auto" fxFlex.gt-xs="40">
+            <div fxLayout="row" fxLayoutAlign="space-around">
+              <img class="licensor-logo" width=250 height=250 src="./assets/licensor.webp">
+            </div>
+          </div>
+          <div fxFlex.xs="auto" fxFlex.gt-xs="60">
+            <div fxLayout="column" fxLayoutGap="24px">
+              <div fxLayout="column">
+                <h2>Summary</h2>
+                <div>Planting Varieties: <span>0</span></div>
+                <div>Licensees: <span>0</span></div>
+              </div>
+              <div>
+                <h2>About</h2>
+                <p style="white-space: pre-wrap;">{{ about }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <mat-tab-group dynamicHeight="true">
+          <mat-tab label="Licensees">
+          </mat-tab>
+          <mat-tab label="Planting Varieties">
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loadingIndicator>
+  <div style="width: 100%;">
+    <mat-spinner color="accent" style="margin: 96px auto"></mat-spinner>
+  </div>
+</ng-template>
