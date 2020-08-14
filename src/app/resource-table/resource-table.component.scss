@@ -46,3 +46,8 @@ th.mat-sort-header-sorted {
 .resource-table .resource-table-header .mat-checkbox-ripple.mat-focus-indicator {
   display: none;
 }
+
+td.resource-table-cell {
+  max-width: 0px;
+  padding: 0px 12px 0px 12px;
+}

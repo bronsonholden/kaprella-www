@@ -1,12 +1,12 @@
-<div *ngIf="display.type === 'text'">
+<div class="resource-table-cell" *ngIf="display.type === 'text'">
   {{ raw }}
 </div>
 
-<div *ngIf="display.type === 'format'">
+<div class="resource-table-cell" *ngIf="display.type === 'format'">
   {{ formatted }}
 </div>
 
-<div *ngIf="display.type === 'fieldArea'">
+<div class="resource-table-cell" *ngIf="display.type === 'fieldArea'">
   <span
       class="mat-body-2 accent-color"
       style="cursor: pointer;"
