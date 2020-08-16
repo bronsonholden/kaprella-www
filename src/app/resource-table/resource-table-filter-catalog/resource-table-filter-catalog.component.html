@@ -7,7 +7,7 @@
           <mat-expansion-panel-header expandedHeight="48px">
             <mat-panel-title style="font-size: 1.2rem;">Data</mat-panel-title>
           </mat-expansion-panel-header>
-          <mat-selection-list multiple="false" (selectionChange)="onSelectionChange($event)">
+          <mat-selection-list multiple="false" (selectionChange)="onDimensionChange($event)">
             <mat-list-option
                 #option
                 *ngFor="let attribute of attributes"
@@ -52,7 +52,7 @@
     <mat-step>
       <ng-template matStepLabel>Value</ng-template>
       <div *ngIf="builderType === 'integer'">
-        <app-integer-value-builder [(value)]="value"></app-integer-value-builder>
+        <app-integer-value-builder [value]="value" (valueChange)="onValueChange($event)"></app-integer-value-builder>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

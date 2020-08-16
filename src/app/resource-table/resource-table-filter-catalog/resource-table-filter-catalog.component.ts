@@ -197,8 +197,8 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
 
   attributes: any[] = [];
   relationships: any[] = [];
-  selectedAttribute: string;
-  selectedOperator: string;
+  dimension: string;
+  filter: BaseFilter;
   value: any[];
 
   constructor() { }
@@ -213,25 +213,30 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
     }
   }
 
-  onSelectionChange(selection): void {
-    this.selectedAttribute = selection.option.value;
+  // Emits a filter expression if the catalog selections are complete.
+  emitIfComplete(): void {
+    if (!!this.filter && !!this.dimension && !!this.value) {
+      const filter = this.getSelectedOperator().generate(this.dimension, this.value);
+      this.filterChange.emit(filter);
+    }
   }
 
-  get filterValue(): string {
-    if (!!this.selectedOperator && !!this.selectedAttribute && !!this.value) {
-      const idx = this.operators.map(op => op.option).indexOf(this.selectedOperator);
-      return this.operators[idx].generate(this.selectedAttribute, this.value);
-    } else {
-      return null;
-    }
+  getSelectedOperator(): BaseFilter {
+    const idx = this.operators.map(op => op.option).indexOf(this.filter);
+    return this.operators[idx];
+  }
+
+  onDimensionChange(selection): void {
+    this.dimension = selection.option.value;
+    this.emitIfComplete();
   }
 
   get builderType(): string {
-    if (!this.selectedAttribute) {
+    if (!this.dimension) {
       return null;
     }
 
-    return this.typeByKey(this.selectedAttribute);
+    return this.typeByKey(this.dimension);
   }
 
   typeByKey(key) {
@@ -239,7 +244,13 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
   }
 
   onOperatorChange(selection): void {
-    this.selectedOperator = selection.option.value;
+    this.filter = selection.option.value;
+    this.emitIfComplete();
+  }
+
+  onValueChange(value: any[]): void {
+    this.value = value;
+    this.emitIfComplete();
   }
 
   loadReflection(reflection: any): void {
@@ -293,12 +304,12 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
   }
 
   get operators(): any[] {
-    if (!this.selectedAttribute) {
+    if (!this.dimension) {
       return [];
     }
 
-    const selectedAttribute = this.reflection.attributes[this.selectedAttribute];
-    switch (selectedAttribute.sqlTypeMetadata.type) {
+    const dimension = this.reflection.attributes[this.dimension];
+    switch (dimension.sqlTypeMetadata.type) {
       case 'integer':
         return INTEGER_OPERATORS;
       case 'string':
