@@ -1,7 +1,12 @@
 import { SqlTypeMetadata } from './sql-type-metadata';
 
 export type AttributeReflections = {
-  [key: string]: AttributeReflection<string | number | boolean>
+  attributes: {
+    [key: string]: AttributeReflection<string | number | boolean>
+  },
+  relationships: {
+    [key: string]: RelationshipReflection
+  }
 }
 
 export interface AttributeReflection<T> {
@@ -9,6 +14,15 @@ export interface AttributeReflection<T> {
   defaultValue: T | null;
   allowNull: boolean;
   comment: string | null;
+  name: string;
+  prettyName: string;
+}
+
+export interface RelationshipReflection {
+  relationshipType: string;
+  resource: string;
+  foreignKey: string;
+  options: Object;
   name: string;
   prettyName: string;
 }

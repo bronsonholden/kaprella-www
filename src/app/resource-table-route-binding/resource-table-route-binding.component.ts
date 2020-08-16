@@ -13,7 +13,7 @@ import {
   ResourceTablePage
 } from '../resource-table/resource-table.component';
 
-import { HumanizedFilter } from '../resource-table-filters/humanized-filter';
+import { HumanizedFilter } from '../resource-table/resource-table-filters/humanized-filter';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceApiService } from '../resource-api.service';
@@ -68,7 +68,6 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
         if (!isNaN(param)) {
           if (param !== this.page[key]) {
-            reload = true;
             this.page[key] = param;
           }
         }
@@ -116,11 +115,12 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
   onFilterRemoved(humanizedFilter: HumanizedFilter): void {
     const filters = filter(this.filters, (expression: string) => expression !== humanizedFilter.expression);
+    let queryParams;
 
     if (filters.length > 0) {
-      var queryParams = { filter: filters };
+      queryParams = { filter: filters };
     } else {
-      var queryParams = { filter: null };
+      queryParams = { filter: null };
     }
 
     this.router.navigate([], {

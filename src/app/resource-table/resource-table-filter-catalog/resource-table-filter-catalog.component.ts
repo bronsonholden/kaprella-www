@@ -6,7 +6,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { AttributeReflections } from '../../reflections/attribute-reflections.ts';
+import { AttributeReflections } from '../../reflections/attribute-reflections';
 
 import { BaseFilter } from '../resource-table-filters/base-filter';
 import { NumericGreaterThanFilter } from '../resource-table-filters/numeric-greater-than-filter';
@@ -25,17 +25,12 @@ import { NumericGreaterThanFilter } from '../resource-table-filters/numeric-grea
  * ?cfilter=farmer_id,>,
  */
 
-export interface FilterOperator {
-  value: string;
-  label: string;
-}
-
 /* Operators may have more than one "value", e.g. "Within radius" for
  * geography attributes. Where applicable, multiple values are described for
  * each of the various operators.
  */
 
-const INTEGER_OPERATORS: FilterOperator[] = [
+const INTEGER_OPERATORS: BaseFilter[] = [
   new NumericGreaterThanFilter(),
   // { value: '>=', label: 'Greater than or equal to' },
   // { value: '<', label: 'Less than' },
@@ -50,14 +45,14 @@ const INTEGER_OPERATORS: FilterOperator[] = [
   // { value: 'exclrange', label: 'Exclusive range' }
 ];
 
-const STRING_OPERATORS: FilterOperator[] = [
+const STRING_OPERATORS: BaseFilter[] = [
   // { value: 'contains', label: 'Contains' },
   // { value: 'nocontains', label: 'Does not contain' },
   // { value: '==', label: 'Exactly matches' },
   // { value: 'like', label: 'Partially matches' }
 ];
 
-const GEOGRAPHY_OPERATORS: FilterOperator[] = [
+const GEOGRAPHY_OPERATORS: BaseFilter[] = [
   // { value: 'intersects', label: 'Intersects' },
   // { value: 'nointersects', label: 'Does not intersect' },
   // { value: 'within', label: 'Within' },
@@ -68,7 +63,7 @@ const GEOGRAPHY_OPERATORS: FilterOperator[] = [
   // { value: 'outradius', label: 'Not in radius' }
 ];
 
-const DATETIME_OPERATORS: FilterOperator[] = [
+const DATETIME_OPERATORS: BaseFilter[] = [
   // { value: '==', label: 'Equal to' },
   // { value: '!=', label: 'Not equal to' },
   // { value: 'hod', label: 'Hour of day' },
