@@ -10,6 +10,8 @@ import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+import { HumanizedFilter } from './resource-table-filters/humanized-filter';
+
 /* Wrapper component for tables. Displays data with the given table
  * configuration and emits events upon user interaction with the display
  * e.g. page changes or selections. Responding to such events to reload data,
@@ -29,9 +31,12 @@ export class ResourceTableComponent implements OnInit {
   /* Which resources are currently selected in the display */
   selected: any[] = [];
 
-  /* Currently applied filters
+  /* Filters to display as applied to the data.
    */
-  @Input() filters: ResourceTableFilter[] = [];
+  @Input() humanizedFilters: HumanizedFilter[] = [];
+
+  /* Emits events when a filter is removed by clicking the delete button. */
+  @Output() filterRemoved = new EventEmitter<HumanizedFilter>();
 
   /* Internal property that affects how the datatable displays sort icons
    * next to column headers.
@@ -102,8 +107,8 @@ export class ResourceTableComponent implements OnInit {
     this.pageChange.emit(new ResourceTablePage(event.pageIndex, event.pageSize, event.length));
   }
 
-  removeFilterByIdx(idx) {
-    this.filters.splice(idx, 1);
+  removeFilter(filter: HumanizedFilter) {
+    this.filterRemoved.emit(filter);
   }
 
 }
@@ -125,20 +130,6 @@ export enum ResourceTableFilterType {
   BooleanFalse,
   GeographicWithinRadius,
   GeographicWithinCountry
-}
-
-/* Describes a filter as configured with the resource table filter wizard.
- * The parent component is responsible for applying or extending filters
- * on the actual data source.
- */
-export class ResourceTableFilter {
-  constructor(public filterType: ResourceTableFilterType,
-              public columnIdentifier: string,
-              public operand: any) {}
-
-  get label(): string {
-    return 'Filter';
-  }
 }
 
 export class ResourceTableColumnConfig {

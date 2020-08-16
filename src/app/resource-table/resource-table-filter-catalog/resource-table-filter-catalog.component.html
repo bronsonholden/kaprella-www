@@ -41,16 +41,23 @@
       <ng-template matStepLabel>Operator</ng-template>
       <mat-selection-list multiple="false" (selectionChange)="onOperatorChange($event)">
         <mat-list-option
-            [class.column-selected]="selectedOperator === operator.value"
+            [class.column-selected]="selectedOperator === operator.option"
             *ngFor="let operator of operators"
-            [value]="operator.value"
+            [value]="operator.option"
             checkboxPosition="before">
-          {{ operator.label }}
+          {{ operator.title }}
         </mat-list-option>
       </mat-selection-list>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Value</ng-template>
+      <div *ngIf="builderType === 'integer'">
+        <app-integer-value-builder [(value)]="value"></app-integer-value-builder>
+      </div>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
+{{ selectedAttribute }}<br>
+{{ selectedOperator }}<br>
+{{ value }}<br>
+{{ filterValue }}

@@ -6,15 +6,23 @@ import {
   EventEmitter
 } from '@angular/core';
 
+import { AttributeReflections } from '../../reflections/attribute-reflections.ts';
+
+import { BaseFilter } from '../resource-table-filters/base-filter';
+import { NumericGreaterThanFilter } from '../resource-table-filters/numeric-greater-than-filter';
+
 /* This component accepts reflection metadata from a Kaprella resource and
  * presents a simple interface for the user to select a column, operator, and
  * value. When a valid selection is made for all three, an object containing
- * the filter expression as well as a label is emitted.
+ * the filter expression as well as a label is emitted. This is used to
+ * easily configure new filters to apply to resource table data.
  *
  * Filters created from this component are limited and relatively simple.
  * More complex filters must be applied using filter expressions. These
  * filters are bound to the 'cfilter' query parameter. Filter expressions
  * remain in the 'filter' query parameter.
+ *
+ * ?cfilter=farmer_id,>,
  */
 
 export interface FilterOperator {
@@ -28,50 +36,50 @@ export interface FilterOperator {
  */
 
 const INTEGER_OPERATORS: FilterOperator[] = [
-  { value: '>', label: 'Greater than' },
-  { value: '>=', label: 'Greater than or equal to' },
-  { value: '<', label: 'Less than' },
-  { value: '<=', label: 'Less than or equal to' },
-  { value: '==', label: 'Equal to' },
-  { value: '!=', label: 'Not equal to' },
-  { value: 'isevent', label: 'Is even' },
-  { value: 'isodd', label: 'Is odd' },
+  new NumericGreaterThanFilter(),
+  // { value: '>=', label: 'Greater than or equal to' },
+  // { value: '<', label: 'Less than' },
+  // { value: '<=', label: 'Less than or equal to' },
+  // { value: '==', label: 'Equal to' },
+  // { value: '!=', label: 'Not equal to' },
+  // { value: 'iseven', label: 'Is even' },
+  // { value: 'isodd', label: 'Is odd' },
   // inclrange values: range min, range max
-  { value: 'inclrange', label: 'Inclusive range' },
+  // { value: 'inclrange', label: 'Inclusive range' },
   // exclrange values: range min, range max
-  { value: 'exclrange', label: 'Exclusive range' }
+  // { value: 'exclrange', label: 'Exclusive range' }
 ];
 
 const STRING_OPERATORS: FilterOperator[] = [
-  { value: 'contains', label: 'Contains' },
-  { value: 'nocontains', label: 'Does not contain' },
-  { value: '==', label: 'Exactly matches' },
-  { value: 'like', label: 'Partially matches' }
+  // { value: 'contains', label: 'Contains' },
+  // { value: 'nocontains', label: 'Does not contain' },
+  // { value: '==', label: 'Exactly matches' },
+  // { value: 'like', label: 'Partially matches' }
 ];
 
 const GEOGRAPHY_OPERATORS: FilterOperator[] = [
-  { value: 'intersects', label: 'Intersects' },
-  { value: 'nointersects', label: 'Does not intersect' },
-  { value: 'within', label: 'Within' },
-  { value: 'nowithin', label: 'Not within' },
-  // inradius values: point wkt, radius (meters)
-  { value: 'inradius', label: 'In radius' },
-  // outradius values: point wkt, radius (meters)
-  { value: 'outradius', label: 'Not in radius' }
+  // { value: 'intersects', label: 'Intersects' },
+  // { value: 'nointersects', label: 'Does not intersect' },
+  // { value: 'within', label: 'Within' },
+  // { value: 'nowithin', label: 'Not within' },
+  // // inradius values: point wkt, radius (meters)
+  // { value: 'inradius', label: 'In radius' },
+  // // outradius values: point wkt, radius (meters)
+  // { value: 'outradius', label: 'Not in radius' }
 ];
 
 const DATETIME_OPERATORS: FilterOperator[] = [
-  { value: '==', label: 'Equal to' },
-  { value: '!=', label: 'Not equal to' },
-  { value: 'hod', label: 'Hour of day' },
-  { value: 'dow', label: 'Day of week' },
-  { value: 'moy', label: 'Month of year' },
-  // timerange values: from time, to time
-  { value: 'timerange', label: 'Time range' },
-  // datetimerange values: from datetime, to datetime
-  { value: 'datetimerange', label: 'Date & time range' },
-  { value: 'before', label: 'On or before' },
-  { value: 'after', label: 'On or after' }
+  // { value: '==', label: 'Equal to' },
+  // { value: '!=', label: 'Not equal to' },
+  // { value: 'hod', label: 'Hour of day' },
+  // { value: 'dow', label: 'Day of week' },
+  // { value: 'moy', label: 'Month of year' },
+  // // timerange values: from time, to time
+  // { value: 'timerange', label: 'Time range' },
+  // // datetimerange values: from datetime, to datetime
+  // { value: 'datetimerange', label: 'Date & time range' },
+  // { value: 'before', label: 'On or before' },
+  // { value: 'after', label: 'On or after' }
 ];
 
 @Component({
@@ -81,7 +89,7 @@ const DATETIME_OPERATORS: FilterOperator[] = [
 })
 export class ResourceTableFilterCatalogComponent implements OnInit {
 
-  @Input() reflection: any = {
+  @Input() reflection: AttributeReflections = {
     "attributes": {
       "id": {
         "sqlTypeMetadata": {
@@ -198,8 +206,9 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
 
   attributes: any[] = [];
   relationships: any[] = [];
-  selectedKey: string;
+  selectedAttribute: string;
   selectedOperator: string;
+  value: any[];
 
   constructor() { }
 
@@ -216,11 +225,32 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
   onSelectionChange(selection): void {
     const newKey = selection.option.value;
 
-    if (this.selectedKey === newKey) {
-      this.selectedKey = null;
+    if (this.selectedAttribute === newKey) {
+      this.selectedAttribute = null;
     } else {
-      this.selectedKey = newKey;
+      this.selectedAttribute = newKey;
     }
+  }
+
+  get filterValue(): string {
+    if (!!this.selectedOperator && !!this.selectedAttribute && !!this.value) {
+      const idx = this.operators.map(op => op.option).indexOf(this.selectedOperator);
+      return this.operators[idx].generate(this.selectedAttribute, this.value);
+    } else {
+      return null;
+    }
+  }
+
+  get builderType(): string {
+    if (!this.selectedAttribute) {
+      return null;
+    }
+
+    return this.typeByKey(this.selectedAttribute);
+  }
+
+  typeByKey(key) {
+    return this.reflection.attributes[key].sqlTypeMetadata.type;
   }
 
   onOperatorChange(selection): void {
@@ -278,11 +308,11 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
   }
 
   get operators(): any[] {
-    if (!this.selectedKey) {
+    if (!this.selectedAttribute) {
       return [];
     }
 
-    const selectedAttribute = this.reflection.attributes[this.selectedKey];
+    const selectedAttribute = this.reflection.attributes[this.selectedAttribute];
     switch (selectedAttribute.sqlTypeMetadata.type) {
       case 'integer':
         return INTEGER_OPERATORS;

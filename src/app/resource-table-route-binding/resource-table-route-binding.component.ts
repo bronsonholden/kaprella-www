@@ -6,12 +6,14 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { mergeWith, isArray } from 'lodash-es';
+import { filter, mergeWith, isArray } from 'lodash-es';
 
 import {
   ResourceTableConfig,
   ResourceTablePage
 } from '../resource-table/resource-table.component';
+
+import { HumanizedFilter } from '../resource-table-filters/humanized-filter';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceApiService } from '../resource-api.service';
@@ -30,6 +32,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
   @Input() scope: any;
 
   filters: any;
+  humanizedFilters: HumanizedFilter[];
 
   /* Whether interacting with the table updates the activated route's
    * query parameters.
@@ -70,7 +73,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
         ['offset', 'limit'].forEach((key: string) => {
           const param = parseInt(params[key]);
 
-          if (typeof param !== 'undefined') {
+          if (!isNaN(param)) {
             if (param !== this.page[key]) {
               reload = true;
               this.page[key] = param;
@@ -123,6 +126,16 @@ export class ResourceTableRouteBindingComponent implements OnInit {
     }
   }
 
+  onFilterRemoved(humanizedFilter: HumanizedFilter): void {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        filter: filter(this.filters, (expression: string) => expression !== humanizedFilter.expression)
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
   reloadData(): void {
     if (!this.apiService) {
       return;
@@ -146,6 +159,16 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       this.rows = res.data;
       this.page.turn(res.meta.page.pageOffset, res.meta.page.pageLimit, res.meta.page.itemCount);
       this.loading = false;
+
+      const humanizedFilters = res.meta.filterLabels;
+
+      this.humanizedFilters = [];
+      for (let key of Object.keys(humanizedFilters)) {
+        this.humanizedFilters.push({
+          expression: key,
+          humanized: humanizedFilters[key] || 'Custom filter'
+        });
+      }
     }, (err: any) => {
       this.loading = false;
     });

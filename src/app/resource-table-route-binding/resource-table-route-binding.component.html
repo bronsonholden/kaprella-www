@@ -3,6 +3,8 @@
     [tableConfig]="tableConfig"
     [rows]="rows"
     [page]="page"
+    [humanizedFilters]="humanizedFilters"
+    (filterRemoved)="onFilterRemoved($event)"
     (pageChange)="onPageChange($event)"
     [loading]="loading"></app-resource-table>
 </div>
