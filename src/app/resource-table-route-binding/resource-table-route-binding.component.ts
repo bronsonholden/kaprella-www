@@ -31,7 +31,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
   /* A set of query parameters that are always provided in the query */
   @Input() scope: any;
 
-  filters: any;
+  filters = [];
   humanizedFilters: HumanizedFilter[];
 
   /* Whether interacting with the table updates the activated route's
@@ -40,7 +40,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
   @Input() updateQuery = true;
 
   /* The current table page */
-  page: ResourceTablePage;
+  page = new ResourceTablePage(0, 10, 0);
 
   /* Emits pages when the paginator is updated (e.g. next page or page size
    * is changed).
@@ -63,37 +63,25 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      let reload = false;
+      ['offset', 'limit'].forEach((key: string) => {
+        const param = parseInt(params[key]);
 
-      // Handle pagination query parameters
-      if (typeof this.page === 'undefined') {
-        reload = true;
-        this.page = new ResourceTablePage(0, 10, 0);
-      } else {
-        ['offset', 'limit'].forEach((key: string) => {
-          const param = parseInt(params[key]);
-
-          if (!isNaN(param)) {
-            if (param !== this.page[key]) {
-              reload = true;
-              this.page[key] = param;
-            }
+        if (!isNaN(param)) {
+          if (param !== this.page[key]) {
+            reload = true;
+            this.page[key] = param;
           }
-        });
-      }
-
-      if (typeof params['filter'] !== 'undefined') {
-        reload = true;
-        let newFilters = params['filter'];
-        if (!isArray(newFilters)) {
-          newFilters = [newFilters];
         }
-        this.filters = newFilters;
+      });
+
+      const newFilters = params['filter'];
+      if (typeof newFilters === 'string') {
+        this.filters = [newFilters];
+      } else {
+        this.filters = [];
       }
 
-      if (reload) {
-        this.reloadData();
-      }
+      this.reloadData();
     });
 
     const query = this.activatedRoute.snapshot.queryParams;
@@ -127,11 +115,17 @@ export class ResourceTableRouteBindingComponent implements OnInit {
   }
 
   onFilterRemoved(humanizedFilter: HumanizedFilter): void {
+    const filters = filter(this.filters, (expression: string) => expression !== humanizedFilter.expression);
+
+    if (filters.length > 0) {
+      var queryParams = { filter: filters };
+    } else {
+      var queryParams = { filter: null };
+    }
+
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
-      queryParams: {
-        filter: filter(this.filters, (expression: string) => expression !== humanizedFilter.expression)
-      },
+      queryParams,
       queryParamsHandling: 'merge',
     });
   }
