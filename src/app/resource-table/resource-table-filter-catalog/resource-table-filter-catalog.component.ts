@@ -214,13 +214,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
   }
 
   onSelectionChange(selection): void {
-    const newKey = selection.option.value;
-
-    if (this.selectedAttribute === newKey) {
-      this.selectedAttribute = null;
-    } else {
-      this.selectedAttribute = newKey;
-    }
+    this.selectedAttribute = selection.option.value;
   }
 
   get filterValue(): string {
