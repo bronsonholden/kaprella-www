@@ -41,7 +41,6 @@
       <ng-template matStepLabel>Operator</ng-template>
       <mat-selection-list multiple="false" (selectionChange)="onOperatorChange($event)">
         <mat-list-option
-            [class.column-selected]="selectedOperator === operator.option"
             *ngFor="let operator of operators"
             [value]="operator.option"
             checkboxPosition="before">
