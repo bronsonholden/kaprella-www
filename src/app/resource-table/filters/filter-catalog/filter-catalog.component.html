@@ -1,5 +1,5 @@
 <div class="filter-catalog"> <!-- *ngIf="useBuilder; else customExpression" -->
-  <mat-horizontal-stepper linear="true">
+  <mat-horizontal-stepper #catalogStepper linear="true">
     <mat-step>
       <ng-template matStepLabel>Attribute</ng-template>
       <mat-accordion displayMode="flat" class="mat-elevation-z0">
@@ -12,6 +12,7 @@
                 #option
                 *ngFor="let attribute of attributes"
                 [value]="attribute.key"
+                (click)="catalogStepper.next()"
                 checkboxPosition="before">
               <mat-icon
                   style="opacity: 0.8"
@@ -43,6 +44,7 @@
         <mat-list-option
             *ngFor="let operator of operators"
             [value]="operator.option"
+            (click)="catalogStepper.next()"
             checkboxPosition="before">
           {{ operator.title }}
         </mat-list-option>
