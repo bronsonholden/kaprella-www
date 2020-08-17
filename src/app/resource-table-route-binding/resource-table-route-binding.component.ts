@@ -76,6 +76,8 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       const newFilters = params['filter'];
       if (typeof newFilters === 'string') {
         this.filters = [newFilters];
+      } else if (isArray(newFilters)) {
+        this.filters = newFilters;
       } else {
         this.filters = [];
       }
