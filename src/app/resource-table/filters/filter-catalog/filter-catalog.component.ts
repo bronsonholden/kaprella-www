@@ -6,6 +6,8 @@ import {
   EventEmitter
 } from '@angular/core';
 
+import { isNull } from 'lodash-es';
+
 import { AttributeReflections } from '../../reflections/attribute-reflections';
 
 import { BaseCriterion } from '../criteria/base-criterion';
@@ -213,12 +215,17 @@ export class FilterCatalogComponent implements OnInit {
     }
   }
 
-  // Emits a filter expression if the catalog selections are complete.
+  /* Emits a filter expression if the catalog selections are complete. If
+   * the selections become invalid (e.g. the user removes the value from the
+   * builder), null is emitted.
+   */
   emitIfComplete(): void {
-    if (!!this.filter && !!this.dimension && !!this.value) {
+    if (!isNull(this.filter) && !isNull(this.dimension) && !isNull(this.value)) {
       const filter = this.getSelectedOperator().generate(this.dimension, this.value);
       this.filterChange.emit(filter);
       console.log(filter);
+    } else {
+      this.filterChange.emit(null);
     }
   }
 
