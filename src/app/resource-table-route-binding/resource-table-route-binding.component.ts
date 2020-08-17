@@ -6,7 +6,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { filter, mergeWith, isArray } from 'lodash-es';
+import { filter, mergeWith, isArray, omit, get } from 'lodash-es';
 
 import {
   ResourceTableConfig,
@@ -154,7 +154,8 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       this.page.turn(res.meta.page.pageOffset, res.meta.page.pageLimit, res.meta.page.itemCount);
       this.loading = false;
 
-      const humanizedFilters = res.meta.filterLabels;
+      // We don't want to show scope filters
+      const humanizedFilters = omit(res.meta.filterLabels, get(this.scope, 'filter', []));
 
       this.humanizedFilters = [];
       for (let key of Object.keys(humanizedFilters)) {
