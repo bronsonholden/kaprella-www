@@ -6,7 +6,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { isNull } from 'lodash-es';
+import { isNil, isArray } from 'lodash-es';
 
 import { AttributeReflections } from '../../reflections/attribute-reflections';
 
@@ -220,12 +220,27 @@ export class FilterCatalogComponent implements OnInit {
    * builder), null is emitted.
    */
   emitIfComplete(): void {
-    if (!isNull(this.filter) && !isNull(this.dimension) && !isNull(this.value)) {
+    if (isNil(this.filter) || isNil(this.dimension)) {
+      return;
+    }
+
+    if (this.isValueValid()) {
       const filter = this.getSelectedOperator().generate(this.dimension, this.value);
       this.filterChange.emit(filter);
-      console.log(filter);
     } else {
-      this.filterChange.emit(null);
+      console.log(null);
+    }
+  }
+
+  // TODO: Don't emit unless value has been changed. Currently emits as soon
+  // as a dimension & operator are selected.
+  isValueValid(): boolean {
+    if (isNil(this.value) || !isArray(this.value)) {
+      return false;
+    } else if (this.value.filter((val: any) => !isNil(val)).length === 0) {
+      return false;
+    } else {
+      return this.value.length > 0;
     }
   }
 
