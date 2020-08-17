@@ -201,8 +201,11 @@ export class FilterCatalogComponent implements OnInit {
   attributes: any[] = [];
   relationships: any[] = [];
   dimension: string;
-  filter: BaseCriterion;
+  criterion: BaseCriterion;
   value: any[];
+
+  // The filter expression being created
+  filter: string;
 
   constructor() { }
 
@@ -221,12 +224,13 @@ export class FilterCatalogComponent implements OnInit {
    * builder), null is emitted.
    */
   emitIfComplete(): void {
-    if (isNil(this.filter) || isNil(this.dimension)) {
+    if (isNil(this.criterion) || isNil(this.dimension)) {
       return;
     }
 
     if (this.isValueValid()) {
       const filter = this.getSelectedOperator().generate(this.dimension, this.value);
+      this.filter = filter;
       this.filterChange.emit(filter);
     } else {
       console.log(null);
@@ -246,7 +250,7 @@ export class FilterCatalogComponent implements OnInit {
   }
 
   getSelectedOperator(): BaseCriterion {
-    const idx = this.operators.map(op => op.option).indexOf(this.filter);
+    const idx = this.operators.map(op => op.option).indexOf(this.criterion);
     return this.operators[idx];
   }
 
@@ -268,7 +272,7 @@ export class FilterCatalogComponent implements OnInit {
   }
 
   onOperatorChange(selection): void {
-    this.filter = selection.option.value;
+    this.criterion = selection.option.value;
     this.emitIfComplete();
   }
 
@@ -278,7 +282,7 @@ export class FilterCatalogComponent implements OnInit {
   }
 
   onClickApply(): void {
-    this.filterApply.emit(this.value);
+    this.filterApply.emit(this.filter);
   }
 
   loadReflection(reflection: any): void {

@@ -31,7 +31,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
   /* A set of query parameters that are always provided in the query */
   @Input() scope: any;
 
-  filters = [];
+  filters: string[] = [];
   humanizedFilters: HumanizedFilter[];
 
   /* Whether interacting with the table updates the activated route's
@@ -135,7 +135,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       this.router.navigate([], {
         relativeTo: this.activatedRoute,
         queryParams: {
-          filter: this.filters + [filter]
+          filter: this.filters.concat([filter])
         },
         queryParamsHandling: 'merge',
       });
