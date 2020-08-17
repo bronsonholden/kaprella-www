@@ -33,6 +33,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
   filters: string[] = [];
   humanizedFilters: HumanizedFilter[];
+  reflection: any;
 
   /* Whether interacting with the table updates the activated route's
    * query parameters.
@@ -165,6 +166,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
     this.apiService.index(this.page.offset, this.page.limit, query).subscribe((res: any) => {
       this.rows = res.data;
+      this.reflection = res.meta.reflection;
       this.page.turn(res.meta.page.pageOffset, res.meta.page.pageLimit, res.meta.page.itemCount);
       this.loading = false;
 

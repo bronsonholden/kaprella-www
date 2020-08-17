@@ -15,8 +15,12 @@ export interface FilterCatalogDialogData {
 })
 export class FilterCatalogDialogComponent implements OnInit {
 
+  reflection: any;
+
   constructor(private matDialogRef: MatDialogRef<FilterCatalogDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public dialogData) { }
+              @Inject(MAT_DIALOG_DATA) public dialogData) {
+    this.reflection = dialogData.reflection;
+  }
 
   filter: string;
 

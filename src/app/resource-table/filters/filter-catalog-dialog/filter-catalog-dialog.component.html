@@ -1,1 +1,5 @@
-<app-filter-catalog (filterChange)="onFilterChange($event)" (filterApply)="applyCatalogFilter()"></app-filter-catalog>
+<app-filter-catalog
+  [reflection]="reflection"
+  (filterChange)="onFilterChange($event)"
+  (filterApply)="applyCatalogFilter()">
+</app-filter-catalog>

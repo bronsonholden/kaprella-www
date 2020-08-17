@@ -82,7 +82,8 @@ const DATETIME_OPERATORS: BaseCriterion[] = [
 })
 export class FilterCatalogComponent implements OnInit {
 
-  @Input() reflection: AttributeReflections = {
+  @Input() reflection: AttributeReflections;
+  __reflection = {
     "attributes": {
       "id": {
         "sqlTypeMetadata": {
@@ -210,12 +211,11 @@ export class FilterCatalogComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.loadReflection(this.reflection)
   }
 
   ngOnChanges(changes): void {
     if (changes.reflection) {
-      this.loadReflection(changes.reflection);
+      this.loadReflection(changes.reflection.currentValue);
     }
   }
 
@@ -319,6 +319,7 @@ export class FilterCatalogComponent implements OnInit {
   attributeIconName(attribute): string {
     switch (attribute.type) {
       case 'string':
+      case 'text':
         return 'format-quote-close';
       case 'integer':
         return 'integer';
@@ -345,6 +346,7 @@ export class FilterCatalogComponent implements OnInit {
       case 'integer':
         return INTEGER_OPERATORS;
       case 'string':
+      case 'text':
         return STRING_OPERATORS;
       case 'geography':
         return GEOGRAPHY_OPERATORS;

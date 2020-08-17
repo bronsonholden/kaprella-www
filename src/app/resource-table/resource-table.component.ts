@@ -63,6 +63,8 @@ export class ResourceTableComponent implements OnInit {
 
   @Input() tableConfig: ResourceTableConfig;
 
+  @Input() reflection: any;
+
   constructor(private mediaObserver: MediaObserver,
               private dialog: MatDialog) { }
 
@@ -102,11 +104,13 @@ export class ResourceTableComponent implements OnInit {
 
   openFilterCatalogDialog(): void {
     const dialogRef = this.dialog.open(FilterCatalogDialogComponent, {
-      maxWidth: 'calc(100vw - 16px)',
-      maxHeight: 'calc(100vh - 16px)',
-      height: 'calc(100% - 16px)',
-      width: 'calc(100% - 16px)',
-      data: {}
+      maxWidth: 'calc(100vw - 24px)',
+      maxHeight: 'calc(100vh - 24px)',
+      height: 'calc(100% - 24px)',
+      width: '600px',
+      data: {
+        reflection: this.reflection
+      }
     });
 
     dialogRef.afterClosed().subscribe((filter: string) => {
