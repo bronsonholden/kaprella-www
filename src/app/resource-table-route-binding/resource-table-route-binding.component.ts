@@ -13,7 +13,7 @@ import {
   ResourceTablePage
 } from '../resource-table/resource-table.component';
 
-import { HumanizedFilter } from '../resource-table/resource-table-filters/humanized-filter';
+import { HumanizedFilter } from '../resource-table/filters/humanized-filter';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceApiService } from '../resource-api.service';

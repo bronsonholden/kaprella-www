@@ -8,8 +8,8 @@ import {
 
 import { AttributeReflections } from '../../reflections/attribute-reflections';
 
-import { BaseFilter } from '../resource-table-filters/base-filter';
-import { NumericLogicalCriterion } from '../resource-table-filters/numeric-logical-criterion';
+import { BaseCriterion } from '../criteria/base-criterion';
+import { NumericLogicalCriterion } from '../criteria/numeric-logical-criterion';
 
 /* This component accepts reflection metadata from a Kaprella resource and
  * presents a simple interface for the user to select a column, operator, and
@@ -26,7 +26,7 @@ import { NumericLogicalCriterion } from '../resource-table-filters/numeric-logic
  * each of the various operators.
  */
 
-const INTEGER_OPERATORS: BaseFilter[] = [
+const INTEGER_OPERATORS: BaseCriterion[] = [
   new NumericLogicalCriterion('>', 'Greater than'),
   new NumericLogicalCriterion('>=', 'Greater than or equal to'),
   new NumericLogicalCriterion('<', 'Less than'),
@@ -41,14 +41,14 @@ const INTEGER_OPERATORS: BaseFilter[] = [
   // { value: 'exclrange', label: 'Exclusive range' }
 ];
 
-const STRING_OPERATORS: BaseFilter[] = [
+const STRING_OPERATORS: BaseCriterion[] = [
   // { value: 'contains', label: 'Contains' },
   // { value: 'nocontains', label: 'Does not contain' },
   // { value: '==', label: 'Exactly matches' },
   // { value: 'like', label: 'Partially matches' }
 ];
 
-const GEOGRAPHY_OPERATORS: BaseFilter[] = [
+const GEOGRAPHY_OPERATORS: BaseCriterion[] = [
   // { value: 'intersects', label: 'Intersects' },
   // { value: 'nointersects', label: 'Does not intersect' },
   // { value: 'within', label: 'Within' },
@@ -59,7 +59,7 @@ const GEOGRAPHY_OPERATORS: BaseFilter[] = [
   // { value: 'outradius', label: 'Not in radius' }
 ];
 
-const DATETIME_OPERATORS: BaseFilter[] = [
+const DATETIME_OPERATORS: BaseCriterion[] = [
   // { value: '==', label: 'Equal to' },
   // { value: '!=', label: 'Not equal to' },
   // { value: 'hod', label: 'Hour of day' },
@@ -74,11 +74,11 @@ const DATETIME_OPERATORS: BaseFilter[] = [
 ];
 
 @Component({
-  selector: 'app-resource-table-filter-catalog',
-  templateUrl: './resource-table-filter-catalog.component.html',
-  styleUrls: ['./resource-table-filter-catalog.component.scss']
+  selector: 'app-filter-catalog',
+  templateUrl: './filter-catalog.component.html',
+  styleUrls: ['./filter-catalog.component.scss']
 })
-export class ResourceTableFilterCatalogComponent implements OnInit {
+export class FilterCatalogComponent implements OnInit {
 
   @Input() reflection: AttributeReflections = {
     "attributes": {
@@ -198,7 +198,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
   attributes: any[] = [];
   relationships: any[] = [];
   dimension: string;
-  filter: BaseFilter;
+  filter: BaseCriterion;
   value: any[];
 
   constructor() { }
@@ -222,7 +222,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
     }
   }
 
-  getSelectedOperator(): BaseFilter {
+  getSelectedOperator(): BaseCriterion {
     const idx = this.operators.map(op => op.option).indexOf(this.filter);
     return this.operators[idx];
   }

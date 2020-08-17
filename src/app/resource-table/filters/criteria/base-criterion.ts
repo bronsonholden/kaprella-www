@@ -1,4 +1,4 @@
-export abstract class BaseFilter {
+export abstract class BaseCriterion {
   constructor() {
   }
 

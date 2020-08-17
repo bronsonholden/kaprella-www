@@ -1,0 +1,21 @@
+/* Styling to make the catalog more compact and cleaner on small devices */
+
+::ng-deep .filter-catalog .mat-expansion-panel-body {
+  padding: 0;
+}
+
+::ng-deep .filter-catalog .mat-horizontal-content-container {
+  padding: 0;
+}
+
+::ng-deep .filter-catalog .mat-selection-list {
+  padding: 0;
+}
+
+::ng-deep .filter-catalog .mat-list-text {
+  padding-left: 0 !important;
+}
+
+::ng-deep .filter-catalog .mat-expansion-panel-header {
+  padding-left: 16px;
+}

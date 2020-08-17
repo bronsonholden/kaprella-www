@@ -11,9 +11,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { HumanizedFilter } from './resource-table-filters/humanized-filter';
+import { HumanizedFilter } from './filters/humanized-filter';
 
-import { ResourceTableFilterCatalogComponent } from './resource-table-filter-catalog/resource-table-filter-catalog.component';
+import { FilterCatalogComponent } from './filters/filter-catalog/filter-catalog.component';
 
 /* Wrapper component for tables. Displays data with the given table
  * configuration and emits events upon user interaction with the display
@@ -95,7 +95,7 @@ export class ResourceTableComponent implements OnInit {
   }
 
   openFilterCatalogDialog(): void {
-    const dialogRef = this.dialog.open(ResourceTableFilterCatalogComponent, {
+    const dialogRef = this.dialog.open(FilterCatalogComponent, {
       maxWidth: 'calc(100vw - 16px)',
       maxHeight: 'calc(100vh - 16px)',
       height: 'calc(100% - 16px)',

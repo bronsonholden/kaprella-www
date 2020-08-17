@@ -43,7 +43,7 @@ import { CreateLicensorComponent } from './create/create-licensor/create-licenso
 import { FieldMapComponent } from './maps/field-map/field-map.component';
 import { LicensorFormComponent } from './forms/licensor-form/licensor-form.component';
 import { WktClipboardComponent } from './maps/util/wkt-clipboard/wkt-clipboard.component';
-import { ResourceTableFilterCatalogComponent } from './resource-table/resource-table-filter-catalog/resource-table-filter-catalog.component';
+import { FilterCatalogComponent } from './resource-table/filters/filter-catalog/filter-catalog.component';
 import { IntegerValueBuilderComponent } from './resource-table/value-builders/integer-value-builder/integer-value-builder.component';
 
 @NgModule({
@@ -76,7 +76,7 @@ import { IntegerValueBuilderComponent } from './resource-table/value-builders/in
     FieldMapComponent,
     LicensorFormComponent,
     WktClipboardComponent,
-    ResourceTableFilterCatalogComponent,
+    FilterCatalogComponent,
     IntegerValueBuilderComponent
   ],
   imports: [

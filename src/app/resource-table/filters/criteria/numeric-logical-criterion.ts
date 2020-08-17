@@ -1,6 +1,6 @@
-import { BaseFilter } from './base-filter';
+import { BaseCriterion } from './base-criterion';
 
-export class NumericLogicalCriterion extends BaseFilter {
+export class NumericLogicalCriterion extends BaseCriterion {
   constructor(public operator: string, private operatorTitle: string) {
     super();
   }
