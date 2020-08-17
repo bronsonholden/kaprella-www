@@ -233,7 +233,7 @@ export class FilterCatalogComponent implements OnInit {
       this.filter = filter;
       this.filterChange.emit(filter);
     } else {
-      console.log(null);
+      this.filterChange.emit(null);
     }
   }
 
