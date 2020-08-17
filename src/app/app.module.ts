@@ -45,6 +45,7 @@ import { LicensorFormComponent } from './forms/licensor-form/licensor-form.compo
 import { WktClipboardComponent } from './maps/util/wkt-clipboard/wkt-clipboard.component';
 import { FilterCatalogComponent } from './resource-table/filters/filter-catalog/filter-catalog.component';
 import { IntegerValueBuilderComponent } from './resource-table/value-builders/integer-value-builder/integer-value-builder.component';
+import { FilterCatalogDialogComponent } from './resource-table/filters/filter-catalog-dialog/filter-catalog-dialog.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { IntegerValueBuilderComponent } from './resource-table/value-builders/in
     LicensorFormComponent,
     WktClipboardComponent,
     FilterCatalogComponent,
-    IntegerValueBuilderComponent
+    IntegerValueBuilderComponent,
+    FilterCatalogDialogComponent
   ],
   imports: [
     BrowserModule,

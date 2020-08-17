@@ -9,11 +9,14 @@ import {
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { HumanizedFilter } from './filters/humanized-filter';
 
-import { FilterCatalogComponent } from './filters/filter-catalog/filter-catalog.component';
+import {
+  FilterCatalogDialogComponent,
+  FilterCatalogDialogData
+} from './filters/filter-catalog-dialog/filter-catalog-dialog.component';
 
 /* Wrapper component for tables. Displays data with the given table
  * configuration and emits events upon user interaction with the display
@@ -40,6 +43,9 @@ export class ResourceTableComponent implements OnInit {
 
   /* Emits events when a filter is removed by clicking the delete button. */
   @Output() filterRemoved = new EventEmitter<HumanizedFilter>();
+
+  /* Emits a filter when a new one is created via the filter catalog */
+  @Output() filterApply = new EventEmitter<string>();
 
   /* Internal property that affects how the datatable displays sort icons
    * next to column headers.
@@ -95,7 +101,7 @@ export class ResourceTableComponent implements OnInit {
   }
 
   openFilterCatalogDialog(): void {
-    const dialogRef = this.dialog.open(FilterCatalogComponent, {
+    const dialogRef = this.dialog.open(FilterCatalogDialogComponent, {
       maxWidth: 'calc(100vw - 16px)',
       maxHeight: 'calc(100vh - 16px)',
       height: 'calc(100% - 16px)',
@@ -104,7 +110,7 @@ export class ResourceTableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((filter: string) => {
-      console.log(filter);
+      this.filterApply.emit(filter);
     });
   }
 

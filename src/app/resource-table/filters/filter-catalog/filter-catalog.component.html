@@ -7,34 +7,38 @@
           <mat-expansion-panel-header expandedHeight="48px">
             <mat-panel-title style="font-size: 1.2rem;">Data</mat-panel-title>
           </mat-expansion-panel-header>
-          <mat-selection-list multiple="false" (selectionChange)="onDimensionChange($event)">
-            <mat-list-option
-                #option
-                *ngFor="let attribute of attributes"
-                [value]="attribute.key"
-                (click)="catalogStepper.next()"
-                checkboxPosition="before">
-              <mat-icon
-                  style="opacity: 0.8"
+          <ng-template matExpansionPanelContent>
+            <mat-selection-list multiple="false" (selectionChange)="onDimensionChange($event)">
+              <mat-list-option
+                  #option
+                  *ngFor="let attribute of attributes"
+                  [value]="attribute.key"
+                  (click)="catalogStepper.next()"
+                  checkboxPosition="before">
+                <mat-icon
+                    style="opacity: 0.8"
+                    mat-list-icon
+                    color="accent">
+                  <span *ngIf="attribute.foreignKey">vpn_key</span>
+                </mat-icon>
+                <mat-icon
+                  style="opacity: 0.5"
                   mat-list-icon
-                  color="accent">
-                <span *ngIf="attribute.foreignKey">vpn_key</span>
-              </mat-icon>
-              <mat-icon
-                style="opacity: 0.5"
-                mat-list-icon
-                [svgIcon]="attributeIconName(attribute)">
-              </mat-icon>
-              {{ attribute.label }}
-            </mat-list-option>
-          </mat-selection-list>
+                  [svgIcon]="attributeIconName(attribute)">
+                </mat-icon>
+                {{ attribute.label }}
+              </mat-list-option>
+            </mat-selection-list>
+          </ng-template>
         </mat-expansion-panel>
-        <mat-expansion-panel class="mat-elevation-z0" *ngFor="let relationship of relationships">
+        <mat-expansion-panel [expanded]="false" class="mat-elevation-z0" *ngFor="let relationship of relationships">
           <mat-expansion-panel-header expandedHeight="48px">
             <mat-panel-title style="font-size: 1.2rem;">{{ relationship.label }}</mat-panel-title>
           </mat-expansion-panel-header>
-          <mat-selection-list>
-          </mat-selection-list>
+          <ng-template matExpansionPanelContent>
+            <mat-selection-list>
+            </mat-selection-list>
+          </ng-template>
         </mat-expansion-panel>
       </mat-accordion>
     </mat-step>
@@ -55,6 +59,8 @@
       <div *ngIf="builderType === 'integer'">
         <app-integer-value-builder [value]="value" (valueChange)="onValueChange($event)"></app-integer-value-builder>
       </div>
+      <br>
+      <button mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

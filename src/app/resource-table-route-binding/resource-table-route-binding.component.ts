@@ -130,6 +130,18 @@ export class ResourceTableRouteBindingComponent implements OnInit {
     });
   }
 
+  onFilterApply(filter: string | null) {
+    if (typeof filter === 'string') {
+      this.router.navigate([], {
+        relativeTo: this.activatedRoute,
+        queryParams: {
+          filter: this.filters + [filter]
+        },
+        queryParamsHandling: 'merge',
+      });
+    }
+  }
+
   reloadData(): void {
     if (!this.apiService) {
       return;

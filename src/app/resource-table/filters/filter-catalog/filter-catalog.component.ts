@@ -196,6 +196,7 @@ export class FilterCatalogComponent implements OnInit {
   }
 
   @Output() filterChange = new EventEmitter<any>();
+  @Output() filterApply = new EventEmitter<string>();
 
   attributes: any[] = [];
   relationships: any[] = [];
@@ -274,6 +275,10 @@ export class FilterCatalogComponent implements OnInit {
   onValueChange(value: any[]): void {
     this.value = value;
     this.emitIfComplete();
+  }
+
+  onClickApply(): void {
+    this.filterApply.emit(this.value);
   }
 
   loadReflection(reflection: any): void {

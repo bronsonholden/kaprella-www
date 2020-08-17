@@ -5,6 +5,7 @@
     [page]="page"
     [humanizedFilters]="humanizedFilters"
     (filterRemoved)="onFilterRemoved($event)"
+    (filterApply)="onFilterApply($event)"
     (pageChange)="onPageChange($event)"
     [loading]="loading"></app-resource-table>
 </div>
