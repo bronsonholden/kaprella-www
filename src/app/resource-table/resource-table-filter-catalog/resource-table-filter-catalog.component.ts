@@ -9,7 +9,7 @@ import {
 import { AttributeReflections } from '../../reflections/attribute-reflections';
 
 import { BaseFilter } from '../resource-table-filters/base-filter';
-import { NumericGreaterThanFilter } from '../resource-table-filters/numeric-greater-than-filter';
+import { NumericLogicalCriterion } from '../resource-table-filters/numeric-logical-criterion';
 
 /* This component accepts reflection metadata from a Kaprella resource and
  * presents a simple interface for the user to select a column, operator, and
@@ -27,12 +27,12 @@ import { NumericGreaterThanFilter } from '../resource-table-filters/numeric-grea
  */
 
 const INTEGER_OPERATORS: BaseFilter[] = [
-  new NumericGreaterThanFilter(),
-  // { value: '>=', label: 'Greater than or equal to' },
-  // { value: '<', label: 'Less than' },
-  // { value: '<=', label: 'Less than or equal to' },
-  // { value: '==', label: 'Equal to' },
-  // { value: '!=', label: 'Not equal to' },
+  new NumericLogicalCriterion('>', 'Greater than'),
+  new NumericLogicalCriterion('>=', 'Greater than or equal to'),
+  new NumericLogicalCriterion('<', 'Less than'),
+  new NumericLogicalCriterion('<=', 'Less than or equal to'),
+  new NumericLogicalCriterion('==', 'Equal to'),
+  new NumericLogicalCriterion('!=', 'Not equal to')
   // { value: 'iseven', label: 'Is even' },
   // { value: 'isodd', label: 'Is odd' },
   // inclrange values: range min, range max
@@ -218,6 +218,7 @@ export class ResourceTableFilterCatalogComponent implements OnInit {
     if (!!this.filter && !!this.dimension && !!this.value) {
       const filter = this.getSelectedOperator().generate(this.dimension, this.value);
       this.filterChange.emit(filter);
+      console.log(filter);
     }
   }
 
