@@ -1,1 +1,31 @@
-<p>show-plant-variety works!</p>
+<div *ngIf="!!plantVariety; else loadingIndicator">
+  <div class="resource-page">
+    <div fxLayout="column" fxLayoutGap="24px">
+      <div class="button-row" fxLayout="row">
+        <button mat-stroked-button routerLink="..">All Plant Varieties</button>
+      </div>
+      <div fxLayout="column">
+        <div fxFlex class="plant-variety-genus">
+          {{ plantVariety.attributes.genus }}
+        </div>
+        <div fxFlex>
+          <h1>{{ plantVariety.attributes.denomination }}</h1>
+        </div>
+      </div>
+      <div>
+        <div fxLayout="column">
+          <div>Protections: <span>0</span></div>
+          <div>Licensed Growers: <span>0</span></div>
+          <div>Est. Total Plants: <span>0</span></div>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loadingIndicator>
+  <div style="width: 100%;">
+    <mat-spinner color="accent" style="margin: 96px auto"></mat-spinner>
+  </div>
+</ng-template>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PlantVarietyApiService } from '../../plant-variety-api.service';
+import { PlantVariety } from '../../models/plant-variety';
 
 @Component({
   selector: 'app-show-plant-variety',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowPlantVarietyComponent implements OnInit {
 
-  constructor() { }
+  plantVariety: PlantVariety;
 
-  ngOnInit(): void {
-  }
+    constructor(private plantVarietyApi: PlantVarietyApiService,
+                private activatedRoute: ActivatedRoute) { }
+
+    ngOnInit(): void {
+      this.activatedRoute.params.subscribe((params: any) => {
+        this.plantVarietyApi.get(params.id).subscribe((res: any) => {
+          this.plantVariety = res.data;
+        });
+      });
+    }
 
 }

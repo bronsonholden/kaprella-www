@@ -1,1 +1,10 @@
-<p>create-plant-variety works!</p>
+<div class="resource-page">
+  <div fxLayout="column" fxLayoutGap="24px">
+    <div class="button-row" fxLayout="row">
+      <button mat-raised-button color="primary" (click)="createPlantVariety()">Create</button>
+      <div class="h-fill"></div>
+      <button mat-button color="warn" (click)="goBack()">Cancel</button>
+    </div>
+    <app-plant-variety-form [(plantVariety)]="plantVariety"></app-plant-variety-form>
+  </div>
+</div>

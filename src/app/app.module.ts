@@ -46,6 +46,7 @@ import { WktClipboardComponent } from './maps/util/wkt-clipboard/wkt-clipboard.c
 import { FilterCatalogComponent } from './resource-table/filters/filter-catalog/filter-catalog.component';
 import { IntegerValueBuilderComponent } from './resource-table/value-builders/integer-value-builder/integer-value-builder.component';
 import { FilterCatalogDialogComponent } from './resource-table/filters/filter-catalog-dialog/filter-catalog-dialog.component';
+import { PlantVarietyFormComponent } from './forms/plant-variety-form/plant-variety-form.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { FilterCatalogDialogComponent } from './resource-table/filters/filter-ca
     WktClipboardComponent,
     FilterCatalogComponent,
     IntegerValueBuilderComponent,
-    FilterCatalogDialogComponent
+    FilterCatalogDialogComponent,
+    PlantVarietyFormComponent
   ],
   imports: [
     BrowserModule,

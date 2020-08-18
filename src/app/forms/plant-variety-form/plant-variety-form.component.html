@@ -1,0 +1,23 @@
+<form style="width: 100%;" [formGroup]="plantVarietyFormGroup">
+  <div formGroupName="attributes" fxLayout="column" fxLayoutGap="24px">
+    <div>
+      <mat-form-field appearance="standard">
+        <mat-label>Genus</mat-label>
+        <mat-select formControlName="genus">
+          <mat-option value="Vitis">Vitis</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="standard">
+        <mat-label>Denomination</mat-label>
+        <input
+          matInput
+          placeholder="Denomination"
+          name="denomination"
+          formControlName="denomination">
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+{{ plantVariety | json }}
