@@ -31,7 +31,11 @@
     <div class="resource-banner-container" fxLayout="column" fxLayoutGap="12px">
       <a routerLink="farmers">
         <div class="resource-banner">
-          <img class="resource-banner-image" src="./assets/farmers-banner.webp" alt="Farmers">
+          <app-image
+            class="resource-banner-image"
+            srcFallback="./assets/farmers-banner.png"
+            alt="Farmers"
+            [sources]="farmersBannerSources"></app-image>
           <div class="resource-banner-title">
             Farmers
           </div>
@@ -39,7 +43,11 @@
       </a>
       <a routerLink="licensors">
         <div class="resource-banner">
-          <img class="resource-banner-image" src="./assets/licensors-banner.webp" alt="Licensors">
+          <app-image
+            class="resource-banner-image"
+            srcFallback="./assets/licensors-banner.png"
+            alt="Licensors"
+            [sources]="licensorsBannerSources"></app-image>
           <div class="resource-banner-title">
             Licensors
           </div>
@@ -47,7 +55,11 @@
       </a>
       <a routerLink="fields">
         <div class="resource-banner">
-          <img class="resource-banner-image" src="./assets/fields-banner.webp" alt="Fields">
+          <app-image
+            class="resource-banner-image"
+            srcFallback="./assets/fields-banner.png"
+            alt="Fields"
+            [sources]="fieldsBannerSources"></app-image>
           <div class="resource-banner-title">
             Fields
           </div>
@@ -55,7 +67,11 @@
       </a>
       <a routerLink="plantVarieties">
         <div class="resource-banner">
-          <img class="resource-banner-image" src="./assets/plant-varieties-banner.webp" alt="Plant varieties">
+          <app-image
+            class="resource-banner-image"
+            srcFallback="./assets/plant-varieties-banner.png"
+            alt="Plant Varieties"
+            [sources]="plantVarietiesBannerSources"></app-image>
           <div class="resource-banner-title">
             Plant Varieties
           </div>

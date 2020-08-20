@@ -7,7 +7,7 @@
   height: 100%;
 }
 
-.site-logo {
+::ng-deep .site-logo {
   padding: 7px 0;
   height: calc(100% - 14px);
 }

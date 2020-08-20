@@ -70,7 +70,10 @@
           </button>
           <div class="brand-logo text-no-select">
             <a routerLink="/" (click)="sideNav.close()">
-              <img class="site-logo" src="assets/logo.webp" alt="Kaprella">
+              <app-image
+                alt="Kaprella"
+                class="site-logo"
+                srcFallback="./assets/logo.png" [sources]="[{ src: './assets/logo.webp', type: 'image/webp' }]"></app-image>
             </a>
           </div>
           <div class="h-fill"></div>

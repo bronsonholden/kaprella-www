@@ -1,0 +1,4 @@
+<picture>
+  <source *ngFor="let source of sources" [srcset]="source.src" [type]="source.type">
+  <img [class]="classes" [src]="srcFallback" [alt]="alt">
+</picture>

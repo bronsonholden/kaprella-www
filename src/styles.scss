@@ -431,3 +431,7 @@ a {
 .mat-form-field {
   letter-spacing: normal;
 }
+
+/* Background support for browers that cannot display WebP images */
+.no-webp .site-banner { background-image: url('./assets/site-banner.png'); }
+.webp .site-banner { background-image: url('./assets/site-banner.webp'); }

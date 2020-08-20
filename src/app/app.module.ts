@@ -47,6 +47,7 @@ import { FilterCatalogComponent } from './resource-table/filters/filter-catalog/
 import { IntegerValueBuilderComponent } from './resource-table/value-builders/integer-value-builder/integer-value-builder.component';
 import { FilterCatalogDialogComponent } from './resource-table/filters/filter-catalog-dialog/filter-catalog-dialog.component';
 import { PlantVarietyFormComponent } from './forms/plant-variety-form/plant-variety-form.component';
+import { ImageComponent } from './image/image.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { PlantVarietyFormComponent } from './forms/plant-variety-form/plant-vari
     FilterCatalogComponent,
     IntegerValueBuilderComponent,
     FilterCatalogDialogComponent,
-    PlantVarietyFormComponent
+    PlantVarietyFormComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
