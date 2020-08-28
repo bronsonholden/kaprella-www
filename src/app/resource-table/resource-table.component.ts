@@ -9,7 +9,6 @@ import {
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
 
 import { HumanizedFilter } from './filters/humanized-filter';
 
@@ -65,8 +64,7 @@ export class ResourceTableComponent implements OnInit {
 
   @Input() reflection: any;
 
-  constructor(private mediaObserver: MediaObserver,
-              private dialog: MatDialog) { }
+  constructor(private mediaObserver: MediaObserver) { }
 
   isAllSelected() {
     for (let row of this.rows) {
@@ -100,22 +98,6 @@ export class ResourceTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  openFilterCatalogDialog(): void {
-    const dialogRef = this.dialog.open(FilterCatalogDialogComponent, {
-      maxWidth: 'calc(100vw - 24px)',
-      maxHeight: 'calc(100vh - 24px)',
-      height: 'calc(100% - 24px)',
-      width: '600px',
-      data: {
-        reflection: this.reflection
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((filter: string) => {
-      this.filterApply.emit(filter);
-    });
   }
 
   /* Called when a column sort is modified (header is clicked) */
