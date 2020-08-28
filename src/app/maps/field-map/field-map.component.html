@@ -1,4 +1,12 @@
 <div class="resource-page">
+  <app-resource-table-filter-list
+    [filters]="humanizedFilters"
+    (filterRemoved)="onFilterRemoved($event)">
+  </app-resource-table-filter-list>
+  <app-resource-table-filter-catalog
+    [reflection]="reflection"
+    (filterCreated)="onFilterCreated($event)">
+  </app-resource-table-filter-catalog>
   <mat-tab-group [animationDuration]="0">
     <mat-tab label="Map">
       <google-map

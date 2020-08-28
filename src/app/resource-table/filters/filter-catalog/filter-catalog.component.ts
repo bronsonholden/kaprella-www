@@ -229,7 +229,7 @@ export class FilterCatalogComponent implements OnInit {
     }
 
     if (this.isValueValid()) {
-      const filter = this.getSelectedOperator().generate(this.dimension, this.value);
+      const filter = this.getSelectedOperator().generate(this.columnNameByKey(this.dimension), this.value);
       this.filter = filter;
       this.filterChange.emit(filter);
     } else {
@@ -256,6 +256,7 @@ export class FilterCatalogComponent implements OnInit {
 
   onDimensionChange(selection): void {
     this.dimension = selection.option.value;
+    console.log(selection);
     this.emitIfComplete();
   }
 
@@ -269,6 +270,10 @@ export class FilterCatalogComponent implements OnInit {
 
   typeByKey(key) {
     return this.reflection.attributes[key].sqlTypeMetadata.type;
+  }
+
+  columnNameByKey(key) {
+    return this.reflection.attributes[key].name
   }
 
   onOperatorChange(selection): void {

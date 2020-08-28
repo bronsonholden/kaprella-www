@@ -1,0 +1,8 @@
+<div class="filter-chips">
+<mat-chip-list aria-label="Filters" *ngIf="filters?.length > 0">
+  <mat-chip *ngFor="let filter of filters; index as idx;">
+    {{ filter.humanized }}
+    <mat-icon matChipRemove (click)="filterRemoved.emit(filter)">cancel</mat-icon>
+  </mat-chip>
+</mat-chip-list>
+</div>

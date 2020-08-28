@@ -117,10 +117,6 @@ export class ResourceTableComponent implements OnInit {
     this.pageChange.emit(new ResourceTablePage(event.pageIndex, event.pageSize, event.length));
   }
 
-  removeFilter(filter: HumanizedFilter) {
-    this.filterRemoved.emit(filter);
-  }
-
 }
 
 export enum ResourceTableFilterType {
