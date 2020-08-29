@@ -34,10 +34,15 @@ export class ResourceTableNoBindingComponent implements OnInit {
   /* The table configuration to use when displaying the resources */
   @Input() tableConfig: ResourceTableConfig = new ResourceTableConfig();
 
+  humanizedFilters: HumanizedFilter[];
   @Input() filters: string[] = [];
+
+  reflection: AttributeReflections;
 
   /* Resource rows to display in the table */
   rows: any[] = [];
+
+  @Input() scope: any;
 
   /* Whether to show a loading graphic. Initially displayed while the first
    * set of rows is loaded, but page changes do not display the graphic.
