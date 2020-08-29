@@ -19,6 +19,7 @@ import { FieldApiService } from '../../field-api.service';
 import { interval } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Field } from '../../models/field';
+import { HumanizedFilter } from '../../resource-table/filters/humanized-filter';
 
 @Component({
   selector: 'app-field-map',
