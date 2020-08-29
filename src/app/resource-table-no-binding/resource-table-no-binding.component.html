@@ -1,0 +1,12 @@
+<div class="theme-container">
+  <app-resource-table
+    [tableConfig]="tableConfig"
+    [rows]="rows"
+    [page]="page"
+    [humanizedFilters]="humanizedFilters"
+    [reflection]="reflection"
+    (filterRemoved)="onFilterRemoved($event)"
+    (filterApply)="onFilterApply($event)"
+    (pageChange)="onPageChange($event)"
+    [loading]="loading"></app-resource-table>
+</div>

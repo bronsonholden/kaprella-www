@@ -50,6 +50,7 @@ import { PlantVarietyFormComponent } from './forms/plant-variety-form/plant-vari
 import { ImageComponent } from './image/image.component';
 import { ResourceTableFilterCatalogComponent } from './resource-table/resource-table-filter-catalog/resource-table-filter-catalog.component';
 import { ResourceTableFilterListComponent } from './resource-table/resource-table-filter-list/resource-table-filter-list.component';
+import { ResourceTableNoBindingComponent } from './resource-table-no-binding/resource-table-no-binding.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { ResourceTableFilterListComponent } from './resource-table/resource-tabl
     PlantVarietyFormComponent,
     ImageComponent,
     ResourceTableFilterCatalogComponent,
-    ResourceTableFilterListComponent
+    ResourceTableFilterListComponent,
+    ResourceTableNoBindingComponent
   ],
   imports: [
     BrowserModule,
