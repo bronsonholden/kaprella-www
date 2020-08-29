@@ -409,6 +409,7 @@ a {
 
 .content {
   margin: 0 auto;
+  margin-block-end: 48px;
   padding: 0 48px;
   max-width: 680px;
 }
@@ -423,8 +424,7 @@ a {
   }
 }
 
-.button-row button:not(:last-child) {
-  display: table-cell;
+.button-row > :not(:last-child) {
   margin-right: 12px;
 }
 

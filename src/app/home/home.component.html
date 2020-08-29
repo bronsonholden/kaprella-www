@@ -1,82 +1,43 @@
-<div class="site-banner">
-  <div class="site-banner-description">
-    <p>
-      A unified Ag platform for data sharing and licensor/producer relations.
-    </p>
-    <!-- Until user & auth implementation
-    <p *ngIf="false">
-      <button mat-stroked-button style="border-color: white;">Get started &rarr;</button>
-    </p>
-     -->
-  </div>
-</div>
-<div class="content">
-  <div fxLayout="column" fxLayoutGap="24px">
-    <div class="mission-statement">
-      Kaprella's mission is to be the go-to platform for collaboration and
-      improving business relationships between licensors and producers.
-    </div>
-    <div class="abstract-statement">
+<div fxLayout="column">
+  <div class="site-banner">
+    <div class="site-banner-description">
       <p>
-        Technology has had a profound impact on agriculture throughout human
-        history. Irrigation techniques, motorized farm equipment, plant
-        genetics, and GPS are examples of advancements that have allowed
-        farmers to cultivate and manage increasingly larger amounts of land,
-        and provide fresh produce for billions around the globe. Kaprella
-        aims to be the collaborative platform for licensors, marketers, and
-        producers in a complex global industry that serves billions around
-        the globe.
+        A unified Ag platform for data sharing and licensor/producer relations.
       </p>
+      <!-- Until user & auth implementation
+      <p *ngIf="false">
+        <button mat-stroked-button style="border-color: white;">Get started &rarr;</button>
+      </p>
+       -->
     </div>
-    <div class="resource-banner-container" fxLayout="column" fxLayoutGap="12px">
-      <a routerLink="farmers">
-        <div class="resource-banner">
-          <app-image
-            class="resource-banner-image"
-            srcFallback="./assets/farmers-banner.png"
-            alt="Farmers"
-            [sources]="farmersBannerSources"></app-image>
-          <div class="resource-banner-title">
-            Farmers
-          </div>
-        </div>
-      </a>
-      <a routerLink="licensors">
-        <div class="resource-banner">
-          <app-image
-            class="resource-banner-image"
-            srcFallback="./assets/licensors-banner.png"
-            alt="Licensors"
-            [sources]="licensorsBannerSources"></app-image>
-          <div class="resource-banner-title">
-            Licensors
-          </div>
-        </div>
-      </a>
-      <a routerLink="fields">
-        <div class="resource-banner">
-          <app-image
-            class="resource-banner-image"
-            srcFallback="./assets/fields-banner.png"
-            alt="Fields"
-            [sources]="fieldsBannerSources"></app-image>
-          <div class="resource-banner-title">
-            Fields
-          </div>
-        </div>
-      </a>
-      <a routerLink="plantVarieties">
-        <div class="resource-banner">
-          <app-image
-            class="resource-banner-image"
-            srcFallback="./assets/plant-varieties-banner.png"
-            alt="Plant Varieties"
-            [sources]="plantVarietiesBannerSources"></app-image>
-          <div class="resource-banner-title">
-            Plant Varieties
-          </div>
-        </div>
-      </a>
+  </div>
+  <div class="content">
+    <div fxLayout="column" fxLayoutGap="24px">
+      <div class="mission-statement">
+        Kaprella's mission is to be the go-to platform for collaboration and
+        improving business relationships between licensors and producers.
+      </div>
+      <div class="abstract-statement">
+        <p>
+          Technology has had a profound impact on agriculture throughout human
+          history. Irrigation techniques, motorized farm equipment, plant
+          genetics, and GPS are examples of advancements that have allowed
+          farmers to cultivate and manage increasingly larger amounts of land,
+          and provide fresh produce for billions around the globe. Kaprella
+          aims to be the collaborative platform for licensors, marketers, and
+          producers in a complex global industry that serves billions around
+          the globe.
+        </p>
+      </div>
+      <div>
+        <h2>Get started by viewing one of the resources below:</h2>
+      </div>
+      <div class="button-row">
+        <a mat-stroked-button routerLink="farmers">Farmers</a>
+        <a mat-stroked-button routerLink="licensors">Licensors</a>
+        <a mat-stroked-button routerLink="fields">Fields</a>
+        <a mat-stroked-button routerLink="plantVarieties">Plant Varieties</a>
+      </div>
     </div>
   </div>
 </div>
