@@ -76,7 +76,7 @@ export class ResourceTableNoBindingComponent implements OnInit {
       return;
     }
 
-    let query = {};
+    const query = {};
 
     if (!!this.filters) {
       query['filter'] = this.filters;
