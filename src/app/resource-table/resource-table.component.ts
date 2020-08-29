@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { HumanizedFilter } from './filters/humanized-filter';
+import { AttributeReflections } from './reflections/attribute-reflections';
 
 import {
   FilterCatalogDialogComponent,
@@ -62,7 +63,7 @@ export class ResourceTableComponent implements OnInit {
 
   @Input() tableConfig: ResourceTableConfig;
 
-  @Input() reflection: any;
+  @Input() reflection: AttributeReflections;
 
   constructor(private mediaObserver: MediaObserver) { }
 

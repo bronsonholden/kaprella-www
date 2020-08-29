@@ -14,6 +14,7 @@ import {
 } from '../resource-table/resource-table.component';
 
 import { HumanizedFilter } from '../resource-table/filters/humanized-filter';
+import { AttributeReflections } from '../resource-table/reflections/attribute-reflections';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceApiService } from '../resource-api.service';
@@ -33,7 +34,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
   filters: string[] = [];
   humanizedFilters: HumanizedFilter[];
-  reflection: any;
+  reflection: AttributeReflections;
 
   /* Whether interacting with the table updates the activated route's
    * query parameters.

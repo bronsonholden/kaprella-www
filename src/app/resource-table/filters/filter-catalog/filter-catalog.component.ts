@@ -83,119 +83,6 @@ const DATETIME_OPERATORS: BaseCriterion[] = [
 export class FilterCatalogComponent implements OnInit {
 
   @Input() reflection: AttributeReflections;
-  __reflection = {
-    "attributes": {
-      "id": {
-        "sqlTypeMetadata": {
-          "sqlType": "bigint",
-          "type": "integer",
-          "limit": 8,
-          "precision": null,
-          "scale": null
-        },
-        "defaultValue": null,
-        "allowNull": false,
-        "comment": null,
-        "name": "id",
-        "prettyName": "ID"
-      },
-      "name": {
-        "sqlTypeMetadata": {
-          "sqlType": "character varying",
-          "type": "string",
-          "limit": null,
-          "precision": null,
-          "scale": null
-        },
-        "defaultValue": null,
-        "allowNull": false,
-        "comment": null,
-        "name": "name",
-        "prettyName": "Name"
-      },
-      "boundary": {
-        "sqlTypeMetadata": {
-          "sqlType": "geography(MultiPolygon,4326)",
-          "type": "geography",
-          "limit": null,
-          "precision": null,
-          "scale": null
-        },
-        "defaultValue": null,
-        "allowNull": true,
-        "comment": null,
-        "name": "boundary",
-        "prettyName": "Boundary"
-      },
-      "srid": {
-        "sqlTypeMetadata": {
-          "sqlType": "integer",
-          "type": "integer",
-          "limit": 4,
-          "precision": null,
-          "scale": null
-        },
-        "defaultValue": null,
-        "allowNull": true,
-        "comment": null,
-        "name": "srid",
-        "prettyName": "SRID"
-      },
-      "farmerId": {
-        "sqlTypeMetadata": {
-          "sqlType": "bigint",
-          "type": "integer",
-          "limit": 8,
-          "precision": null,
-          "scale": null
-        },
-        "defaultValue": null,
-        "allowNull": false,
-        "comment": null,
-        "name": "farmer_id",
-        "prettyName": "Farmer ID"
-      },
-      "createdAt": {
-        "sqlTypeMetadata": {
-          "sqlType": "timestamp(6) without time zone",
-          "type": "datetime",
-          "limit": null,
-          "precision": 6,
-          "scale": null
-        },
-        "defaultValue": null,
-        "allowNull": false,
-        "comment": null,
-        "name": "created_at",
-        "prettyName": "Created at"
-      },
-      "updatedAt": {
-        "sqlTypeMetadata": {
-          "sqlType": "timestamp(6) without time zone",
-          "type": "datetime",
-          "limit": null,
-          "precision": 6,
-          "scale": null
-        },
-        "defaultValue": null,
-        "allowNull": false,
-        "comment": null,
-        "name": "updated_at",
-        "prettyName": "Updated at"
-      }
-    },
-    "relationships": {
-      "farmer": {
-        "relationshipType": "belongsTo",
-        "resource": "Farmer",
-        "foreignKey": "farmer_id",
-        "options": {},
-        "name": "farmer",
-        "prettyName": "Farmer"
-      }
-    }
-  }
-
   @Output() filterChange = new EventEmitter<any>();
   @Output() filterApply = new EventEmitter<string>();
 
@@ -290,7 +177,7 @@ export class FilterCatalogComponent implements OnInit {
     this.filterApply.emit(this.filter);
   }
 
-  loadReflection(reflection: any): void {
+  loadReflection(reflection: AttributeReflections): void {
     let attributes: any[] = [];
     let relationships: any[] = [];
 

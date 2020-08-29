@@ -12,6 +12,8 @@ import {
   FilterCatalogDialogData
 } from '../filters/filter-catalog-dialog/filter-catalog-dialog.component';
 
+import { AttributeReflections } from '../reflections/attribute-reflections';
+
 @Component({
   selector: 'app-resource-table-filter-catalog',
   templateUrl: './resource-table-filter-catalog.component.html',
@@ -19,7 +21,7 @@ import {
 })
 export class ResourceTableFilterCatalogComponent implements OnInit {
 
-  @Input() reflection: any;
+  @Input() reflection: AttributeReflections;
   @Output() filterCreated = new EventEmitter<any>();
 
   constructor(private dialog: MatDialog) { }

@@ -20,6 +20,7 @@ import { interval } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Field } from '../../models/field';
 import { HumanizedFilter } from '../../resource-table/filters/humanized-filter';
+import { AttributeReflections } from '../../resource-table/reflections/attribute-reflections';
 
 @Component({
   selector: 'app-field-map',
@@ -28,7 +29,7 @@ import { HumanizedFilter } from '../../resource-table/filters/humanized-filter';
 })
 export class FieldMapComponent implements OnInit {
 
-  reflection: any;
+  reflection: AttributeReflections;
 
   @ViewChild('googleMap', { static: true }) googleMap: GoogleMap;
 
