@@ -12,6 +12,8 @@ import { AttributeReflections } from '../../reflections/attribute-reflections';
 
 import { BaseCriterion } from '../criteria/base-criterion';
 import { NumericLogicalCriterion } from '../criteria/numeric-logical-criterion';
+import { NumericIsEvenCriterion } from '../criteria/numeric-is-even-criterion';
+import { NumericIsOddCriterion } from '../criteria/numeric-is-odd-criterion';
 import { StringEqualsCriterion } from '../criteria/string-equals-criterion';
 import { StringNotEqualsCriterion } from '../criteria/string-not-equals-criterion';
 import { StringLikeCriterion } from '../criteria/string-like-criterion';
@@ -38,7 +40,9 @@ const INTEGER_OPERATORS: BaseCriterion[] = [
   new NumericLogicalCriterion('<', 'Less than'),
   new NumericLogicalCriterion('<=', 'Less than or equal to'),
   new NumericLogicalCriterion('==', 'Equal to'),
-  new NumericLogicalCriterion('!=', 'Not equal to')
+  new NumericLogicalCriterion('!=', 'Not equal to'),
+  new NumericIsEvenCriterion('is_even', 'Is even'),
+  new NumericIsOddCriterion('is_odd', 'Is odd')
   // { value: 'iseven', label: 'Is even' },
   // { value: 'isodd', label: 'Is odd' },
   // inclrange values: range min, range max

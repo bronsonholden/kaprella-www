@@ -1,4 +1,6 @@
-<mat-form-field>
-  <mat-label>Value</mat-label>
-  <input matInput type="text" [ngModel]="value" (ngModelChange)="onValueChange($event)">
-</mat-form-field>
+<form [formGroup]="valueFormGroup">
+  <mat-form-field>
+    <mat-label>Value</mat-label>
+    <input matInput type="text" formControlName="value" name="value">
+  </mat-form-field>
+</form>

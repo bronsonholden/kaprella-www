@@ -57,13 +57,14 @@
     <mat-step>
       <ng-template matStepLabel>Value</ng-template>
       <div *ngIf="builderType === 'integer'">
-        <app-integer-value-builder [value]="value" (valueChange)="onValueChange($event)"></app-integer-value-builder>
+        <app-integer-value-builder #builder [value]="value" (valueChange)="onValueChange($event)"></app-integer-value-builder>
+        <button [disabled]="!builder.valid" mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
       </div>
       <div *ngIf="builderType === 'string' || builderType === 'text'">
-        <app-string-value-builder [value]="value" (valueChange)="onValueChange($event)"></app-string-value-builder>
+        <app-string-value-builder #builder [value]="value" (valueChange)="onValueChange($event)"></app-string-value-builder>
+        <button [disabled]="!builder.valid" mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
       </div>
       <br>
-      <button mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
