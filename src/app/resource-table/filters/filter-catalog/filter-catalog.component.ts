@@ -150,7 +150,6 @@ export class FilterCatalogComponent implements OnInit {
 
   onDimensionChange(selection): void {
     this.dimension = selection.option.value;
-    console.log(selection);
     this.emitIfComplete();
   }
 
