@@ -51,6 +51,7 @@ import { ImageComponent } from './image/image.component';
 import { ResourceTableFilterCatalogComponent } from './resource-table/resource-table-filter-catalog/resource-table-filter-catalog.component';
 import { ResourceTableFilterListComponent } from './resource-table/resource-table-filter-list/resource-table-filter-list.component';
 import { ResourceTableNoBindingComponent } from './resource-table-no-binding/resource-table-no-binding.component';
+import { StringValueBuilderComponent } from './resource-table/value-builders/string-value-builder/string-value-builder.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { ResourceTableNoBindingComponent } from './resource-table-no-binding/res
     ImageComponent,
     ResourceTableFilterCatalogComponent,
     ResourceTableFilterListComponent,
-    ResourceTableNoBindingComponent
+    ResourceTableNoBindingComponent,
+    StringValueBuilderComponent
   ],
   imports: [
     BrowserModule,

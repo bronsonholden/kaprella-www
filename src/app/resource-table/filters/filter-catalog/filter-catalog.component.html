@@ -59,6 +59,9 @@
       <div *ngIf="builderType === 'integer'">
         <app-integer-value-builder [value]="value" (valueChange)="onValueChange($event)"></app-integer-value-builder>
       </div>
+      <div *ngIf="builderType === 'string' || builderType === 'text'">
+        <app-string-value-builder [value]="value" (valueChange)="onValueChange($event)"></app-string-value-builder>
+      </div>
       <br>
       <button mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
     </mat-step>

@@ -12,6 +12,10 @@ import { AttributeReflections } from '../../reflections/attribute-reflections';
 
 import { BaseCriterion } from '../criteria/base-criterion';
 import { NumericLogicalCriterion } from '../criteria/numeric-logical-criterion';
+import { StringEqualsCriterion } from '../criteria/string-equals-criterion';
+import { StringNotEqualsCriterion } from '../criteria/string-not-equals-criterion';
+import { StringLikeCriterion } from '../criteria/string-like-criterion';
+import { StringNotLikeCriterion } from '../criteria/string-not-like-criterion';
 
 /* This component accepts reflection metadata from a Kaprella resource and
  * presents a simple interface for the user to select a column, operator, and
@@ -46,7 +50,10 @@ const INTEGER_OPERATORS: BaseCriterion[] = [
 const STRING_OPERATORS: BaseCriterion[] = [
   // { value: 'contains', label: 'Contains' },
   // { value: 'nocontains', label: 'Does not contain' },
-  // { value: '==', label: 'Exactly matches' },
+  new StringEqualsCriterion('==', 'Exactly matches'),
+  new StringNotEqualsCriterion('!=', 'Does not match'),
+  new StringLikeCriterion('~=', 'Like'),
+  new StringNotLikeCriterion('!~=', 'Not like')
   // { value: 'like', label: 'Partially matches' }
 ];
 
