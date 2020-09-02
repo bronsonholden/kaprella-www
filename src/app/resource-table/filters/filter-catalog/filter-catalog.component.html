@@ -56,14 +56,8 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Value</ng-template>
-      <div *ngIf="builderType === 'integer'">
-        <app-integer-value-builder #builder [value]="value" (valueChange)="onValueChange($event)"></app-integer-value-builder>
-        <button [disabled]="!builder.valid" mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
-      </div>
-      <div *ngIf="builderType === 'string' || builderType === 'text'">
-        <app-string-value-builder #builder [value]="value" (valueChange)="onValueChange($event)"></app-string-value-builder>
-        <button [disabled]="!builder.valid" mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
-      </div>
+      <ng-template filterCatalogValue></ng-template>
+      <button [disabled]="!valueBuilder?.valid" mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
       <br>
     </mat-step>
   </mat-horizontal-stepper>

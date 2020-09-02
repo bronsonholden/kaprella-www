@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ValueBuilder } from '../value-builder';
 
 @Component({
   selector: 'app-string-value-builder',

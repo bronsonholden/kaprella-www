@@ -1,7 +1,8 @@
+import { Type } from '@angular/core';
 import { StringCriterion } from './string-criterion';
 
 export class StringLikeCriterion extends StringCriterion {
-  constructor(private operator: string, private operatorTitle: string) {
+  constructor(private operator: string, private operatorTitle: string, public valueBuilderComponent: Type<any>) {
     super();
   }
 

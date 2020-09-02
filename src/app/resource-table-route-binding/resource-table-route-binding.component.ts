@@ -177,7 +177,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       this.humanizedFilters = [];
       for (let key of Object.keys(humanizedFilters)) {
         this.humanizedFilters.push({
-          expression: key,
+          expression: key.replace(/%2[Bb]/g, '+'),
           humanized: humanizedFilters[key] || 'Custom filter'
         });
       }

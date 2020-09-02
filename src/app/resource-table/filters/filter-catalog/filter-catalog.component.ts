@@ -1,14 +1,19 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  ComponentFactoryResolver,
+  ViewChild
 } from '@angular/core';
 
 import { isNil, isArray } from 'lodash-es';
 
 import { AttributeReflections } from '../../reflections/attribute-reflections';
+
+import { FilterCatalogValueDirective } from './filter-catalog-value.directive';
 
 import { BaseCriterion } from '../criteria/base-criterion';
 import { NumericLogicalCriterion } from '../criteria/numeric-logical-criterion';
@@ -18,6 +23,10 @@ import { StringEqualsCriterion } from '../criteria/string-equals-criterion';
 import { StringNotEqualsCriterion } from '../criteria/string-not-equals-criterion';
 import { StringLikeCriterion } from '../criteria/string-like-criterion';
 import { StringNotLikeCriterion } from '../criteria/string-not-like-criterion';
+
+import { ValueBuilder } from '../../value-builders/value-builder';
+import { IntegerValueBuilderComponent } from '../../value-builders/integer-value-builder/integer-value-builder.component';
+import { StringValueBuilderComponent } from '../../value-builders/string-value-builder/string-value-builder.component';
 
 /* This component accepts reflection metadata from a Kaprella resource and
  * presents a simple interface for the user to select a column, operator, and
@@ -35,14 +44,14 @@ import { StringNotLikeCriterion } from '../criteria/string-not-like-criterion';
  */
 
 const INTEGER_OPERATORS: BaseCriterion[] = [
-  new NumericLogicalCriterion('>', 'Greater than'),
-  new NumericLogicalCriterion('>=', 'Greater than or equal to'),
-  new NumericLogicalCriterion('<', 'Less than'),
-  new NumericLogicalCriterion('<=', 'Less than or equal to'),
-  new NumericLogicalCriterion('==', 'Equal to'),
-  new NumericLogicalCriterion('!=', 'Not equal to'),
-  new NumericIsEvenCriterion('is_even', 'Is even'),
-  new NumericIsOddCriterion('is_odd', 'Is odd')
+  new NumericLogicalCriterion('>', 'Greater than', IntegerValueBuilderComponent),
+  new NumericLogicalCriterion('>=', 'Greater than or equal to', IntegerValueBuilderComponent),
+  new NumericLogicalCriterion('<', 'Less than', IntegerValueBuilderComponent),
+  new NumericLogicalCriterion('<=', 'Less than or equal to', IntegerValueBuilderComponent),
+  new NumericLogicalCriterion('==', 'Equal to', IntegerValueBuilderComponent),
+  new NumericLogicalCriterion('!=', 'Not equal to', IntegerValueBuilderComponent),
+  new NumericIsEvenCriterion('is_even', 'Is even', IntegerValueBuilderComponent),
+  new NumericIsOddCriterion('is_odd', 'Is odd', IntegerValueBuilderComponent)
   // { value: 'iseven', label: 'Is even' },
   // { value: 'isodd', label: 'Is odd' },
   // inclrange values: range min, range max
@@ -54,10 +63,10 @@ const INTEGER_OPERATORS: BaseCriterion[] = [
 const STRING_OPERATORS: BaseCriterion[] = [
   // { value: 'contains', label: 'Contains' },
   // { value: 'nocontains', label: 'Does not contain' },
-  new StringEqualsCriterion('==', 'Exactly matches'),
-  new StringNotEqualsCriterion('!=', 'Does not match'),
-  new StringLikeCriterion('~=', 'Like'),
-  new StringNotLikeCriterion('!~=', 'Not like')
+  new StringEqualsCriterion('==', 'Exactly matches', StringValueBuilderComponent),
+  new StringNotEqualsCriterion('!=', 'Does not match', StringValueBuilderComponent),
+  new StringLikeCriterion('~=', 'Like', StringValueBuilderComponent),
+  new StringNotLikeCriterion('!~=', 'Not like', StringValueBuilderComponent)
   // { value: 'like', label: 'Partially matches' }
 ];
 
@@ -91,11 +100,13 @@ const DATETIME_OPERATORS: BaseCriterion[] = [
   templateUrl: './filter-catalog.component.html',
   styleUrls: ['./filter-catalog.component.scss']
 })
-export class FilterCatalogComponent implements OnInit {
+export class FilterCatalogComponent implements OnInit, OnDestroy {
 
   @Input() reflection: AttributeReflections;
   @Output() filterChange = new EventEmitter<any>();
   @Output() filterApply = new EventEmitter<string>();
+
+  @ViewChild(FilterCatalogValueDirective, { static: true }) valueHost: FilterCatalogValueDirective;
 
   attributes: any[] = [];
   relationships: any[] = [];
@@ -103,12 +114,20 @@ export class FilterCatalogComponent implements OnInit {
   criterion: BaseCriterion;
   value: any[];
 
+  valueBuilder: ValueBuilder;
+
   // The filter expression being created
   filter: string;
 
-  constructor() { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    if (this.valueBuilder) {
+      this.valueBuilder.valueChange.unsubscribe();
+    }
   }
 
   ngOnChanges(changes): void {
@@ -175,6 +194,17 @@ export class FilterCatalogComponent implements OnInit {
 
   onOperatorChange(selection): void {
     this.criterion = selection.option.value;
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.getSelectedOperator().valueBuilderComponent);
+    const viewContainerRef = this.valueHost.viewContainerRef;
+    if (this.valueBuilder) {
+      this.valueBuilder.valueChange.unsubscribe();
+    }
+    viewContainerRef.clear();
+    const componentRef = viewContainerRef.createComponent<any>(componentFactory);
+    this.valueBuilder = componentRef.instance;
+    this.valueBuilder.valueChange.subscribe((value: any[]) => {
+      this.onValueChange(value);
+    });
     this.emitIfComplete();
   }
 

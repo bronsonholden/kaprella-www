@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomWidthBreakPoints } from './flex-ext/custom-width-break-points';
 import { LayoutGtW500Directive } from './flex-ext/layout-gt-w500.directive';
 import { LayoutLtW500Directive } from './flex-ext/layout-lt-w500.directive';
+import { FilterCatalogValueDirective } from './resource-table/filters/filter-catalog/filter-catalog-value.directive';
 
 import { ResourceTableComponent } from './resource-table/resource-table.component';
 import { FieldListComponent } from './lists/field-list/field-list.component';
@@ -62,6 +63,7 @@ import { StringValueBuilderComponent } from './resource-table/value-builders/str
     PointerResizeableDirective,
     LayoutGtW500Directive,
     LayoutLtW500Directive,
+    FilterCatalogValueDirective,
     ResourceTableCellComponent,
     FarmerListComponent,
     ResourceTableRouteBindingComponent,
@@ -106,6 +108,10 @@ import { StringValueBuilderComponent } from './resource-table/value-builders/str
     FlexLayoutModule,
     BrowserAnimationsModule,
     MaterialModule
+  ],
+  entryComponents: [
+    IntegerValueBuilderComponent,
+    StringValueBuilderComponent
   ],
   providers: [
     CustomWidthBreakPoints

@@ -63,6 +63,17 @@ export abstract class ResourceApiService {
       });
     }
 
+    /* Fix characters that don't get URL encoded by Angular */
+    const filters = query['filter'];
+    if (!!filters) {
+      paramObj[`filter[]`] = filters.map(val => val.replace(/\+/g, '%2B'));
+    }
+
+    const sorts = query['sorts'];
+    if (!!sorts) {
+      paramObj[`sort[]`] = sorts.map(val => val.replace(/\+/g, '%2B'));
+    }
+
     return this.httpClient.get(this.resourceName(), { params: paramObj });
   }
 
