@@ -14,6 +14,8 @@
                   *ngFor="let attribute of attributes"
                   [value]="attribute.key"
                   (click)="catalogStepper.next()"
+                  [class.disabled]="!OPERATORS[operatorType(attribute.type)]"
+                  [disabled]="!OPERATORS[operatorType(attribute.type)]"
                   checkboxPosition="before">
                 <mat-icon
                     style="opacity: 0.8"

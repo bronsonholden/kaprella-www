@@ -130,6 +130,8 @@ const OPERATORS = {
 })
 export class FilterCatalogComponent implements OnInit, OnDestroy {
 
+  OPERATORS = OPERATORS;
+
   @Input() reflection: AttributeReflections;
   @Output() filterChange = new EventEmitter<any>();
   @Output() filterApply = new EventEmitter<string>();
