@@ -1,20 +1,16 @@
 import { Type } from '@angular/core';
-import { BaseCriterion } from './base-criterion';
+import { NumericCriterion } from './numeric-criterion';
 
-export class NumericIsEvenCriterion extends BaseCriterion {
-  constructor(public operator: string, private operatorTitle: string, public valueBuilderComponent: Type<any>) {
-    super();
-  }
-
+export class NumericIsEvenCriterion extends NumericCriterion {
   get option(): string {
-    return this.operator;
+    return 'is_even';
   }
 
   get title(): string {
-    return this.operatorTitle;
+    return 'Is even';
   }
 
-  generate(property: string, values: any[]) {
-    return `is_even(prop("${property}"))`;
+  generateFilter(val: [number]) {
+    return `is_even(${val[0]})`;
   }
 }

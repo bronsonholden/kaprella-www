@@ -2,19 +2,15 @@ import { Type } from '@angular/core';
 import { StringCriterion } from './string-criterion';
 
 export class StringLikeCriterion extends StringCriterion {
-  constructor(private operator: string, private operatorTitle: string, public valueBuilderComponent: Type<any>) {
-    super();
-  }
-
   get option(): string {
-    return this.operator;
+    return 'like';
   }
 
   get title(): string {
-    return this.operatorTitle;
+    return 'Like';
   }
 
-  generate(property: string, values: any[]) {
-    return `like(prop("${property}"), "${this.escapeString(values[0])}")`;
+  generateFilter(values: [string]): string {
+    return `like(${this.dimension}, "${this.escapeString(values[0])}")`;
   }
 }

@@ -14,12 +14,12 @@ import { ValueBuilder } from '../value-builder';
   templateUrl: './string-value-builder.component.html',
   styleUrls: ['./string-value-builder.component.scss']
 })
-export class StringValueBuilderComponent implements OnInit {
+export class StringValueBuilderComponent extends ValueBuilder implements OnInit {
   @Input() value: string;
-  @Output() valueChange = new EventEmitter<string[]>();
-  valueFormGroup: FormGroup;
+  @Output() valueChange = new EventEmitter<[string]>();
 
   constructor(private formBuilder: FormBuilder) {
+    super();
     this.valueFormGroup = this.formBuilder.group({
       value: ['', Validators.required]
     });

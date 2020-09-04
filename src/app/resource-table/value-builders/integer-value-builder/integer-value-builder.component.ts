@@ -14,12 +14,12 @@ import { ValueBuilder } from '../value-builder';
   templateUrl: './integer-value-builder.component.html',
   styleUrls: ['./integer-value-builder.component.scss']
 })
-export class IntegerValueBuilderComponent implements OnInit {
+export class IntegerValueBuilderComponent extends ValueBuilder implements OnInit {
   @Input() value: number;
-  @Output() valueChange = new EventEmitter<number[]>();
-  valueFormGroup: FormGroup;
+  @Output() valueChange = new EventEmitter<[number]>();
 
   constructor(private formBuilder: FormBuilder) {
+    super();
     this.valueFormGroup = this.formBuilder.group({
       value: ['', Validators.required]
     });

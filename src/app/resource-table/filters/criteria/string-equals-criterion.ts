@@ -2,19 +2,15 @@ import { Type } from '@angular/core';
 import { StringCriterion } from './string-criterion';
 
 export class StringEqualsCriterion extends StringCriterion {
-  constructor(private operator: string, private operatorTitle: string, public valueBuilderComponent: Type<any>) {
-    super();
-  }
-
   get option(): string {
-    return this.operator;
+    return '==';
   }
 
   get title(): string {
-    return this.operatorTitle;
+    return 'Exactly matches';
   }
 
-  generate(property: string, values: any[]) {
-    return `prop("${property}")=="${this.escapeString(values[0])}"`;
+  generateFilter(values: any[]) {
+    return `${this.dimension}=="${this.escapeString(values[0])}"`;
   }
 }

@@ -6,6 +6,7 @@ import {
   Output,
   EventEmitter,
   ComponentFactoryResolver,
+  Type,
   ViewChild
 } from '@angular/core';
 
@@ -16,7 +17,12 @@ import { AttributeReflections } from '../../reflections/attribute-reflections';
 import { FilterCatalogValueDirective } from './filter-catalog-value.directive';
 
 import { BaseCriterion } from '../criteria/base-criterion';
-import { NumericLogicalCriterion } from '../criteria/numeric-logical-criterion';
+import { NumericGreaterThanCriterion } from '../criteria/numeric-greater-than-criterion';
+import { NumericGreaterOrEqualCriterion } from '../criteria/numeric-greater-or-equal-criterion';
+import { NumericLessThanCriterion } from '../criteria/numeric-less-than-criterion';
+import { NumericLessOrEqualCriterion } from '../criteria/numeric-less-or-equal-criterion';
+import { NumericEqualToCriterion } from '../criteria/numeric-equal-to-criterion';
+import { NumericNotEqualCriterion } from '../criteria/numeric-not-equal-criterion';
 import { NumericIsEvenCriterion } from '../criteria/numeric-is-even-criterion';
 import { NumericIsOddCriterion } from '../criteria/numeric-is-odd-criterion';
 import { StringEqualsCriterion } from '../criteria/string-equals-criterion';
@@ -29,71 +35,87 @@ import { IntegerValueBuilderComponent } from '../../value-builders/integer-value
 import { StringValueBuilderComponent } from '../../value-builders/string-value-builder/string-value-builder.component';
 
 /* This component accepts reflection metadata from a Kaprella resource and
- * presents a simple interface for the user to select a column, operator, and
- * value. When a valid selection is made for all three, an object containing
- * the filter expression as well as a label is emitted. This is used to
- * easily configure new filters to apply to resource table data. Filters
- * created from this component are limited and relatively simple. Complex
- * filters must be applied using filter expressions but can still be added
- * or removed via the catalog/table interfaces.
+ * presents a series of options: a column (or dimension), operator (or
+ * criterion), and (for some criteria) one or more values. The selection of
+ * a dimension determines what criteria are available. Likewise, choosing
+ * a criterion presents the appropriate value builder as a simple form.
+ * Functionality is primarily housed in the various criterion classes. Once
+ * selected, a dimension is assigned; based on the value builder type
+ * returned from the criterion, a component is created and inserted into the
+ * final section of the stepper. This component is similarly assigned to
+ * the criterion, which subscribes to changes to the value builder form.
+ * A subscription is made to the criterion itself to receive filter strings
+ * when a value is chosen.
  */
 
-/* Operators may have more than one "value", e.g. "Within radius" for
- * geography attributes. Where applicable, multiple values are described for
- * each of the various operators.
- */
+const OPERATORS = {
+  'numeric': [
+    NumericGreaterThanCriterion,
+    NumericGreaterOrEqualCriterion,
+    NumericLessThanCriterion,
+    NumericLessOrEqualCriterion,
+    NumericEqualToCriterion,
+    NumericNotEqualCriterion
+  ],
+  'string': [
+    StringEqualsCriterion,
+    StringNotEqualsCriterion,
+    StringLikeCriterion,
+    StringNotLikeCriterion
+  ]
+};
 
-const INTEGER_OPERATORS: BaseCriterion[] = [
-  new NumericLogicalCriterion('>', 'Greater than', IntegerValueBuilderComponent),
-  new NumericLogicalCriterion('>=', 'Greater than or equal to', IntegerValueBuilderComponent),
-  new NumericLogicalCriterion('<', 'Less than', IntegerValueBuilderComponent),
-  new NumericLogicalCriterion('<=', 'Less than or equal to', IntegerValueBuilderComponent),
-  new NumericLogicalCriterion('==', 'Equal to', IntegerValueBuilderComponent),
-  new NumericLogicalCriterion('!=', 'Not equal to', IntegerValueBuilderComponent),
-  new NumericIsEvenCriterion('is_even', 'Is even', IntegerValueBuilderComponent),
-  new NumericIsOddCriterion('is_odd', 'Is odd', IntegerValueBuilderComponent)
-  // { value: 'iseven', label: 'Is even' },
-  // { value: 'isodd', label: 'Is odd' },
-  // inclrange values: range min, range max
-  // { value: 'inclrange', label: 'Inclusive range' },
-  // exclrange values: range min, range max
-  // { value: 'exclrange', label: 'Exclusive range' }
-];
-
-const STRING_OPERATORS: BaseCriterion[] = [
-  // { value: 'contains', label: 'Contains' },
-  // { value: 'nocontains', label: 'Does not contain' },
-  new StringEqualsCriterion('==', 'Exactly matches', StringValueBuilderComponent),
-  new StringNotEqualsCriterion('!=', 'Does not match', StringValueBuilderComponent),
-  new StringLikeCriterion('~=', 'Like', StringValueBuilderComponent),
-  new StringNotLikeCriterion('!~=', 'Not like', StringValueBuilderComponent)
-  // { value: 'like', label: 'Partially matches' }
-];
-
-const GEOGRAPHY_OPERATORS: BaseCriterion[] = [
-  // { value: 'intersects', label: 'Intersects' },
-  // { value: 'nointersects', label: 'Does not intersect' },
-  // { value: 'within', label: 'Within' },
-  // { value: 'nowithin', label: 'Not within' },
-  // // inradius values: point wkt, radius (meters)
-  // { value: 'inradius', label: 'In radius' },
-  // // outradius values: point wkt, radius (meters)
-  // { value: 'outradius', label: 'Not in radius' }
-];
-
-const DATETIME_OPERATORS: BaseCriterion[] = [
-  // { value: '==', label: 'Equal to' },
-  // { value: '!=', label: 'Not equal to' },
-  // { value: 'hod', label: 'Hour of day' },
-  // { value: 'dow', label: 'Day of week' },
-  // { value: 'moy', label: 'Month of year' },
-  // // timerange values: from time, to time
-  // { value: 'timerange', label: 'Time range' },
-  // // datetimerange values: from datetime, to datetime
-  // { value: 'datetimerange', label: 'Date & time range' },
-  // { value: 'before', label: 'On or before' },
-  // { value: 'after', label: 'On or after' }
-];
+// const INTEGER_OPERATORS: BaseCriterion[] = [
+//   new NumericLogicalCriterion('>', 'Greater than', IntegerValueBuilderComponent),
+//   new NumericLogicalCriterion('>=', 'Greater than or equal to', IntegerValueBuilderComponent),
+//   new NumericLogicalCriterion('<', 'Less than', IntegerValueBuilderComponent),
+//   new NumericLogicalCriterion('<=', 'Less than or equal to', IntegerValueBuilderComponent),
+//   new NumericLogicalCriterion('==', 'Equal to', IntegerValueBuilderComponent),
+//   new NumericLogicalCriterion('!=', 'Not equal to', IntegerValueBuilderComponent),
+//   new NumericIsEvenCriterion('is_even', 'Is even', IntegerValueBuilderComponent),
+//   new NumericIsOddCriterion('is_odd', 'Is odd', IntegerValueBuilderComponent)
+//   // { value: 'iseven', label: 'Is even' },
+//   // { value: 'isodd', label: 'Is odd' },
+//   // inclrange values: range min, range max
+//   // { value: 'inclrange', label: 'Inclusive range' },
+//   // exclrange values: range min, range max
+//   // { value: 'exclrange', label: 'Exclusive range' }
+// ];
+//
+// const STRING_OPERATORS: BaseCriterion[] = [
+//   // { value: 'contains', label: 'Contains' },
+//   // { value: 'nocontains', label: 'Does not contain' },
+//   new StringEqualsCriterion('==', 'Exactly matches', StringValueBuilderComponent),
+//   new StringNotEqualsCriterion('!=', 'Does not match', StringValueBuilderComponent),
+//   new StringLikeCriterion('~=', 'Like', StringValueBuilderComponent),
+//   new StringNotLikeCriterion('!~=', 'Not like', StringValueBuilderComponent)
+//   // { value: 'like', label: 'Partially matches' }
+// ];
+//
+// const GEOGRAPHY_OPERATORS: BaseCriterion[] = [
+//   // { value: 'intersects', label: 'Intersects' },
+//   // { value: 'nointersects', label: 'Does not intersect' },
+//   // { value: 'within', label: 'Within' },
+//   // { value: 'nowithin', label: 'Not within' },
+//   // // inradius values: point wkt, radius (meters)
+//   // { value: 'inradius', label: 'In radius' },
+//   // // outradius values: point wkt, radius (meters)
+//   // { value: 'outradius', label: 'Not in radius' }
+// ];
+//
+// const DATETIME_OPERATORS: BaseCriterion[] = [
+//   // { value: '==', label: 'Equal to' },
+//   // { value: '!=', label: 'Not equal to' },
+//   // { value: 'hod', label: 'Hour of day' },
+//   // { value: 'dow', label: 'Day of week' },
+//   // { value: 'moy', label: 'Month of year' },
+//   // // timerange values: from time, to time
+//   // { value: 'timerange', label: 'Time range' },
+//   // // datetimerange values: from datetime, to datetime
+//   // { value: 'datetimerange', label: 'Date & time range' },
+//   // { value: 'before', label: 'On or before' },
+//   // { value: 'after', label: 'On or after' }
+// ];
 
 @Component({
   selector: 'app-filter-catalog',
@@ -108,6 +130,7 @@ export class FilterCatalogComponent implements OnInit, OnDestroy {
 
   @ViewChild(FilterCatalogValueDirective, { static: true }) valueHost: FilterCatalogValueDirective;
 
+  operators: any[] = [];
   attributes: any[] = [];
   relationships: any[] = [];
   dimension: string;
@@ -125,8 +148,8 @@ export class FilterCatalogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.valueBuilder) {
-      this.valueBuilder.valueChange.unsubscribe();
+    if (this.criterion) {
+      this.criterion.filterChange.unsubscribe();
     }
   }
 
@@ -136,44 +159,31 @@ export class FilterCatalogComponent implements OnInit, OnDestroy {
     }
   }
 
-  /* Emits a filter expression if the catalog selections are complete. If
-   * the selections become invalid (e.g. the user removes the value from the
-   * builder), null is emitted.
-   */
-  emitIfComplete(): void {
-    if (isNil(this.criterion) || isNil(this.dimension)) {
-      return;
-    }
-
-    if (this.isValueValid()) {
-      const filter = this.getSelectedOperator().generate(this.columnNameByKey(this.dimension), this.value);
-      this.filter = filter;
-      this.filterChange.emit(filter);
-    } else {
-      this.filterChange.emit(null);
-    }
-  }
-
-  // TODO: Don't emit unless value has been changed. Currently emits as soon
-  // as a dimension & operator are selected.
-  isValueValid(): boolean {
-    if (isNil(this.value) || !isArray(this.value)) {
-      return false;
-    } else if (this.value.filter((val: any) => !isNil(val)).length === 0) {
-      return false;
-    } else {
-      return this.value.length > 0;
-    }
-  }
-
-  getSelectedOperator(): BaseCriterion {
-    const idx = this.operators.map(op => op.option).indexOf(this.criterion);
-    return this.operators[idx];
-  }
-
   onDimensionChange(selection): void {
     this.dimension = selection.option.value;
-    this.emitIfComplete();
+
+    let type = this.builderType;
+
+    let operatorSet = OPERATORS[this.operatorType(type)];
+
+    this.operators = operatorSet.map((componentType: Type<ValueBuilder>) => {
+      return new componentType();
+    });
+  }
+
+  operatorType(type): string {
+    switch (type) {
+      case 'integer':
+        return 'numeric';
+      case 'string':
+      case 'text':
+        return 'string';
+      case 'geography':
+      case 'datetime':
+        return type;
+      default:
+        return null;
+    }
   }
 
   get builderType(): string {
@@ -188,29 +198,30 @@ export class FilterCatalogComponent implements OnInit, OnDestroy {
     return this.reflection.attributes[key].sqlTypeMetadata.type;
   }
 
+  getSelectedOperator(): BaseCriterion {
+    const idx = this.operators.map(op => op.option).indexOf(this.criterion);
+    return this.operators[idx];
+  }
+
   columnNameByKey(key) {
     return this.reflection.attributes[key].name
   }
 
   onOperatorChange(selection): void {
-    this.criterion = selection.option.value;
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.getSelectedOperator().valueBuilderComponent);
-    const viewContainerRef = this.valueHost.viewContainerRef;
-    if (this.valueBuilder) {
-      this.valueBuilder.valueChange.unsubscribe();
+    if (this.criterion) {
+      this.criterion.filterChange.unsubscribe();
     }
+    this.criterion = selection.option.value;
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.criterion.valueBuilderType);
+    const viewContainerRef = this.valueHost.viewContainerRef;
     viewContainerRef.clear();
-    const componentRef = viewContainerRef.createComponent<any>(componentFactory);
-    this.valueBuilder = componentRef.instance;
-    this.valueBuilder.valueChange.subscribe((value: any[]) => {
-      this.onValueChange(value);
+    const componentRef = viewContainerRef.createComponent<ValueBuilder>(componentFactory);
+    this.criterion.valueBuilder = componentRef.instance;
+    this.criterion.dimension = `prop("${this.dimension}")`;
+    this.criterion.filterChange.subscribe((filter: string) => {
+      this.filter = filter;
+      this.filterChange.emit(filter);
     });
-    this.emitIfComplete();
-  }
-
-  onValueChange(value: any[]): void {
-    this.value = value;
-    this.emitIfComplete();
   }
 
   onClickApply(): void {
@@ -265,27 +276,6 @@ export class FilterCatalogComponent implements OnInit, OnDestroy {
         return 'checkbox-marked';
       default:
         return '';
-    }
-  }
-
-  get operators(): any[] {
-    if (!this.dimension) {
-      return [];
-    }
-
-    const dimension = this.reflection.attributes[this.dimension];
-    switch (dimension.sqlTypeMetadata.type) {
-      case 'integer':
-        return INTEGER_OPERATORS;
-      case 'string':
-      case 'text':
-        return STRING_OPERATORS;
-      case 'geography':
-        return GEOGRAPHY_OPERATORS;
-      case 'datetime':
-        return DATETIME_OPERATORS;
-      default:
-        return [];
     }
   }
 

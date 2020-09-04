@@ -47,7 +47,7 @@
       <mat-selection-list multiple="false" (selectionChange)="onOperatorChange($event)">
         <mat-list-option
             *ngFor="let operator of operators"
-            [value]="operator.option"
+            [value]="operator"
             (click)="catalogStepper.next()"
             checkboxPosition="before">
           {{ operator.title }}
@@ -57,7 +57,7 @@
     <mat-step>
       <ng-template matStepLabel>Value</ng-template>
       <ng-template filterCatalogValue></ng-template>
-      <button [disabled]="!valueBuilder?.valid" mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
+      <button [disabled]="!criterion?.valueBuilder.valid" mat-stroked-button color="accent" (click)="onClickApply()">Apply</button>
       <br>
     </mat-step>
   </mat-horizontal-stepper>
