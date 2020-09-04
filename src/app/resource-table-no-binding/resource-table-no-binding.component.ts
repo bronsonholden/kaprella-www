@@ -81,10 +81,18 @@ export class ResourceTableNoBindingComponent implements OnInit {
       return;
     }
 
-    const query = {};
+    let query = {};
 
     if (!!this.filters) {
       query['filter'] = this.filters;
+    }
+
+    if (this.scope) {
+      query = mergeWith(query, this.scope, (obj, src) => {
+        if (isArray(obj) && isArray(src)) {
+          return obj.concat(src);
+        }
+      });
     }
 
     this.apiService.index(this.page.offset, this.page.limit, query).subscribe((res: any) => {
