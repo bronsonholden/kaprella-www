@@ -29,6 +29,8 @@ import { StringEqualsCriterion } from '../criteria/string-equals-criterion';
 import { StringNotEqualsCriterion } from '../criteria/string-not-equals-criterion';
 import { StringLikeCriterion } from '../criteria/string-like-criterion';
 import { StringNotLikeCriterion } from '../criteria/string-not-like-criterion';
+import { DatetimeBeforeCriterion } from '../criteria/datetime-before-criterion';
+import { DatetimeAfterCriterion } from '../criteria/datetime-after-criterion';
 
 import { ValueBuilder } from '../../value-builders/value-builder';
 import { IntegerValueBuilderComponent } from '../../value-builders/integer-value-builder/integer-value-builder.component';
@@ -62,6 +64,10 @@ const OPERATORS = {
     StringNotEqualsCriterion,
     StringLikeCriterion,
     StringNotLikeCriterion
+  ],
+  'datetime': [
+    DatetimeBeforeCriterion,
+    DatetimeAfterCriterion
   ]
 };
 
@@ -198,6 +204,10 @@ export class FilterCatalogComponent implements OnInit, OnDestroy {
     return this.reflection.attributes[key].sqlTypeMetadata.type;
   }
 
+  propNameByKey(key) {
+    return this.reflection.attributes[key].name;
+  }
+
   getSelectedOperator(): BaseCriterion {
     const idx = this.operators.map(op => op.option).indexOf(this.criterion);
     return this.operators[idx];
@@ -217,7 +227,7 @@ export class FilterCatalogComponent implements OnInit, OnDestroy {
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent<ValueBuilder>(componentFactory);
     this.criterion.valueBuilder = componentRef.instance;
-    this.criterion.dimension = `prop("${this.dimension}")`;
+    this.criterion.dimension = `prop("${this.propNameByKey(this.dimension)}")`;
     this.criterion.filterChange.subscribe((filter: string) => {
       this.filter = filter;
       this.filterChange.emit(filter);

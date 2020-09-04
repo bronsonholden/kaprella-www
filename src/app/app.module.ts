@@ -53,6 +53,7 @@ import { ResourceTableFilterCatalogComponent } from './resource-table/resource-t
 import { ResourceTableFilterListComponent } from './resource-table/resource-table-filter-list/resource-table-filter-list.component';
 import { ResourceTableNoBindingComponent } from './resource-table-no-binding/resource-table-no-binding.component';
 import { StringValueBuilderComponent } from './resource-table/value-builders/string-value-builder/string-value-builder.component';
+import { DatetimeValueBuilderComponent } from './resource-table/value-builders/datetime-value-builder/datetime-value-builder.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { StringValueBuilderComponent } from './resource-table/value-builders/str
     ResourceTableFilterCatalogComponent,
     ResourceTableFilterListComponent,
     ResourceTableNoBindingComponent,
-    StringValueBuilderComponent
+    StringValueBuilderComponent,
+    DatetimeValueBuilderComponent
   ],
   imports: [
     BrowserModule,
