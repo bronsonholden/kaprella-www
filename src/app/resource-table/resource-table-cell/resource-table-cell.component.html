@@ -7,12 +7,7 @@
 </div>
 
 <div class="resource-table-cell" *ngIf="display.type === 'fieldArea'">
-  <span
-      class="mat-body-2 accent-color"
-      style="cursor: pointer;"
-      (click)="switchAreaUnit()">
-    {{ fieldArea }} {{ display.unit }}
-  </span>
+  <app-area-display [unit]="display.unit" (unitChange)="onUnitChange($event)"[area]="raw" [format]="this.display.format"></app-area-display>
 </div>
 
 <div *ngIf="display.type === 'link'">

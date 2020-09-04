@@ -12,9 +12,13 @@ export class ResourceTableCellComponent implements OnInit {
   @Input() value: any;
   @Input() row: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+  }
+
+  onUnitChange(unit: string) {
+    this.display.unit = unit;
   }
 
   get raw(): any {
@@ -54,34 +58,6 @@ export class ResourceTableCellComponent implements OnInit {
     }
 
     return sprintf(this.display.format, ...values);
-  }
-
-  switchAreaUnit(): void {
-    if (this.display.unit === 'ha') {
-      this.display.unit = 'ac';
-    } else {
-      this.display.unit = 'ha';
-    }
-  }
-
-  get fieldArea(): string {
-    let value = parseFloat(this.evaluateCellValue(this.value));
-
-    if (this.display.unit === 'ha') {
-      value /= 1e5;
-    } else if (this.display.unit === 'ac') {
-      value /= 4046.8564224;
-    }
-
-    if (isNaN(value)) {
-      return 'NaN';
-    } else {
-      return sprintf(this.display.format, value);
-    }
-  }
-
-  get fieldAreaTooltip(): string {
-    return `Click to show ${this.display.unit === 'ha' ? 'acres' : 'hectares'}`;
   }
 
   get routerLink(): string {

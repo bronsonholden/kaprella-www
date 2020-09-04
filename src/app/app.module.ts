@@ -54,6 +54,7 @@ import { ResourceTableFilterListComponent } from './resource-table/resource-tabl
 import { ResourceTableNoBindingComponent } from './resource-table-no-binding/resource-table-no-binding.component';
 import { StringValueBuilderComponent } from './resource-table/value-builders/string-value-builder/string-value-builder.component';
 import { DatetimeValueBuilderComponent } from './resource-table/value-builders/datetime-value-builder/datetime-value-builder.component';
+import { AreaDisplayComponent } from './area-display/area-display.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { DatetimeValueBuilderComponent } from './resource-table/value-builders/d
     ResourceTableFilterListComponent,
     ResourceTableNoBindingComponent,
     StringValueBuilderComponent,
-    DatetimeValueBuilderComponent
+    DatetimeValueBuilderComponent,
+    AreaDisplayComponent
   ],
   imports: [
     BrowserModule,

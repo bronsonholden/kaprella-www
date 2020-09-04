@@ -1,0 +1,32 @@
+<div *ngIf="!!field; else loadingIndicator">
+  <div class="resource-page">
+    <div fxLayout="column" fxLayoutGap="24px">
+      <div class="button-row" fxLayout="row">
+        <button mat-stroked-button routerLink="..">All Fields</button>
+      </div>
+      <div>
+        <h1><span>{{ field.attributes.name }}</span></h1>
+        <mat-divider></mat-divider>
+      </div>
+      <div>
+        <div fxLayoutGap="24px" fxLayout="column">
+          <div>
+            <div fxLayout="column">
+              <h2>Summary</h2>
+              <div>Farmer: <a class="mat-body-2 accent-color" [routerLink]="'/farmers/' + farmer.id">{{ farmer.attributes.name }}</a></div>
+              <div>Area: <span><app-area-display [(unit)]="unit" [area]="field.meta.boundaryArea"></app-area-display></span></div>
+            </div>
+          </div>
+          <div>
+            <google-map width="100%" height="400px"></google-map>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loadingIndicator>
+  <div style="width: 100%;">
+    <mat-spinner color="accent" style="margin: 96px auto"></mat-spinner>
+  </div>
+</ng-template>
