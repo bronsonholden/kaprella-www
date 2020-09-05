@@ -112,6 +112,10 @@
   }
 }
 
+.resource-link-row a {
+  margin-bottom: 8px;
+}
+
 @keyframes fadein {
   from { opacity: 0; }
   to { opacity: 1; }
