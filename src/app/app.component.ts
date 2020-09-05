@@ -158,16 +158,17 @@ export class AppComponent implements OnInit {
   }
 }
 
-export class TopbarButton {
-  constructor(public label: string,
-              public routerLink: string) {}
+export interface TopbarButton {
+  label: string;
+  disabled?: boolean;
+  routerLink: string;
 }
 
-export class TopbarSection {
-  constructor(public title: string,
-              public buttons: TopbarButton[] = []) {}
+export interface TopbarSection {
+  title: string,
+  buttons: TopbarButton[];
 }
 
-export class TopbarConfig {
-  constructor(public sections: TopbarSection[] = []) {}
+export interface TopbarConfig {
+  sections: TopbarSection[];
 }
