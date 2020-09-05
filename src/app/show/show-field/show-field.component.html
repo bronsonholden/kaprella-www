@@ -18,7 +18,17 @@
             </div>
           </div>
           <div>
-            <google-map width="100%" height="400px"></google-map>
+            <google-map
+                #googleMap
+                width="100%"
+                height="400px"
+                [options]="options">
+              <map-polygon
+                *ngFor="let polygon of multipolygon?.polygons; index as j"
+                [paths]="polygon.path"
+                [options]="polygonOptions">
+              </map-polygon>
+            </google-map>
           </div>
         </div>
       </div>
