@@ -52,10 +52,12 @@ export class AppComponent implements OnInit {
         title: 'Licensor Relationship',
         buttons: [
           {
+            disabled: true,
             label: 'Claims',
             routerLink: ''
           },
           {
+            disabled: true,
             label: 'Audits',
             routerLink: ''
           }
@@ -65,6 +67,7 @@ export class AppComponent implements OnInit {
         title: 'Farm Management',
         buttons: [
           {
+            disabled: true,
             label: 'Active Plantings',
             routerLink: ''
           }

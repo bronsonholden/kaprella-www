@@ -50,6 +50,8 @@
                 [disableRipple]="true"
                 mat-list-item
                 (click)="ltMdQuery.matches && sideNav.close()"
+                [disabled]="!!button.disabled"
+                [class.disabled]="!!button.disabled"
                 [routerLink]="button.routerLink">{{ button.label }}</a>
             </mat-nav-list>
           </mat-expansion-panel>
