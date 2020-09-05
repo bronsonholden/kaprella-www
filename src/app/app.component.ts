@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
           },
           {
             label: 'Licensors',
-            routerLink: ''
+            routerLink: 'licensors'
           },
           {
             label: 'Plant Varieties',
