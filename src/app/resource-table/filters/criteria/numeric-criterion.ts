@@ -1,16 +1,16 @@
 import { Type } from '@angular/core';
 import { BaseCriterion } from './base-criterion';
 import { ValueBuilder } from '../../value-builders/value-builder';
-import { IntegerValueBuilderComponent } from '../../value-builders/integer-value-builder/integer-value-builder.component';
+import { NumericValueBuilderComponent } from '../../value-builders/numeric-value-builder/numeric-value-builder.component';
 
 export abstract class NumericCriterion extends BaseCriterion {
-  _valueBuilder: IntegerValueBuilderComponent;
+  _valueBuilder: NumericValueBuilderComponent;
 
   get valueBuilderType(): Type<ValueBuilder> {
-    return IntegerValueBuilderComponent;
+    return NumericValueBuilderComponent;
   }
 
-  set valueBuilder(val: IntegerValueBuilderComponent) {
+  set valueBuilder(val: NumericValueBuilderComponent) {
     this._valueBuilder = val;
     this._valueBuilder.valueChange.subscribe((val: [number]) => {
       this.filterChange.emit(this.generateFilter(val));
@@ -21,7 +21,7 @@ export abstract class NumericCriterion extends BaseCriterion {
     return `${this.dimension}${this.option}${val[0]}`;
   }
 
-  get valueBuilder(): IntegerValueBuilderComponent {
+  get valueBuilder(): NumericValueBuilderComponent {
     return this._valueBuilder;
   }
 }

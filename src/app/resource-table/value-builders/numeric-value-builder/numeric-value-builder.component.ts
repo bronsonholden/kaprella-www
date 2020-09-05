@@ -10,11 +10,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValueBuilder } from '../value-builder';
 
 @Component({
-  selector: 'app-integer-value-builder',
-  templateUrl: './integer-value-builder.component.html',
-  styleUrls: ['./integer-value-builder.component.scss']
+  selector: 'app-numeric-value-builder',
+  templateUrl: './numeric-value-builder.component.html',
+  styleUrls: ['./numeric-value-builder.component.scss']
 })
-export class IntegerValueBuilderComponent extends ValueBuilder implements OnInit {
+export class NumericValueBuilderComponent extends ValueBuilder implements OnInit {
   @Input() value: number;
   @Output() valueChange = new EventEmitter<[number]>();
 

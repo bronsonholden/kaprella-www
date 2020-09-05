@@ -33,7 +33,7 @@ import { DatetimeBeforeCriterion } from '../criteria/datetime-before-criterion';
 import { DatetimeAfterCriterion } from '../criteria/datetime-after-criterion';
 
 import { ValueBuilder } from '../../value-builders/value-builder';
-import { IntegerValueBuilderComponent } from '../../value-builders/integer-value-builder/integer-value-builder.component';
+import { NumericValueBuilderComponent } from '../../value-builders/numeric-value-builder/numeric-value-builder.component';
 import { StringValueBuilderComponent } from '../../value-builders/string-value-builder/string-value-builder.component';
 
 /* This component accepts reflection metadata from a Kaprella resource and
@@ -72,14 +72,14 @@ const OPERATORS = {
 };
 
 // const INTEGER_OPERATORS: BaseCriterion[] = [
-//   new NumericLogicalCriterion('>', 'Greater than', IntegerValueBuilderComponent),
-//   new NumericLogicalCriterion('>=', 'Greater than or equal to', IntegerValueBuilderComponent),
-//   new NumericLogicalCriterion('<', 'Less than', IntegerValueBuilderComponent),
-//   new NumericLogicalCriterion('<=', 'Less than or equal to', IntegerValueBuilderComponent),
-//   new NumericLogicalCriterion('==', 'Equal to', IntegerValueBuilderComponent),
-//   new NumericLogicalCriterion('!=', 'Not equal to', IntegerValueBuilderComponent),
-//   new NumericIsEvenCriterion('is_even', 'Is even', IntegerValueBuilderComponent),
-//   new NumericIsOddCriterion('is_odd', 'Is odd', IntegerValueBuilderComponent)
+//   new NumericLogicalCriterion('>', 'Greater than', NumericValueBuilderComponent),
+//   new NumericLogicalCriterion('>=', 'Greater than or equal to', NumericValueBuilderComponent),
+//   new NumericLogicalCriterion('<', 'Less than', NumericValueBuilderComponent),
+//   new NumericLogicalCriterion('<=', 'Less than or equal to', NumericValueBuilderComponent),
+//   new NumericLogicalCriterion('==', 'Equal to', NumericValueBuilderComponent),
+//   new NumericLogicalCriterion('!=', 'Not equal to', NumericValueBuilderComponent),
+//   new NumericIsEvenCriterion('is_even', 'Is even', NumericValueBuilderComponent),
+//   new NumericIsOddCriterion('is_odd', 'Is odd', NumericValueBuilderComponent)
 //   // { value: 'iseven', label: 'Is even' },
 //   // { value: 'isodd', label: 'Is odd' },
 //   // inclrange values: range min, range max

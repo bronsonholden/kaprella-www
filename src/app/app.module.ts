@@ -45,7 +45,7 @@ import { FieldMapComponent } from './maps/field-map/field-map.component';
 import { LicensorFormComponent } from './forms/licensor-form/licensor-form.component';
 import { WktClipboardComponent } from './maps/util/wkt-clipboard/wkt-clipboard.component';
 import { FilterCatalogComponent } from './resource-table/filters/filter-catalog/filter-catalog.component';
-import { IntegerValueBuilderComponent } from './resource-table/value-builders/integer-value-builder/integer-value-builder.component';
+import { NumericValueBuilderComponent } from './resource-table/value-builders/numeric-value-builder/numeric-value-builder.component';
 import { FilterCatalogDialogComponent } from './resource-table/filters/filter-catalog-dialog/filter-catalog-dialog.component';
 import { PlantVarietyFormComponent } from './forms/plant-variety-form/plant-variety-form.component';
 import { ImageComponent } from './image/image.component';
@@ -88,7 +88,7 @@ import { AreaDisplayComponent } from './area-display/area-display.component';
     LicensorFormComponent,
     WktClipboardComponent,
     FilterCatalogComponent,
-    IntegerValueBuilderComponent,
+    NumericValueBuilderComponent,
     FilterCatalogDialogComponent,
     PlantVarietyFormComponent,
     ImageComponent,
@@ -114,7 +114,7 @@ import { AreaDisplayComponent } from './area-display/area-display.component';
     MaterialModule
   ],
   entryComponents: [
-    IntegerValueBuilderComponent,
+    NumericValueBuilderComponent,
     StringValueBuilderComponent
   ],
   providers: [
