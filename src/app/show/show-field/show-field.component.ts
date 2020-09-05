@@ -22,6 +22,7 @@ export class ShowFieldComponent implements OnInit {
 
   options = {
     zoom: 15,
+    center: {},
     streetViewControl: false,
     mapTypeControl: true,
     mapTypeId: 'roadmap',
