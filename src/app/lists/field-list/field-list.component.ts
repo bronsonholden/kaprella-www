@@ -26,6 +26,7 @@ export class FieldListComponent implements OnInit {
       },
       name: {
         title: 'Name',
+        sort: 'prop("name")',
         value: {
           type: 'id'
         },
@@ -39,6 +40,7 @@ export class FieldListComponent implements OnInit {
       },
       farmerName: {
         title: 'Farmer',
+        sort: 'lookup_s("farmer", "name")',
         value: {
           type: 'concat',
           parts: [
@@ -64,6 +66,7 @@ export class FieldListComponent implements OnInit {
       },
       area: {
         title: 'Area',
+        sort: 'st_area(prop("boundary"))',
         value: {
           type: 'meta',
           path: 'boundaryArea'

@@ -22,6 +22,7 @@ export class FarmerListComponent implements OnInit {
     columns: {
       name: {
         title: 'Name',
+        sort: 'prop("name")',
         value: {
           type: 'id'
         },

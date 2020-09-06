@@ -13,6 +13,7 @@ export class PlantVarietyListComponent implements OnInit {
     columns: {
       denomination: {
         title: 'Denomination',
+        sort: 'prop("denomination")',
         value: {
           type: 'id'
         },
@@ -26,6 +27,7 @@ export class PlantVarietyListComponent implements OnInit {
       },
       genus: {
         title: 'Genus',
+        sort: 'prop("genus")',
         value: {
           type: 'attribute',
           path: 'genus'

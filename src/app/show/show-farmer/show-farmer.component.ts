@@ -25,6 +25,7 @@ export class ShowFarmerComponent implements OnInit {
       },
       name: {
         title: 'Name',
+        sort: 'prop("name")',
         value: {
           type: 'concat',
           parts: [
@@ -49,6 +50,7 @@ export class ShowFarmerComponent implements OnInit {
       },
       area: {
         title: 'Area',
+        sort: 'st_area(prop("boundary"))',
         value: {
           type: 'meta',
           path: 'boundaryArea'

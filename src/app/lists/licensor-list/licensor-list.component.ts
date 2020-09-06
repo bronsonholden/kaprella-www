@@ -26,6 +26,7 @@ export class LicensorListComponent implements OnInit {
       },
       name: {
         title: 'Name',
+        sort: 'prop("name")',
         value: {
           type: 'id'
         },

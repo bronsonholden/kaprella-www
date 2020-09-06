@@ -50,7 +50,9 @@ export class ResourceTableComponent implements OnInit {
   /* Internal property that affects how the datatable displays sort icons
    * next to column headers.
    */
-  sorts: any;
+  @Input() sort: ResourceTableSort[] = [];
+
+  @Output() sortChange = new EventEmitter<ResourceTableSort[]>();
 
   /* Page properties of the resources displayed */
   @Input() page: ResourceTablePage;
@@ -102,13 +104,50 @@ export class ResourceTableComponent implements OnInit {
   }
 
   /* Called when a column sort is modified (header is clicked) */
-  onSort(sort) {
+  onSort(sort): void {
+    if (!this.tableConfig.columns[sort.active].sort) {
+      return;
+    }
+
+    let sortConfig: ResourceTableSort = {
+      column: sort.active,
+      direction: sort.direction
+    };
+
+    let currentIdx = this.sort.map((s: any) => s.column).indexOf(sort.active);
+
+    if (currentIdx > -1) {
+      if (sort.direction !== '') {
+        this.sort.splice(currentIdx, 1, sortConfig);
+      } else {
+        this.sort.splice(currentIdx, 1);
+      }
+    } else if (sort.direction !== '') {
+      this.sort.push(sortConfig);
+    }
+
+    this.sortChange.emit(Object.assign([], this.sort));
+  }
+
+  clearSort(): void {
+    this.sort = [];
+    this.sortChange.emit([]);
   }
 
   /* Called when a selection is changed in single element selection, i.e.
    * tableConfig.select === 'single'
    */
   onRadioChangeFn(event, row) {
+  }
+
+  sortDirection(key: string) {
+    const sortColumns = this.sort.map((s: ResourceTableSort) => s.column);
+    const idx = sortColumns.indexOf(key);
+    if (idx > -1) {
+      return this.sort[idx].direction;
+    } else {
+      return ''
+    }
   }
 
   /* Called when the pager is changed
@@ -118,6 +157,11 @@ export class ResourceTableComponent implements OnInit {
     this.pageChange.emit(new ResourceTablePage(event.pageIndex, event.pageSize, event.length));
   }
 
+}
+
+export interface ResourceTableSort {
+  column: string;
+  direction: string;
 }
 
 export enum ResourceTableFilterType {

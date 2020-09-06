@@ -6,10 +6,11 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { filter, mergeWith, isArray, omit, get } from 'lodash-es';
+import { filter, mergeWith, isArray, isNil, omit, get } from 'lodash-es';
 
 import {
   ResourceTableConfig,
+  ResourceTableSort,
   ResourceTablePage
 } from '../resource-table/resource-table.component';
 
@@ -60,6 +61,8 @@ export class ResourceTableRouteBindingComponent implements OnInit {
    */
   loading = true;
 
+  sort: ResourceTableSort[] = [];
+
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router) { }
 
@@ -83,6 +86,27 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       } else {
         this.filters = [];
       }
+
+      let newSorts = params['sort'];
+      if (typeof newSorts === 'string') {
+        newSorts = [newSorts];
+      } else if (isNil(newSorts)) {
+        newSorts = [];
+      }
+
+      this.sort = newSorts.map((sort: string) => {
+        if (sort[0] === '-') {
+          return {
+            direction: 'desc',
+            column: sort.slice(1)
+          };
+        } else {
+          return {
+            direction: 'asc',
+            column: sort
+          }
+        }
+      });
 
       this.reloadData();
     });
@@ -115,6 +139,18 @@ export class ResourceTableRouteBindingComponent implements OnInit {
       this.page.turn(page.offset, page.limit, this.page.total);
       this.reloadData();
     }
+  }
+
+  onSortChange(newSort: ResourceTableSort[]): void {
+    const sorts = newSort.map((s: ResourceTableSort) => `${s.direction === 'desc' ? '-' : ''}${s.column}`);
+
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        sort: sorts.length > 0 ? sorts : null
+      },
+      queryParamsHandling: 'merge'
+    });
   }
 
   onFilterRemoved(humanizedFilter: HumanizedFilter): void {
@@ -155,6 +191,18 @@ export class ResourceTableRouteBindingComponent implements OnInit {
 
     if (this.filters) {
       query['filter'] = this.filters;
+    }
+
+    if (this.sort) {
+      query['sort'] = this.sort.map((s: ResourceTableSort) => {
+        const sortColumn = this.tableConfig.columns[s.column];
+
+        if (!!sortColumn) {
+          return `${s.direction}(${sortColumn.sort})`;
+        } else {
+          return null;
+        }
+      }).filter((s: ResourceTableSort | null) => !!s);
     }
 
     if (this.scope) {

@@ -1,10 +1,9 @@
-<mat-chip-list [fxLayout.lt-w500]="'row-reverse'" [fxLayout.gt-w500]="'row'" style="min-height: 48px; margin: 0 12px;" aria-label="Add filter">
-  <mat-chip
-      (click)="openFilterCatalogDialog()"
-      color="accent"
-      selectable="false"
-      selected
-      tabindex="-1">
-    Add filter
-  </mat-chip>
-</mat-chip-list>
+<button
+    mat-flat-button
+    (click)="openFilterCatalogDialog()"
+    color="accent"
+    tabindex="-1"
+    aria-label="Add filter"
+    style="border-radius: 18px">
+  Add filter
+</button>

@@ -1,4 +1,4 @@
-<div fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;">
+<div fxLayout="column" style="width: 100%; height: 100%; overflow-x: auto;" fxLayoutGap="8px">
   <div fxFlex="0 1 em">
     <app-resource-table-filter-list
       (filterRemoved)="filterRemoved.emit($event)"
@@ -6,11 +6,26 @@
     </app-resource-table-filter-list>
   </div>
   <div fxFlex="0 1 auto">
-    <div [fxLayout.lt-w500]="'column'" [fxLayout.gt-w500]="'row'">
-      <app-resource-table-filter-catalog
-        [reflection]="reflection"
-        (filterCreated)=filterApply.emit($event)>
-      </app-resource-table-filter-catalog>
+    <div [fxLayout.lt-sm]="'column'" [fxLayout.gt-xs]="'row'">
+      <div [fxLayout.lt-sm]="'row-reverse'" [fxLayout.gt-xs]="'row'" style="margin: 0 12px;" aria-label="Add filter">
+        <div fxLayout="row" fxLayoutGap="8px">
+          <!-- TODO: Possibly convert filter catalog to directive -->
+          <app-resource-table-filter-catalog
+            [reflection]="reflection"
+            (filterCreated)=filterApply.emit($event)>
+          </app-resource-table-filter-catalog>
+          <div>
+            <button
+                [disabled]="sort?.length === 0"
+                mat-flat-button
+                (click)="clearSort()"
+                color="warn"
+                style="color: white; border-radius: 18px">
+              Clear sort
+            </button>
+          </div>
+        </div>
+      </div>
       <mat-paginator fxFlex="1 0 auto" (page)="onPageChange($event)" [hidePageSize]="true" [pageIndex]="page.offset" [pageSize]="page.limit" [length]="page.total" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons>
       </mat-paginator>
     </div>
@@ -43,15 +58,21 @@
           <div style="position: relative;">
             <div class="resize-area" style="width: 200px;" touchResizeable pointerResizeable>
               <div
+                  *ngIf="!!column.value.sort; else noSortHeader"
                   style="padding-right: 4px;"
                   [mat-sort-header]="column.key"
                   matSort
                   [arrowPosition]="'after'"
-                  [matSortDirection]=""
+                  [matSortDirection]="sortDirection(column.key)"
                   [matSortActive]="column.key"
                   (matSortChange)="onSort($event)">
                 {{ column.value.title }}
               </div>
+              <ng-template #noSortHeader>
+                <div style="padding-right: 4px;">
+                  {{ column.value.title }}
+                </div>
+              </ng-template>
             </div>
           </div>
         </th>

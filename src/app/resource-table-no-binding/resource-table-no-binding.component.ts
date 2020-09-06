@@ -10,6 +10,7 @@ import { filter, mergeWith, isArray, omit, get } from 'lodash-es';
 
 import {
   ResourceTableConfig,
+  ResourceTableSort,
   ResourceTablePage
 } from '../resource-table/resource-table.component';
 
@@ -44,6 +45,8 @@ export class ResourceTableNoBindingComponent implements OnInit {
 
   @Input() scope: any;
 
+  sort: ResourceTableSort[] = [];
+
   /* Whether to show a loading graphic. Initially displayed while the first
    * set of rows is loaded, but page changes do not display the graphic.
    */
@@ -60,6 +63,12 @@ export class ResourceTableNoBindingComponent implements OnInit {
 
   onPageChange(page): void {
     this.page.turn(page.offset, page.limit, this.page.total);
+    this.reloadData();
+  }
+
+  onSortChange(newSorts: ResourceTableSort[]) {
+    this.sort = newSorts;
+
     this.reloadData();
   }
 
@@ -85,6 +94,18 @@ export class ResourceTableNoBindingComponent implements OnInit {
 
     if (!!this.filters) {
       query['filter'] = this.filters;
+    }
+
+    if (this.sort) {
+      query['sort'] = this.sort.map((s: ResourceTableSort) => {
+        const sortColumn = this.tableConfig.columns[s.column];
+
+        if (!!sortColumn) {
+          return `${s.direction}(${sortColumn.sort})`;
+        } else {
+          return null;
+        }
+      }).filter((s: ResourceTableSort | null) => !!s);
     }
 
     if (this.scope) {

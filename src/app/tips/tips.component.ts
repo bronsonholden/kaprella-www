@@ -14,7 +14,9 @@ export class TipsComponent implements OnInit {
     `On a computer, you can resize a column by clicking and dragging over the
     right side of the header.`,
     `You can click or tap table cells that show area to switch between acres
-    and hectares.`
+    and hectares.`,
+    `Most table columns can be sorted. Click or tap on the column title to
+    alter and combine column sorting.`
   ];
 
   currentTipIdx = 0;

@@ -3,6 +3,8 @@
     [tableConfig]="tableConfig"
     [rows]="rows"
     [page]="page"
+    [sort]="sort"
+    (sortChange)="onSortChange($event)"
     [humanizedFilters]="humanizedFilters"
     [reflection]="reflection"
     (filterRemoved)="onFilterRemoved($event)"
