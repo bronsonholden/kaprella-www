@@ -202,7 +202,7 @@ export class ResourceTableRouteBindingComponent implements OnInit {
         } else {
           return null;
         }
-      }).filter((s: ResourceTableSort | null) => !!s);
+      }).filter((s: string | null) => !!s);
     }
 
     if (this.scope) {

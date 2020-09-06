@@ -183,10 +183,11 @@ export enum ResourceTableFilterType {
   GeographicWithinCountry
 }
 
-export class ResourceTableColumnConfig {
-  constructor(public value: any,
-              public display: any,
-              public title: string) {}
+export interface ResourceTableColumnConfig {
+  value: any;
+  display: any;
+  title: string;
+  sort?: string;
 }
 
 /* Resource table configuration. Specifies how a table of resources should
