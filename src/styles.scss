@@ -246,6 +246,16 @@ $altTheme: mat-dark-theme($theme-alt-primary, $theme-accent, $theme-warn);
   background-color: $light-text;
 }
 
+.side-nav a.disabled {
+  color: #ccc;
+  background-color: transparent;
+}
+
+.filter-catalog-option.disabled {
+  color: #ccc;
+  background-color: transparent;
+}
+
 .theme-alternate {
   @include angular-material-color($altTheme);
 
@@ -254,6 +264,16 @@ $altTheme: mat-dark-theme($theme-alt-primary, $theme-accent, $theme-warn);
    * primary color.
    */
   @include mat-toolbar-color($theme);
+
+  .filter-catalog-option.disabled {
+    color: #555;
+    background-color: transparent;
+  }
+
+  .side-nav a.disabled {
+    color: #555;
+    background-color: transparent;
+  }
 
   .resource-table a {
     color: mat-color(map-get($altTheme, primary));

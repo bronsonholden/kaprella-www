@@ -14,6 +14,7 @@
                   *ngFor="let attribute of attributes"
                   [value]="attribute.key"
                   (click)="catalogStepper.next()"
+                  class="filter-catalog-option"
                   [class.disabled]="!OPERATORS[operatorType(attribute.type)]"
                   [disabled]="!OPERATORS[operatorType(attribute.type)]"
                   checkboxPosition="before">
