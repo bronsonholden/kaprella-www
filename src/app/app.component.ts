@@ -67,6 +67,10 @@ export class AppComponent implements OnInit {
         title: 'Farm Management',
         buttons: [
           {
+            label: 'Field Map',
+            routerLink: 'map/fields'
+          },
+          {
             disabled: true,
             label: 'Active Plantings',
             routerLink: ''
