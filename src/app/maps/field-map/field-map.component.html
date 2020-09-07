@@ -1,12 +1,16 @@
 <div class="resource-page">
-  <app-resource-table-filter-list
-    [filters]="humanizedFilters"
-    (filterRemoved)="onFilterRemoved($event)">
-  </app-resource-table-filter-list>
-  <app-resource-table-filter-catalog
-    [reflection]="reflection"
-    (filterCreated)="onFilterCreated($event)">
-  </app-resource-table-filter-catalog>
+  <div fxLayout="column" fxLayoutGap="8px">
+    <app-resource-table-filter-list
+      [filters]="humanizedFilters"
+      (filterRemoved)="onFilterRemoved($event)">
+    </app-resource-table-filter-list>
+    <div style="padding: 0 12px;">
+      <app-resource-table-filter-catalog
+        [reflection]="reflection"
+        (filterCreated)="onFilterCreated($event)">
+      </app-resource-table-filter-catalog>
+    </div>
+  </div>
   <mat-tab-group [animationDuration]="0">
     <mat-tab label="Map">
       <google-map
