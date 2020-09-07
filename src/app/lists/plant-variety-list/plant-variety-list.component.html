@@ -1,6 +1,11 @@
 <div class="resource-list">
   <div class="button-row-container button-row">
     <button mat-stroked-button routerLink="new">New</button>
+    <button mat-stroked-button [matMenuTriggerFor]="actionsMenu">Actions</button>
+    <mat-menu #actionsMenu="matMenu">
+      <button mat-menu-item disabled>Edit</button>
+      <button mat-menu-item disabled>Delete</button>
+    </mat-menu>
   </div>
   <app-resource-table-route-binding
     [tableConfig]="tableConfig"
