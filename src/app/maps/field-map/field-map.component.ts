@@ -7,11 +7,17 @@ import {
 
 import { ActivatedRoute, Router } from '@angular/router';
 
+import {
+  GoogleMap,
+  MapMarker,
+  MapPolygon,
+  MapInfoWindow
+} from '@angular/google-maps';
+
 import { get, omit, mergeWith, isArray, filter } from 'lodash-es';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as wkt from 'terraformer-wkt-parser';
-import { GoogleMap } from '@angular/google-maps';
 import { Multipolygon } from '../geometries/multipolygon';
 import { Polygon } from '../geometries/polygon';
 import { Coordinate } from '../geometries/coordinate';
@@ -21,6 +27,12 @@ import { debounceTime } from 'rxjs/operators';
 import { Field } from '../../models/field';
 import { HumanizedFilter } from '../../resource-table/filters/humanized-filter';
 import { AttributeReflections } from '../../resource-table/reflections/attribute-reflections';
+
+// TODO: Look into refactoring
+export interface MapField {
+  field: Field;
+  multipolygon: Multipolygon;
+}
 
 @Component({
   selector: 'app-field-map',
@@ -32,12 +44,26 @@ export class FieldMapComponent implements OnInit {
   reflection: AttributeReflections;
 
   @ViewChild('googleMap', { static: true }) googleMap: GoogleMap;
+  @ViewChild(MapInfoWindow, { static: true }) infoWindow: MapInfoWindow;
+  @ViewChild('infoWindowMarker', { static: true }) infoWindowMarker: MapMarker;
 
   multipolygons = [];
 
   polygonOptions = {
     fillColor: '#00ff00',
     strokeColor: '#00bb00'
+  };
+
+  infoWindowMarkerOptions = {
+    anchorPoint: {
+      x: 0,
+      y: 0
+    },
+    position: {
+      lat: 35.30209126554529,
+      lng: -119.01580220543715
+    },
+    visible: false
   };
 
   zoom = 10;
@@ -55,12 +81,15 @@ export class FieldMapComponent implements OnInit {
   };
 
   center: any = {};
+  unit = 'ha';
   query: any = {};
   bounds: any = {};
   filters: string[] = [];
   scope: any = {};
   humanizedFilters: HumanizedFilter[] = [];
   sort: string;
+  selectedField: Field | null;
+  fields: MapField[]
 
   constructor(public fieldApi: FieldApiService,
               private activatedRoute: ActivatedRoute,
@@ -101,6 +130,17 @@ export class FieldMapComponent implements OnInit {
     });
   }
 
+  onPolygonClick(click: any, polygon: MapPolygon, field: Field) {
+    this.selectedField = field;
+    this.infoWindowMarker.position = {
+      lat: click.latLng.lat(),
+      lng: click.latLng.lng()
+    };
+    setTimeout(() => {
+      this.infoWindow.open(this.infoWindowMarker);
+    }, 0);
+  }
+
   reloadFields(): void {
     let query = {
       filter: this.filters || []
@@ -137,7 +177,7 @@ export class FieldMapComponent implements OnInit {
       }
 
       // Load the multipolygons
-      this.multipolygons = res.data.map((field: Field) => {
+      this.fields = res.data.map((field: Field) => {
         const geometry = <any>wkt.parse(field.attributes.boundary);
 
         const polygons = geometry.coordinates.map(polygon => {
@@ -145,7 +185,10 @@ export class FieldMapComponent implements OnInit {
           return new Polygon(loops[0], loops.slice(1));
         });
 
-        return new Multipolygon(polygons);
+        return {
+          resource: field,
+          multipolygon: new Multipolygon(polygons)
+        };
       });
     });
   }

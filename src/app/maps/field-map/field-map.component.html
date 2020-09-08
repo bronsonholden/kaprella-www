@@ -18,13 +18,35 @@
           width="100%"
           height="400px"
           [options]="options">
-        <div *ngFor="let multipolygon of multipolygons; index as i">
+        <div *ngFor="let field of fields; index as i">
           <map-polygon
-            *ngFor="let polygon of multipolygon.polygons; index as j"
+            #mapPolygon="mapPolygon"
+            *ngFor="let polygon of field.multipolygon.polygons; index as j"
             [paths]="polygon.path"
+            (polygonClick)="onPolygonClick($event, mapPolygon, field.resource)"
             [options]="polygonOptions">
           </map-polygon>
         </div>
+        <map-marker #infoWindowMarker="mapMarker" [options]="infoWindowMarkerOptions"></map-marker>
+        <map-info-window>
+          <div class="mat-typography">
+            <div>
+              Field:
+              <a class="mat-body-2 primary-color" [routerLink]="'/fields/' + selectedField?.id">
+                {{ selectedField?.attributes.name }}
+              </a>
+            </div>
+            <div>
+              Area: <app-area-display [(unit)]="unit" [area]="selectedField?.meta.boundaryArea"></app-area-display>
+            </div>
+            <div>
+              Farmer:
+              <a class="mat-body-2 primary-color" [routerLink]="'/farmers/' + selectedField?.relationships.farmer.data.id">
+                {{ selectedField?.relationships.farmer.data.id }}
+              </a>
+            </div>
+          </div>
+        </map-info-window>
       </google-map>
     </mat-tab>
     <mat-tab label="Data" disabled>

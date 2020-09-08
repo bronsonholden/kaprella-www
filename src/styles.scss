@@ -265,6 +265,24 @@ $altTheme: mat-dark-theme($theme-alt-primary, $theme-accent, $theme-warn);
    */
   @include mat-toolbar-color($theme);
 
+  .primary-color {
+    color: mat-color($theme-alt-primary) !important;
+  }
+
+  /* Google Maps dark mode styling for info window */
+  .gm-style .gm-style-iw-d::-webkit-scrollbar-track,
+  .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
+  .gm-style .gm-style-iw-c,
+  .gm-style .gm-style-iw-d,
+  .gm-style .gm-style-iw-t::after {
+    background: none;
+    background-color: $dark-background;
+  }
+
+  .gm-style .gm-style-iw-c button img {
+    filter: invert(1.0);
+  }
+
   .filter-catalog-option.disabled {
     color: #555;
     background-color: transparent;
