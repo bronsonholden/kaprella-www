@@ -5,6 +5,7 @@
   object-fit: cover;
   object-position: top center;
   pointer-events: none;
+  filter: brightness(0.76);
 }
 
 .site-banner {
@@ -18,13 +19,14 @@
 .site-banner-description {
   position: absolute;
   z-index: 10;
-  right: 64px;
-  bottom: 64px;
-  width: 400px;
+  left: 50%;
+  top: 50%;
+  bottom: 50%;
+  width: 500px;
   color: white;
   font-family: roboto;
   font-size: 36px;
-  line-height: 36px;
+  line-height: 44px;
   font-weight: bold;
   text-align: left;
 }

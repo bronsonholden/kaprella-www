@@ -430,6 +430,12 @@ a {
   max-width: 680px;
 }
 
+@media screen and (min-width: 1920px) {
+  .content {
+    max-width: 960px;
+  }
+}
+
 @media screen and (max-width: 599px) {
   .resource-page {
     padding: 16px;
