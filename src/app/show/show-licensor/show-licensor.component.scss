@@ -1,11 +1,13 @@
 .licensor-logo {
   border-radius: 50%;
   width: 200px;
+  height: auto;
 }
 
 @media screen and (max-width: 599px) {
   .licensor-logo {
     width: 100px;
+    height: auto;
   }
 }
 
